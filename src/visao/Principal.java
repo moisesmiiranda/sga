@@ -153,7 +153,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+       mostrarTelaCadastroPaciente();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -215,4 +215,15 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuRelatorio;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    //Variável da tela
+   // JDCadastroPaciente cadastroPaciente;
+    JFCadPaciente cadPaciente;
+    private void mostrarTelaCadastroPaciente() {
+        cadPaciente = new JFCadPaciente();
+        cadPaciente.setVisible(true);
+        //cadastroPaciente = new JDCadastroPaciente(this, true);
+        //cadastroPaciente.setVisible(true);
+        
+    }
 }

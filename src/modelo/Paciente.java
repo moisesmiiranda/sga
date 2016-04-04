@@ -28,7 +28,7 @@ public class Paciente {
     private Date dataDeNascimento;
     private String sexo;
     @Column(unique = true)
-    private long cpf;
+    private String cpf;
     private String endereco;
     private int telefone;
 
@@ -64,11 +64,11 @@ public class Paciente {
         this.sexo = sexo;
     }
 
-    public long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -95,7 +95,7 @@ public class Paciente {
         hash = 37 * hash + Objects.hashCode(this.nome);
         hash = 37 * hash + Objects.hashCode(this.dataDeNascimento);
         hash = 37 * hash + Objects.hashCode(this.sexo);
-        hash = 37 * hash + (int) (this.cpf ^ (this.cpf >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.cpf);
         hash = 37 * hash + Objects.hashCode(this.endereco);
         hash = 37 * hash + this.telefone;
         return hash;
