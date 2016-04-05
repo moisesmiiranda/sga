@@ -18,7 +18,6 @@ import javax.persistence.Id;
  * @author Moises
  */
 @Entity
-
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +30,8 @@ public class Paciente {
     private String cpf;
     private String endereco;
     private int telefone;
+    
+    
 
     public int getId() {
         return id;

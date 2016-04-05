@@ -5,9 +5,7 @@
  */
 package util;
 
-import modelo.Paciente;
 import org.hibernate.Session;
-import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
@@ -18,10 +16,12 @@ import org.hibernate.tool.hbm2ddl.SchemaUpdate;
  * @author moises
  */
 public class Utilitaria {
+    
  private static Session sessao;   
  private static Configuration configuracao;
  
 public static void configurar(){
+    configuracao = new Configuration();
     configuracao.addAnnotatedClass(modelo.Paciente.class);
     configuracao.addAnnotatedClass(modelo.Consulta.class);
     configuracao.addAnnotatedClass(modelo.Profissional.class);
