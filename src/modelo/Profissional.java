@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -26,6 +27,18 @@ public class Profissional {
     private String tipo;
     @Column (unique = true)
     private long identificacao;
+    @OneToOne (mappedBy = "profissional")
+    private Consulta consulta;
+    
+    
+
+    public Consulta getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
+    }
 
     public int getId() {
         return id;
@@ -61,11 +74,12 @@ public class Profissional {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + this.id;
-        hash = 73 * hash + Objects.hashCode(this.nome);
-        hash = 73 * hash + Objects.hashCode(this.tipo);
-        hash = 73 * hash + (int) (this.identificacao ^ (this.identificacao >>> 32));
+        int hash = 5;
+        hash = 71 * hash + this.id;
+        hash = 71 * hash + Objects.hashCode(this.nome);
+        hash = 71 * hash + Objects.hashCode(this.tipo);
+        hash = 71 * hash + (int) (this.identificacao ^ (this.identificacao >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.consulta);
         return hash;
     }
 
@@ -93,13 +107,18 @@ public class Profissional {
         if (!Objects.equals(this.tipo, other.tipo)) {
             return false;
         }
+        if (!Objects.equals(this.consulta, other.consulta)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Profissional{" + "id=" + id + ", nome=" + nome + ", tipo=" + tipo + ", identificacao=" + identificacao + '}';
+        return "Profissional{" + "id=" + id + ", nome=" + nome + ", tipo=" + tipo + ", identificacao=" + identificacao + ", consulta=" + consulta + '}';
     }
+
+  
     
     
     

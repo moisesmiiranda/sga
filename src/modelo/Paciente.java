@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -30,6 +31,9 @@ public class Paciente {
     private String cpf;
     private String endereco;
     private int telefone;
+    @OneToOne(mappedBy = "paciente")
+    private Consulta consulta;
+    
     
     
 
@@ -89,16 +93,25 @@ public class Paciente {
         this.telefone = telefone;
     }
 
+    public Consulta getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(Consulta consulta) {
+        this.consulta = consulta;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + this.id;
-        hash = 37 * hash + Objects.hashCode(this.nome);
-        hash = 37 * hash + Objects.hashCode(this.dataDeNascimento);
-        hash = 37 * hash + Objects.hashCode(this.sexo);
-        hash = 37 * hash + Objects.hashCode(this.cpf);
-        hash = 37 * hash + Objects.hashCode(this.endereco);
-        hash = 37 * hash + this.telefone;
+        int hash = 7;
+        hash = 47 * hash + this.id;
+        hash = 47 * hash + Objects.hashCode(this.nome);
+        hash = 47 * hash + Objects.hashCode(this.dataDeNascimento);
+        hash = 47 * hash + Objects.hashCode(this.sexo);
+        hash = 47 * hash + Objects.hashCode(this.cpf);
+        hash = 47 * hash + Objects.hashCode(this.endereco);
+        hash = 47 * hash + this.telefone;
+        hash = 47 * hash + Objects.hashCode(this.consulta);
         return hash;
     }
 
@@ -117,9 +130,6 @@ public class Paciente {
         if (this.id != other.id) {
             return false;
         }
-        if (this.cpf != other.cpf) {
-            return false;
-        }
         if (this.telefone != other.telefone) {
             return false;
         }
@@ -129,10 +139,16 @@ public class Paciente {
         if (!Objects.equals(this.sexo, other.sexo)) {
             return false;
         }
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
         if (!Objects.equals(this.endereco, other.endereco)) {
             return false;
         }
         if (!Objects.equals(this.dataDeNascimento, other.dataDeNascimento)) {
+            return false;
+        }
+        if (!Objects.equals(this.consulta, other.consulta)) {
             return false;
         }
         return true;
@@ -140,8 +156,10 @@ public class Paciente {
 
     @Override
     public String toString() {
-        return "paciente{" + "id=" + id + ", nome=" + nome + ", dataDeNascimento=" + dataDeNascimento + ", sexo=" + sexo + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + '}';
+        return "Paciente{" + "id=" + id + ", nome=" + nome + ", dataDeNascimento=" + dataDeNascimento + ", sexo=" + sexo + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + ", consulta=" + consulta + '}';
     }
+    
+   
     
     
     

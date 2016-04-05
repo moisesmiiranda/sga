@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -24,7 +26,11 @@ public class Consulta {
     private int id;
     private Date data;
     private Time hora;
+    @OneToOne
+    @JoinColumn(name ="profissionalFK")
     private Profissional profissional;
+    @OneToOne
+    @JoinColumn(name = "pacienteFK")  
     private Paciente paciente;
 
     public int getId() {
@@ -69,12 +75,12 @@ public class Consulta {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + this.id;
-        hash = 79 * hash + Objects.hashCode(this.data);
-        hash = 79 * hash + Objects.hashCode(this.hora);
-        hash = 79 * hash + Objects.hashCode(this.profissional);
-        hash = 79 * hash + Objects.hashCode(this.paciente);
+        int hash = 7;
+        hash = 47 * hash + this.id;
+        hash = 47 * hash + Objects.hashCode(this.data);
+        hash = 47 * hash + Objects.hashCode(this.hora);
+        hash = 47 * hash + Objects.hashCode(this.profissional);
+        hash = 47 * hash + Objects.hashCode(this.paciente);
         return hash;
     }
 
@@ -112,6 +118,7 @@ public class Consulta {
     public String toString() {
         return "Consulta{" + "id=" + id + ", data=" + data + ", hora=" + hora + ", profissional=" + profissional + ", paciente=" + paciente + '}';
     }
+
     
     
 }
