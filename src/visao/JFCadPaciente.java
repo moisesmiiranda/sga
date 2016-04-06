@@ -6,7 +6,9 @@
 package visao;
 
 import DAO_Generico.Dao;
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 import modelo.Paciente;
 
@@ -60,8 +62,6 @@ public class JFCadPaciente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Paciente");
-        setMinimumSize(new java.awt.Dimension(300, 600));
-        setPreferredSize(new java.awt.Dimension(862, 620));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
@@ -128,7 +128,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
                     .addComponent(jTextFieldEndereco)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                             .addComponent(jTextFieldDataDeNascimento)
                             .addComponent(jTextField1)
                             .addComponent(jTextFieldCPF)
@@ -143,7 +143,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
                                 .addComponent(jRadioButtonM)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jRadioButtonF)))
-                        .addGap(395, 395, 395)))
+                        .addGap(392, 392, 392)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -179,7 +179,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jButton1.setText("Novo");
@@ -226,10 +226,9 @@ public class JFCadPaciente extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.add(jPanel2);
@@ -315,12 +314,23 @@ public class JFCadPaciente extends javax.swing.JFrame {
         Paciente p = new Paciente();
         p.setNome(jTextFieldNome.getText().trim());
         p.setCpf(jTextFieldCPF.getText().trim());
+        p.setEndereco(jTextFieldEndereco.getText().trim());
+        p.setTelefone(Integer.parseInt(jTextFieldTelefone.getText().trim()));
+        
+        //Salvar Data
+        SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+        String dn = jTextFieldDataDeNascimento.getText().trim();
+        try {
+            Date dnP = (Date) formatoData.parse(dn);
+           p.setDataDeNascimento(dnP);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         
         Dao<Paciente> dao = new Dao<>();
         dao.gravar(p);
-         JOptionPane.showMessageDialog(null, "Dados gravados com sucesso!");
-    
-        
-        
+        JOptionPane.showMessageDialog(null, "Dados gravados com sucesso!");
+
     }
+
 }
