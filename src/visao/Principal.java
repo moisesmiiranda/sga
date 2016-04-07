@@ -147,7 +147,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+       mostrarTelaCadastroProfissional();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -230,5 +230,11 @@ public class Principal extends javax.swing.JFrame {
         //cadastroPaciente = new JDCadastroPaciente(this, true);
         //cadastroPaciente.setVisible(true);
         
+    }
+    //Variável da tela
+    JFCadProfissional cadProfissinal;
+    private void mostrarTelaCadastroProfissional() {
+        cadProfissinal = new JFCadProfissional();
+        cadProfissinal.setVisible(true);
     }
 }

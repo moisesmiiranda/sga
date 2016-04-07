@@ -26,7 +26,7 @@ public class Profissional {
     private String nome;
     private String tipo;
     @Column (unique = true)
-    private long identificacao;
+    private String identificacao;
     @OneToOne (mappedBy = "profissional")
     private Consulta consulta;
     
@@ -64,11 +64,11 @@ public class Profissional {
         this.tipo = tipo;
     }
 
-    public long getIdentificacao() {
+    public String getIdentificacao() {
         return identificacao;
     }
 
-    public void setIdentificacao(long identificacao) {
+    public void setIdentificacao(String identificacao) {
         this.identificacao = identificacao;
     }
 
@@ -78,7 +78,7 @@ public class Profissional {
         hash = 71 * hash + this.id;
         hash = 71 * hash + Objects.hashCode(this.nome);
         hash = 71 * hash + Objects.hashCode(this.tipo);
-        hash = 71 * hash + (int) (this.identificacao ^ (this.identificacao >>> 32));
+        hash = 71 * hash + Objects.hashCode(this.identificacao);
         hash = 71 * hash + Objects.hashCode(this.consulta);
         return hash;
     }
@@ -98,7 +98,7 @@ public class Profissional {
         if (this.id != other.id) {
             return false;
         }
-        if (this.identificacao != other.identificacao) {
+        if (!Objects.equals(this.identificacao, other.identificacao)) {
             return false;
         }
         if (!Objects.equals(this.nome, other.nome)) {
