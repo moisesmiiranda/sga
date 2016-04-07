@@ -1,6 +1,7 @@
 
 package DAO_Generico;
 
+import javax.persistence.Query;
 import org.hibernate.Session;
 import util.Utilitaria;
 
@@ -42,5 +43,6 @@ public class Dao<T> {
             sessao.close();
                     
     }
+  
     
 }

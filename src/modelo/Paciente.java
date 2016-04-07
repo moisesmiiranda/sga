@@ -20,22 +20,20 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class Paciente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(nullable = false)
     private String nome;
-    private Date dataDeNascimento;
+    private String dataDeNascimento;
     private String sexo;
     @Column(unique = true)
     private String cpf;
     private String endereco;
-    private int telefone;
+    private String telefone;
     @OneToOne(mappedBy = "paciente")
     private Consulta consulta;
-    
-    
-    
 
     public int getId() {
         return id;
@@ -53,11 +51,11 @@ public class Paciente {
         this.nome = nome;
     }
 
-    public Date getDataDeNascimento() {
+    public String getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(Date dataDeNascimento) {
+    public void setDataDeNascimento(String dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 
@@ -85,11 +83,11 @@ public class Paciente {
         this.endereco = endereco;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
@@ -110,7 +108,7 @@ public class Paciente {
         hash = 47 * hash + Objects.hashCode(this.sexo);
         hash = 47 * hash + Objects.hashCode(this.cpf);
         hash = 47 * hash + Objects.hashCode(this.endereco);
-        hash = 47 * hash + this.telefone;
+        hash = 47 * hash + Objects.hashCode(this.telefone);
         hash = 47 * hash + Objects.hashCode(this.consulta);
         return hash;
     }
@@ -130,7 +128,7 @@ public class Paciente {
         if (this.id != other.id) {
             return false;
         }
-        if (this.telefone != other.telefone) {
+        if (!Objects.equals(this.telefone, other.telefone)) {
             return false;
         }
         if (!Objects.equals(this.nome, other.nome)) {
@@ -158,10 +156,5 @@ public class Paciente {
     public String toString() {
         return "Paciente{" + "id=" + id + ", nome=" + nome + ", dataDeNascimento=" + dataDeNascimento + ", sexo=" + sexo + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + ", consulta=" + consulta + '}';
     }
-    
-   
-    
-    
-    
-    
+
 }

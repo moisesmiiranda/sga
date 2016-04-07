@@ -24,8 +24,8 @@ public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private Date data;
-    private Time hora;
+    private String data;
+    private String hora;
     @OneToOne
     @JoinColumn(name ="profissionalFK")
     private Profissional profissional;
@@ -41,19 +41,19 @@ public class Consulta {
         this.id = id;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public Time getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Time hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
