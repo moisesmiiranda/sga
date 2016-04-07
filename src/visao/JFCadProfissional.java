@@ -61,7 +61,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jTableProfissionais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -227,7 +227,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         salvarProfissional();
         ControleCamposEBotoesSalvar();
-        preecherATabela();
+       
        
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
@@ -297,7 +297,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
         dao.gravar(pf);
         JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!");
         
-       
+        preecherATabela();
     }
 
 
@@ -344,7 +344,6 @@ public class JFCadProfissional extends javax.swing.JFrame {
     }
 
     private void preecherATabela() {
-     
        String nome = jTextFieldNome.getText();
        String tipo = jTextFieldTipo.getText();
        String identificacao = jTextFieldIdentificacao.getText();
