@@ -5,6 +5,8 @@
  */
 package visao;
 
+import modelo.Consulta;
+
 /**
  *
  * @author ADMIN
@@ -215,7 +217,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-       
+        SalvarConsulta();
 
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
@@ -289,5 +291,13 @@ public class JFCadConsulta extends javax.swing.JFrame {
     private void mostrarTelaDePacientes() {
     listaPaciente = new JDListaPacientes(this, true);
     listaPaciente.setVisible(true);
+    }
+
+    private void SalvarConsulta() {
+        Consulta c = new Consulta();
+        c.setData(jTextFieldDataConsulta.getText());
+        c.setHora(jTextFieldHoraConsulta.getText());
+        
+       
     }
 }

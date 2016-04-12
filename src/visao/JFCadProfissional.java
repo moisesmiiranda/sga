@@ -6,8 +6,10 @@
 package visao;
 
 import DAO_Generico.Dao;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Paciente;
 import modelo.Profissional;
 import org.hibernate.Session;
 import util.Utilitaria;
@@ -39,11 +41,9 @@ public class JFCadProfissional extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProfissionais = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextFieldID = new javax.swing.JTextField();
         jTextFieldNome = new javax.swing.JTextField();
         jTextFieldTipo = new javax.swing.JTextField();
         jTextFieldIdentificacao = new javax.swing.JTextField();
@@ -81,25 +81,14 @@ public class JFCadProfissional extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableProfissionais);
         if (jTableProfissionais.getColumnModel().getColumnCount() > 0) {
-            jTableProfissionais.getColumnModel().getColumn(0).setResizable(false);
-            jTableProfissionais.getColumnModel().getColumn(0).setPreferredWidth(30);
+            jTableProfissionais.getColumnModel().getColumn(0).setPreferredWidth(15);
         }
-
-        jLabel1.setText("ID: ");
 
         jLabel2.setText("Nome:");
 
         jLabel3.setText("Tipo:");
 
         jLabel5.setText("Identificação:");
-
-        jTextFieldID.setEditable(false);
-        jTextFieldID.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextFieldID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldIDActionPerformed(evt);
-            }
-        });
 
         jTextFieldNome.setEnabled(false);
 
@@ -119,9 +108,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
                             .addComponent(jTextFieldTipo)
-                            .addComponent(jTextFieldID)
                             .addComponent(jTextFieldIdentificacao)
-                            .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5))
                         .addGap(392, 392, 392)))
@@ -131,10 +118,6 @@ public class JFCadProfissional extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(1, 1, 1)
-                .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,7 +129,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(1, 1, 1)
                 .addComponent(jTextFieldIdentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jButtonNovo.setText("Novo");
@@ -203,8 +186,8 @@ public class JFCadProfissional extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -217,12 +200,8 @@ public class JFCadProfissional extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIDActionPerformed
-
-    }//GEN-LAST:event_jTextFieldIDActionPerformed
-
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-           ControleCamposEBotesNovo(); 
+        ControleCamposEBotesNovo();
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
@@ -232,8 +211,9 @@ public class JFCadProfissional extends javax.swing.JFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         salvarProfissional();
         ControleCamposEBotoesSalvar();
-       
-       
+        mostrarDoBancoNaTabela();
+
+
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
@@ -280,7 +260,6 @@ public class JFCadProfissional extends javax.swing.JFrame {
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -290,7 +269,6 @@ public class JFCadProfissional extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProfissionais;
-    private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldIdentificacao;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldTipo;
@@ -306,67 +284,77 @@ public class JFCadProfissional extends javax.swing.JFrame {
         dao.gravar(pf);
         JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!");
         
-        preecherATabela();
     }
 
-
     private void ControleCamposEBotoesSalvar() {
-        
+
         //Botões
         jButtonSalvar.setEnabled(false);//desabilitar o botão salvar
         jButtonNovo.setEnabled(true);//habilitar o botão novo
         jButtonExcluir.setEnabled(true);//habilitar o botão Excluir
         jButtonAlterar.setEnabled(true);//habilitar o botão Alterar
-        
+
         //Campos
         jTextFieldNome.setEnabled(false);//Desabilita campo nome
         jTextFieldTipo.setEnabled(false);//Desabilita campo tipo
         jTextFieldIdentificacao.setEnabled(false);//Desabilita campo identificacao
-        
+
         //Limpar campos
         jTextFieldNome.setText(null);
         jTextFieldTipo.setText(null);
         jTextFieldIdentificacao.setText(null);
-        
-        
-        
-        
+
     }
 
     private void ControleCamposEBotesNovo() {
-          //Botões
+        //Botões
         jButtonSalvar.setEnabled(true);//habilitar o botão salvar
         jButtonNovo.setEnabled(false);// desabilitar o botão novo
         jButtonExcluir.setEnabled(false);//desabilitar o botão Excluir
         jButtonAlterar.setEnabled(false);//desabilitar o botão Alterar
-        
+
         //Campos
         jTextFieldNome.setEnabled(true);//habilitar campo nome
         jTextFieldTipo.setEnabled(true);//habilitar campo tipo
         jTextFieldIdentificacao.setEnabled(true);//habilitar campo identificacao
-        
+
         //Dar foco pro campo nome
         jTextFieldNome.requestFocus();
-        
-        
-       
+
     }
 
     private void preecherATabela() {
-       String nome = jTextFieldNome.getText();
-       String tipo = jTextFieldTipo.getText();
-       String identificacao = jTextFieldIdentificacao.getText();
-       
-       int linha = jTableProfissionais.getRowCount() - 1;//aqui eu pego a quantidade de linhas da tabela, o -1 é pra iniciar na primeira linha
-       // OBS: A tabela tem que estar apenas com uma linha.
-       
-       jTableProfissionais.getModel().setValueAt(nome, linha, 1);
-       jTableProfissionais.getModel().setValueAt(tipo, linha, 2);
-       jTableProfissionais.getModel().setValueAt(identificacao, linha, 3);
-       
-       DefaultTableModel tabelaProfissionais = (DefaultTableModel) jTableProfissionais.getModel(); // pegando o modelo padrão da tabela
-       int coluna = jTableProfissionais.getModel().getColumnCount(); // pegando o número de colunas da tabela
-       tabelaProfissionais.addRow(new Object[coluna]);
-       
+        String nome = jTextFieldNome.getText();
+        String tipo = jTextFieldTipo.getText();
+        String identificacao = jTextFieldIdentificacao.getText();
+
+        int linha = jTableProfissionais.getRowCount() - 1;//aqui eu pego a quantidade de linhas da tabela, o -1 é pra iniciar na primeira linha
+        // OBS: A tabela tem que estar apenas com uma linha.
+
+        jTableProfissionais.getModel().setValueAt(nome, linha, 1);
+        jTableProfissionais.getModel().setValueAt(tipo, linha, 2);
+        jTableProfissionais.getModel().setValueAt(identificacao, linha, 3);
+
+        DefaultTableModel tabelaProfissionais = (DefaultTableModel) jTableProfissionais.getModel(); // pegando o modelo padrão da tabela
+        int coluna = jTableProfissionais.getModel().getColumnCount(); // pegando o número de colunas da tabela
+        tabelaProfissionais.addRow(new Object[coluna]);
+
     }
-}
+
+    private void mostrarDoBancoNaTabela() {
+        Session sessao = Utilitaria.getSession();//Peguei a sessao
+        List<Profissional> Lprofissionais = sessao.createQuery("from Profissional").list();//selecionei a tabela profissionais
+        int i = 0;
+        for (Profissional pf : Lprofissionais) {
+            jTableProfissionais.getModel().setValueAt(pf.getId(), i, 0);
+            jTableProfissionais.getModel().setValueAt(pf.getNome(), i, 1);
+            jTableProfissionais.getModel().setValueAt(pf.getTipo(), i, 2);
+            jTableProfissionais.getModel().setValueAt(pf.getIdentificacao(), i, 3);
+            i++;
+            DefaultTableModel tabelaProfissionais = (DefaultTableModel) jTableProfissionais.getModel(); // pegando o modelo padrão da tabela
+            //int linha = 1;          
+            tabelaProfissionais.addRow(new Object[1]);
+        }
+    }// Final do método
+
+}//Final da classe

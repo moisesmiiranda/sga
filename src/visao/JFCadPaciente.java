@@ -47,14 +47,12 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePacientes = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextFieldID = new javax.swing.JTextField();
         jTextFieldNome = new javax.swing.JTextField();
         jTextFieldDataDeNascimento = new javax.swing.JTextField();
         jRadioButtonM = new javax.swing.JRadioButton();
@@ -93,8 +91,10 @@ public class JFCadPaciente extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTablePacientes);
-
-        jLabel1.setText("ID: ");
+        if (jTablePacientes.getColumnModel().getColumnCount() > 0) {
+            jTablePacientes.getColumnModel().getColumn(0).setPreferredWidth(20);
+            jTablePacientes.getColumnModel().getColumn(1).setPreferredWidth(250);
+        }
 
         jLabel2.setText("Nome:");
 
@@ -107,14 +107,6 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jLabel6.setText("Endereço:");
 
         jLabel7.setText("Telefone:");
-
-        jTextFieldID.setEditable(false);
-        jTextFieldID.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextFieldID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldIDActionPerformed(evt);
-            }
-        });
 
         jTextFieldNome.setEnabled(false);
 
@@ -143,12 +135,10 @@ public class JFCadPaciente extends javax.swing.JFrame {
                     .addComponent(jTextFieldEndereco)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextFieldDataDeNascimento)
-                            .addComponent(jTextFieldID)
                             .addComponent(jTextFieldCPF)
                             .addComponent(jTextFieldTelefone)
-                            .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
@@ -159,16 +149,12 @@ public class JFCadPaciente extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jRadioButtonF)))
                         .addGap(392, 392, 392)))
-                .addContainerGap())
+                .addGap(14, 14, 14))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(1, 1, 1)
-                .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +180,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButtonNovo.setText("Novo");
@@ -238,7 +224,9 @@ public class JFCadPaciente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -246,10 +234,11 @@ public class JFCadPaciente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel1.add(jPanel2);
@@ -269,12 +258,9 @@ public class JFCadPaciente extends javax.swing.JFrame {
         //preencherATabela();
         mostrarDoBancoNaTabela();
         limparCampos();
+        controleCamposEBotoes();
 
     }//GEN-LAST:event_jButtonSalvarActionPerformed
-
-    private void jTextFieldIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIDActionPerformed
-
-    }//GEN-LAST:event_jTextFieldIDActionPerformed
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
         novoPaciente();
@@ -289,6 +275,9 @@ public class JFCadPaciente extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
+        
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -308,12 +297,13 @@ public class JFCadPaciente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
+                
                 new JFCadPaciente().setVisible(true);
                 
-
             }
 
         });
@@ -324,7 +314,6 @@ public class JFCadPaciente extends javax.swing.JFrame {
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -342,7 +331,6 @@ public class JFCadPaciente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldCPF;
     private javax.swing.JTextField jTextFieldDataDeNascimento;
     private javax.swing.JTextField jTextFieldEndereco;
-    private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldTelefone;
     // End of variables declaration//GEN-END:variables
@@ -398,7 +386,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
 
     }
 
-    private void preencherATabela() {
+    /*private void preencherATabela() {
 
         String nome = jTextFieldNome.getText();
         String data = jTextFieldDataDeNascimento.getText();
@@ -427,10 +415,10 @@ public class JFCadPaciente extends javax.swing.JFrame {
         int coluna = jTablePacientes.getModel().getColumnCount(); // variável coluna guardando o número de colunas da tabela
         tabelaPaciente.addRow(new Object[coluna]);// adicionando uma nova lina para o número de colunas.
 
-    }
+    }*/
 
     private void limparCampos() {
-        jTextFieldID.setText(null);
+        
         jTextFieldNome.setText(null);
         jTextFieldDataDeNascimento.setText(null);
         jRadioButtonF.getModel().setArmed(false);
@@ -442,14 +430,28 @@ public class JFCadPaciente extends javax.swing.JFrame {
     }
 
     private void mostrarDoBancoNaTabela() {
-        List<Paciente> ListPacientes = Utilitaria.getSession().getNamedQuery("Todos os Pacientes").list();
-        int i =0;
-        for (  Paciente p : ListPacientes){
+        Session sessao = Utilitaria.getSession();//Peguei a sessao
+        List<Paciente> Lpacientes = sessao.createQuery("from Paciente").list();//selecionei a tabela pacientes
+        int i = 0;
+        for (Paciente p : Lpacientes) {
             jTablePacientes.getModel().setValueAt(p.getId(), i, 0);
-            jTablePacientes.getModel().setValueAt(p.getNome(),i, 1);
+            jTablePacientes.getModel().setValueAt(p.getNome(), i, 1);
+            jTablePacientes.getModel().setValueAt(p.getDataDeNascimento(), i, 2);
+            jTablePacientes.getModel().setValueAt(p.getSexo(), i, 3);
+            jTablePacientes.getModel().setValueAt(p.getCpf(), i, 4);
+            jTablePacientes.getModel().setValueAt(p.getEndereco(), i, 5);
+            jTablePacientes.getModel().setValueAt(p.getTelefone(), i, 6);
+            i++;
+            DefaultTableModel tabelaPaciente = (DefaultTableModel) jTablePacientes.getModel(); // pegando o modelo padrão da tabela
+            //int linha = 1;          
+            tabelaPaciente.addRow(new Object[1]);
+        }
         
+
     }
-         
+
+    private void controleCamposEBotoes() {
+      
     }
 
 }
