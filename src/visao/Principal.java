@@ -33,11 +33,11 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuEquipe = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuAcompanhamento = new javax.swing.JMenu();
@@ -71,15 +71,12 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuCadastro.setText("Cadastros");
 
-        jMenuItem1.setText("Profissionais");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem2.setText("Consultas");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenuCadastro.add(jMenuItem1);
-
-        jMenuItem2.setText("Serviços");
         jMenuCadastro.add(jMenuItem2);
 
         jMenuItem5.setText("Pacientes");
@@ -90,6 +87,17 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenuCadastro.add(jMenuItem5);
 
+        jMenuItem9.setText("Campanhas");
+        jMenuCadastro.add(jMenuItem9);
+
+        jMenuItem1.setText("Profissionais");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItem1);
+
         jMenuItem7.setText("Equipe de Saúde");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,9 +105,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenuCadastro.add(jMenuItem7);
-
-        jMenuItem9.setText("Campanhas");
-        jMenuCadastro.add(jMenuItem9);
 
         jMenuBar1.add(jMenuCadastro);
 
@@ -161,6 +166,10 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+     mostrarTelaCadastroConsulta();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,5 +245,11 @@ public class Principal extends javax.swing.JFrame {
     private void mostrarTelaCadastroProfissional() {
         cadProfissinal = new JFCadProfissional();
         cadProfissinal.setVisible(true);
+    }
+    //Variável da Tela
+    JFCadConsulta cadConsulta;
+    private void mostrarTelaCadastroConsulta() {
+       cadConsulta = new JFCadConsulta();
+       cadConsulta.setVisible(true);
     }
 }

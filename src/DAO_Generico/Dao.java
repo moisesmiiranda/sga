@@ -37,11 +37,18 @@ public class Dao<T> {
     public void excluir(T t){
         sessao = Utilitaria.getSession();
         sessao.beginTransaction();
+         Query q;
+         
+         
+        
+        
         sessao.delete(t);
         sessao.getTransaction().commit();
         if(sessao.isOpen())
             sessao.close();
-                    
+   
+  
+    
     }
   
     
