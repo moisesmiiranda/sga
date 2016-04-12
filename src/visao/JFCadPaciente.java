@@ -6,9 +6,11 @@
 package visao;
 
 import DAO_Generico.Dao;
+import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import static java.util.Collections.list;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -264,7 +266,8 @@ public class JFCadPaciente extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         salvarPaciente();
-        preencherATabela();
+        //preencherATabela();
+        mostrarDoBancoNaTabela();
         limparCampos();
 
     }//GEN-LAST:event_jButtonSalvarActionPerformed
@@ -436,6 +439,17 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jTextFieldEndereco.setText(null);
         jTextFieldTelefone.setText(null);
 
+    }
+
+    private void mostrarDoBancoNaTabela() {
+        List<Paciente> ListPacientes = Utilitaria.getSession().getNamedQuery("Todos os Pacientes").list();
+        int i =0;
+        for (  Paciente p : ListPacientes){
+            jTablePacientes.getModel().setValueAt(p.getId(), i, 0);
+            jTablePacientes.getModel().setValueAt(p.getNome(),i, 1);
+        
+    }
+         
     }
 
 }
