@@ -6,7 +6,7 @@
 package modelo;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,8 +24,8 @@ public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String data;
-    private String hora;
+    private Date data;
+    private Time hora;
     @OneToOne
     @JoinColumn(name ="profissionalFK")
     private Profissional profissional;
@@ -41,19 +41,19 @@ public class Consulta {
         this.id = id;
     }
 
-    public String getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
-    public String getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 
@@ -76,19 +76,16 @@ public class Consulta {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + this.id;
-        hash = 47 * hash + Objects.hashCode(this.data);
-        hash = 47 * hash + Objects.hashCode(this.hora);
-        hash = 47 * hash + Objects.hashCode(this.profissional);
-        hash = 47 * hash + Objects.hashCode(this.paciente);
+        hash = 17 * hash + this.id;
+        hash = 17 * hash + Objects.hashCode(this.data);
+        hash = 17 * hash + Objects.hashCode(this.hora);
+        hash = 17 * hash + Objects.hashCode(this.profissional);
+        hash = 17 * hash + Objects.hashCode(this.paciente);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -119,6 +116,7 @@ public class Consulta {
         return "Consulta{" + "id=" + id + ", data=" + data + ", hora=" + hora + ", profissional=" + profissional + ", paciente=" + paciente + '}';
     }
 
+   
     
     
 }

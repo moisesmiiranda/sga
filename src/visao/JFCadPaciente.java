@@ -341,7 +341,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
         p.setCpf(jTextFieldCPF.getText().trim());
         p.setEndereco(jTextFieldEndereco.getText().trim());
         p.setTelefone(jTextFieldTelefone.getText());
-        p.setDataDeNascimento(jTextFieldDataDeNascimento.getText().trim());
+//        p.setDataDeNascimento(jTextFieldDataDeNascimento.getText().trim());
         //Salvar Sexo
         if (jRadioButtonM.getModel().isSelected() == true) {
             p.setSexo("Masculino");

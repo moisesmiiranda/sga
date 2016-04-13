@@ -5,7 +5,8 @@
  */
 package modelo;
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class Paciente {
     private int id;
     @Column(nullable = false)
     private String nome;
-    private String dataDeNascimento;
+    private Date dataDeNascimento;
     private String sexo;
     @Column(unique = true)
     private String cpf;
@@ -51,11 +52,11 @@ public class Paciente {
         this.nome = nome;
     }
 
-    public String getDataDeNascimento() {
+    public Date getDataDeNascimento() {
         return dataDeNascimento;
     }
 
-    public void setDataDeNascimento(String dataDeNascimento) {
+    public void setDataDeNascimento(Date dataDeNascimento) {
         this.dataDeNascimento = dataDeNascimento;
     }
 
@@ -115,9 +116,6 @@ public class Paciente {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null) {
             return false;
         }
@@ -128,10 +126,10 @@ public class Paciente {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.telefone, other.telefone)) {
+        if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        if (!Objects.equals(this.nome, other.nome)) {
+        if (!Objects.equals(this.dataDeNascimento, other.dataDeNascimento)) {
             return false;
         }
         if (!Objects.equals(this.sexo, other.sexo)) {
@@ -143,7 +141,7 @@ public class Paciente {
         if (!Objects.equals(this.endereco, other.endereco)) {
             return false;
         }
-        if (!Objects.equals(this.dataDeNascimento, other.dataDeNascimento)) {
+        if (!Objects.equals(this.telefone, other.telefone)) {
             return false;
         }
         if (!Objects.equals(this.consulta, other.consulta)) {
@@ -156,5 +154,10 @@ public class Paciente {
     public String toString() {
         return "Paciente{" + "id=" + id + ", nome=" + nome + ", dataDeNascimento=" + dataDeNascimento + ", sexo=" + sexo + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + ", consulta=" + consulta + '}';
     }
+
+
+
+
+
 
 }
