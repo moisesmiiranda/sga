@@ -10,6 +10,7 @@ import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.time.LocalDate;
 import static java.util.Collections.list;
 
 import javax.swing.JOptionPane;
@@ -342,6 +343,16 @@ public class JFCadPaciente extends javax.swing.JFrame {
         p.setEndereco(jTextFieldEndereco.getText().trim());
         p.setTelefone(jTextFieldTelefone.getText());
 //        p.setDataDeNascimento(jTextFieldDataDeNascimento.getText().trim());
+        
+        //Deve gravar assim: dd/MM/yyyy
+        // está salvando assim: 1960-09-22/ 22-09-1960
+        String dia = jTextFieldDataDeNascimento.getText().substring(0, 2);
+        String mes = jTextFieldDataDeNascimento.getText().substring(3, 5);
+        String ano = jTextFieldDataDeNascimento.getText().substring(6);
+        String dataASerGravada = ano+"-"+mes+"-"+dia;
+        
+        LocalDate DN =  LocalDate.parse(dataASerGravada);
+        p.setDataDeNascimento(java.sql.Date.valueOf(DN));
         //Salvar Sexo
         if (jRadioButtonM.getModel().isSelected() == true) {
             p.setSexo("Masculino");
@@ -433,6 +444,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
         Session sessao = Utilitaria.getSession();//Peguei a sessao
         List<Paciente> Lpacientes = sessao.createQuery("from Paciente").list();//selecionei a tabela pacientes
         int i = 0;
+        int linha = 1; 
         for (Paciente p : Lpacientes) {
             jTablePacientes.getModel().setValueAt(p.getId(), i, 0);
             jTablePacientes.getModel().setValueAt(p.getNome(), i, 1);
@@ -443,8 +455,8 @@ public class JFCadPaciente extends javax.swing.JFrame {
             jTablePacientes.getModel().setValueAt(p.getTelefone(), i, 6);
             i++;
             DefaultTableModel tabelaPaciente = (DefaultTableModel) jTablePacientes.getModel(); // pegando o modelo padrão da tabela
-            //int linha = 1;          
-            tabelaPaciente.addRow(new Object[1]);
+                     
+            tabelaPaciente.addRow(new Object[linha]);
         }
         
 

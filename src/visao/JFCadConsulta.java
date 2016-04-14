@@ -269,8 +269,8 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
     private void SalvarConsulta() {
         Consulta c = new Consulta();
-        c.setData(jTextFieldDataConsulta.getText());
-        c.setHora(jTextFieldHoraConsulta.getText());
+//        c.setData(jTextFieldDataConsulta.getText());
+  //      c.setHora(jTextFieldHoraConsulta.getText());
         
        
     }
