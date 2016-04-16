@@ -69,6 +69,11 @@ public class JFCadPaciente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Paciente");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
@@ -290,6 +295,10 @@ public class JFCadPaciente extends javax.swing.JFrame {
         limparCampos();
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        mostrarDoBancoNaTabela();
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -299,9 +308,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        
-        
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -321,13 +328,11 @@ public class JFCadPaciente extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                
                 new JFCadPaciente().setVisible(true);
-                
+
             }
 
         });
@@ -366,15 +371,15 @@ public class JFCadPaciente extends javax.swing.JFrame {
         p.setEndereco(jTextFieldEndereco.getText().trim());
         p.setTelefone(jTextFieldTelefone.getText());
 //        p.setDataDeNascimento(jTextFieldDataDeNascimento.getText().trim());
-        
+
         //Deve gravar assim: dd/MM/yyyy
         // está salvando assim: 1960-09-22/ 22-09-1960
         String dia = jTextFieldDataDeNascimento.getText().substring(0, 2);
         String mes = jTextFieldDataDeNascimento.getText().substring(3, 5);
         String ano = jTextFieldDataDeNascimento.getText().substring(6);
-        String dataASerGravada = ano+"-"+mes+"-"+dia;
-        
-        LocalDate DN =  LocalDate.parse(dataASerGravada);
+        String dataASerGravada = ano + "-" + mes + "-" + dia;
+
+        LocalDate DN = LocalDate.parse(dataASerGravada);
         p.setDataDeNascimento(java.sql.Date.valueOf(DN));
         //Salvar Sexo
         if (jRadioButtonM.getModel().isSelected() == true) {
@@ -422,37 +427,36 @@ public class JFCadPaciente extends javax.swing.JFrame {
 
     /*private void preencherATabela() {
 
-        String nome = jTextFieldNome.getText();
-        String data = jTextFieldDataDeNascimento.getText();
-        String sexo = null;
-        if (jRadioButtonM.getModel().isSelected() == true) {
-            sexo = "Masculino";
-        } else if (jRadioButtonF.getModel().isSelected() == true) {
-            sexo = "Feminino";
-        }
-        String cpf = jTextFieldCPF.getText();
-        String endereco = jTextFieldEndereco.getText();
-        String telefone = jTextFieldTelefone.getText();
+     String nome = jTextFieldNome.getText();
+     String data = jTextFieldDataDeNascimento.getText();
+     String sexo = null;
+     if (jRadioButtonM.getModel().isSelected() == true) {
+     sexo = "Masculino";
+     } else if (jRadioButtonF.getModel().isSelected() == true) {
+     sexo = "Feminino";
+     }
+     String cpf = jTextFieldCPF.getText();
+     String endereco = jTextFieldEndereco.getText();
+     String telefone = jTextFieldTelefone.getText();
 
-        //preenchendo a tabela
-        int linha = jTablePacientes.getRowCount() - 1;// necessário para começar a preencher a tabela.
-        // OBS: A tabela tem que estar apenas com uma linha.
+     //preenchendo a tabela
+     int linha = jTablePacientes.getRowCount() - 1;// necessário para começar a preencher a tabela.
+     // OBS: A tabela tem que estar apenas com uma linha.
 
-        jTablePacientes.getModel().setValueAt(null, linha, 0);
-        jTablePacientes.getModel().setValueAt(nome, linha, 1);
-        jTablePacientes.getModel().setValueAt(data, linha, 2);
-        jTablePacientes.getModel().setValueAt(sexo, linha, 3);
-        jTablePacientes.getModel().setValueAt(cpf, linha, 4);
-        jTablePacientes.getModel().setValueAt(endereco, linha, 5);
-        jTablePacientes.getModel().setValueAt(telefone, linha, 6);
-        DefaultTableModel tabelaPaciente = (DefaultTableModel) jTablePacientes.getModel(); // pegando o modelo padrão da tabela
-        int coluna = jTablePacientes.getModel().getColumnCount(); // variável coluna guardando o número de colunas da tabela
-        tabelaPaciente.addRow(new Object[coluna]);// adicionando uma nova lina para o número de colunas.
+     jTablePacientes.getModel().setValueAt(null, linha, 0);
+     jTablePacientes.getModel().setValueAt(nome, linha, 1);
+     jTablePacientes.getModel().setValueAt(data, linha, 2);
+     jTablePacientes.getModel().setValueAt(sexo, linha, 3);
+     jTablePacientes.getModel().setValueAt(cpf, linha, 4);
+     jTablePacientes.getModel().setValueAt(endereco, linha, 5);
+     jTablePacientes.getModel().setValueAt(telefone, linha, 6);
+     DefaultTableModel tabelaPaciente = (DefaultTableModel) jTablePacientes.getModel(); // pegando o modelo padrão da tabela
+     int coluna = jTablePacientes.getModel().getColumnCount(); // variável coluna guardando o número de colunas da tabela
+     tabelaPaciente.addRow(new Object[coluna]);// adicionando uma nova lina para o número de colunas.
 
-    }*/
-
+     }*/
     private void limparCampos() {
-        
+
         jTextFieldNome.setText(null);
         jTextFieldDataDeNascimento.setText(null);
         jRadioButtonF.getModel().setSelected(false);
@@ -467,26 +471,35 @@ public class JFCadPaciente extends javax.swing.JFrame {
         Session sessao = Utilitaria.getSession();//Peguei a sessao
         List<Paciente> Lpacientes = sessao.createQuery("from Paciente").list();//selecionei a tabela pacientes
         int i = 0;
-        int linha = 1; 
+        int linha = 1;
+        //Data está aparecendo assim 1982-04-22
+        //Deve aparecer assim: 22/04/1982
+
         for (Paciente p : Lpacientes) {
+            //Conversão necessária para salvar a data no formato correto
+            String dataN_do_paciente = String.valueOf(p.getDataDeNascimento());
+            String ano =dataN_do_paciente.substring(0, 4);
+            String mes = dataN_do_paciente.substring(5, 7);
+            String dia = dataN_do_paciente.substring(8);
+            String DataParaTabela = dia+"/"+mes+"/"+ano;
+            
             jTablePacientes.getModel().setValueAt(p.getId(), i, 0);
             jTablePacientes.getModel().setValueAt(p.getNome(), i, 1);
-            jTablePacientes.getModel().setValueAt(p.getDataDeNascimento(), i, 2);
+            jTablePacientes.getModel().setValueAt(DataParaTabela, i, 2);
             jTablePacientes.getModel().setValueAt(p.getSexo(), i, 3);
             jTablePacientes.getModel().setValueAt(p.getCpf(), i, 4);
             jTablePacientes.getModel().setValueAt(p.getEndereco(), i, 5);
             jTablePacientes.getModel().setValueAt(p.getTelefone(), i, 6);
             i++;
             DefaultTableModel tabelaPaciente = (DefaultTableModel) jTablePacientes.getModel(); // pegando o modelo padrão da tabela
-                     
+
             tabelaPaciente.addRow(new Object[linha]);
         }
-        
 
     }
 
     private void controleCamposEBotoes() {
-      
+
     }
 
 }

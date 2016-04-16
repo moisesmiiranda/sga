@@ -56,6 +56,11 @@ public class JFCadProfissional extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Profissional");
         setSize(new java.awt.Dimension(699, 605));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
@@ -221,6 +226,10 @@ public class JFCadProfissional extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        mostrarDoBancoNaTabela();
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -284,7 +293,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
         Dao<Profissional> dao = new Dao<>();
         dao.gravar(pf);
         JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!");
-        
+
     }
 
     private void ControleCamposEBotoesSalvar() {

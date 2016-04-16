@@ -36,11 +36,11 @@ public class JFCadConsulta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldNomePaciente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldDataConsulta = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldHoraConsulta = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
+        jTFDataConsulta = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
@@ -92,9 +92,9 @@ public class JFCadConsulta extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jButton1)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextFieldHoraConsulta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                .addComponent(jTextFieldDataConsulta, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 523, Short.MAX_VALUE)))
+                                .addComponent(jTFDataConsulta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jTextFieldHoraConsulta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -103,7 +103,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldDataConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFDataConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -255,7 +255,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextFieldDataConsulta;
+    private com.toedter.calendar.JDateChooser jTFDataConsulta;
     private javax.swing.JTextField jTextFieldHoraConsulta;
     private javax.swing.JTextField jTextFieldNomePaciente;
     // End of variables declaration//GEN-END:variables

@@ -82,11 +82,11 @@
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jTFDataConsulta" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jTextFieldHoraConsulta" alignment="0" pref="161" max="32767" attributes="0"/>
-                                      <Component id="jTextFieldDataConsulta" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="523" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -99,7 +99,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextFieldDataConsulta" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTFDataConsulta" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -137,8 +137,6 @@
                 <Property name="text" type="java.lang.String" value="Data da Consulta:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldDataConsulta">
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Hora da Consulta:"/>
@@ -165,6 +163,8 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jTFDataConsulta">
             </Component>
           </SubComponents>
         </Container>
