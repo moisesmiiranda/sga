@@ -96,6 +96,11 @@ public class JFCadPaciente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTablePacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablePacientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablePacientes);
         if (jTablePacientes.getColumnModel().getColumnCount() > 0) {
             jTablePacientes.getColumnModel().getColumn(0).setPreferredWidth(20);
@@ -117,10 +122,8 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jTextFieldNome.setEnabled(false);
 
         jRadioButtonM.setText("M");
-        jRadioButtonM.setEnabled(false);
 
         jRadioButtonF.setText("F");
-        jRadioButtonF.setEnabled(false);
 
         jTextFieldEndereco.setEnabled(false);
 
@@ -278,12 +281,11 @@ public class JFCadPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         salvarPaciente();
-        //preencherATabela();
         mostrarDoBancoNaTabela();
         limparCampos();
         controleCamposEBotoes();
@@ -298,6 +300,10 @@ public class JFCadPaciente extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         mostrarDoBancoNaTabela();
     }//GEN-LAST:event_formWindowOpened
+
+    private void jTablePacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePacientesMouseClicked
+       selecionarPaciente();
+    }//GEN-LAST:event_jTablePacientesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -370,7 +376,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
         p.setCpf(jTextFieldCPF.getText().trim());
         p.setEndereco(jTextFieldEndereco.getText().trim());
         p.setTelefone(jTextFieldTelefone.getText());
-//        p.setDataDeNascimento(jTextFieldDataDeNascimento.getText().trim());
+
 
         //Deve gravar assim: dd/MM/yyyy
         // está salvando assim: 1960-09-22/ 22-09-1960
@@ -425,36 +431,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
 
     }
 
-    /*private void preencherATabela() {
 
-     String nome = jTextFieldNome.getText();
-     String data = jTextFieldDataDeNascimento.getText();
-     String sexo = null;
-     if (jRadioButtonM.getModel().isSelected() == true) {
-     sexo = "Masculino";
-     } else if (jRadioButtonF.getModel().isSelected() == true) {
-     sexo = "Feminino";
-     }
-     String cpf = jTextFieldCPF.getText();
-     String endereco = jTextFieldEndereco.getText();
-     String telefone = jTextFieldTelefone.getText();
-
-     //preenchendo a tabela
-     int linha = jTablePacientes.getRowCount() - 1;// necessário para começar a preencher a tabela.
-     // OBS: A tabela tem que estar apenas com uma linha.
-
-     jTablePacientes.getModel().setValueAt(null, linha, 0);
-     jTablePacientes.getModel().setValueAt(nome, linha, 1);
-     jTablePacientes.getModel().setValueAt(data, linha, 2);
-     jTablePacientes.getModel().setValueAt(sexo, linha, 3);
-     jTablePacientes.getModel().setValueAt(cpf, linha, 4);
-     jTablePacientes.getModel().setValueAt(endereco, linha, 5);
-     jTablePacientes.getModel().setValueAt(telefone, linha, 6);
-     DefaultTableModel tabelaPaciente = (DefaultTableModel) jTablePacientes.getModel(); // pegando o modelo padrão da tabela
-     int coluna = jTablePacientes.getModel().getColumnCount(); // variável coluna guardando o número de colunas da tabela
-     tabelaPaciente.addRow(new Object[coluna]);// adicionando uma nova lina para o número de colunas.
-
-     }*/
     private void limparCampos() {
 
         jTextFieldNome.setText(null);
@@ -500,6 +477,26 @@ public class JFCadPaciente extends javax.swing.JFrame {
 
     private void controleCamposEBotoes() {
 
+    }
+
+    private void selecionarPaciente() {
+       int linhaSelecionada = jTablePacientes.getSelectedRow();
+       jTextFieldNome.setText(jTablePacientes.getValueAt(linhaSelecionada,1).toString());
+       jTextFieldDataDeNascimento.setText(jTablePacientes.getValueAt(linhaSelecionada,2).toString());
+       //pegando o sexo
+       String sexo = jTablePacientes.getValueAt(linhaSelecionada, 3).toString();
+       String sexoM = "masculino";
+       String sexoF = "feminino";
+       
+       if(sexo.equals(sexoM))
+            jRadioButtonM.getModel().setSelected(true);
+        else
+            if(sexo.equals(sexoF))
+                jRadioButtonF.getModel().setSelected(true);
+       
+       jTextFieldCPF.setText(jTablePacientes.getValueAt(linhaSelecionada,4).toString());
+       jTextFieldEndereco.setText(jTablePacientes.getValueAt(linhaSelecionada,5).toString());
+       jTextFieldTelefone.setText(jTablePacientes.getValueAt(linhaSelecionada,6).toString());
     }
 
 }

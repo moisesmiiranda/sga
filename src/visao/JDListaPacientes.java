@@ -5,6 +5,12 @@
  */
 package visao;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import modelo.Paciente;
+import org.hibernate.Session;
+import util.Utilitaria;
+
 /**
  *
  * @author ADMIN
@@ -19,27 +25,29 @@ public class JDListaPacientes extends javax.swing.JDialog {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableListaPacientes = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Lista de Pacientes");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableListaPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null}
             },
@@ -55,7 +63,12 @@ public class JDListaPacientes extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jTableListaPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableListaPacientesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableListaPacientes);
 
         jButton1.setText("Adicionar Consulta");
         jButton1.setPreferredSize(new java.awt.Dimension(200, 35));
@@ -70,55 +83,33 @@ public class JDListaPacientes extends javax.swing.JDialog {
         });
         jPanel2.add(jButton2);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nome", "Data de Nascimento", "Sexo", "CPF", "Endereço", "Telefone"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(jTable2);
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
-            .addComponent(jSeparator1)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 18, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(106, 106, 106)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -134,6 +125,16 @@ public class JDListaPacientes extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         mostrarTelaPesquisaPaciente();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        mostrarPacientes();
+
+
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jTableListaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaPacientesMouseClicked
+       
+    }//GEN-LAST:event_jTableListaPacientesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -184,17 +185,51 @@ public class JDListaPacientes extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableListaPacientes;
     // End of variables declaration//GEN-END:variables
 
     //Variável da tela
     JDPesquisarPaciente pesquisaPaciente;
+
     private void mostrarTelaPesquisaPaciente() {
-       pesquisaPaciente = new JDPesquisarPaciente(null, true);
-       pesquisaPaciente.setVisible(true);
-               
+        mostrarPacientes();
+        pesquisaPaciente = new JDPesquisarPaciente(null, true);
+        pesquisaPaciente.setVisible(true);
+
     }
+
+    private void mostrarPacientes() {
+
+        Session sessao = Utilitaria.getSession();//Peguei a sessao
+        List<Paciente> Lpacientes = sessao.createQuery("from Paciente").list();//selecionei a tabela pacientes
+        int i = 0;
+        int linha = 1;
+        //Data está aparecendo assim 1982-04-22
+        //Deve aparecer assim: 22/04/1982
+
+        for (Paciente p : Lpacientes) {
+            //Conversão necessária para salvar a data no formato correto
+            String dataN_do_paciente = String.valueOf(p.getDataDeNascimento());
+            String ano = dataN_do_paciente.substring(0, 4);
+            String mes = dataN_do_paciente.substring(5, 7);
+            String dia = dataN_do_paciente.substring(8);
+            String DataParaTabela = dia + "/" + mes + "/" + ano;
+
+            jTableListaPacientes.getModel().setValueAt(p.getId(), i, 0);
+            jTableListaPacientes.getModel().setValueAt(p.getNome(), i, 1);
+            jTableListaPacientes.getModel().setValueAt(DataParaTabela, i, 2);
+            jTableListaPacientes.getModel().setValueAt(p.getSexo(), i, 3);
+            jTableListaPacientes.getModel().setValueAt(p.getCpf(), i, 4);
+            jTableListaPacientes.getModel().setValueAt(p.getEndereco(), i, 5);
+            jTableListaPacientes.getModel().setValueAt(p.getTelefone(), i, 6);
+            i++;
+            DefaultTableModel tabelaListaPaciente = (DefaultTableModel) jTableListaPacientes.getModel(); // pegando o modelo padrão da tabela
+
+            tabelaListaPaciente.addRow(new Object[linha]);
+        }
+
+    }
+
+   
 }

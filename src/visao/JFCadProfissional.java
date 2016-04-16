@@ -356,6 +356,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
         List<Profissional> Lprofissionais = sessao.createQuery("from Profissional").list();//selecionei a tabela profissionais
         int i = 0;
         for (Profissional pf : Lprofissionais) {
+            
             jTableProfissionais.getModel().setValueAt(pf.getId(), i, 0);
             jTableProfissionais.getModel().setValueAt(pf.getNome(), i, 1);
             jTableProfissionais.getModel().setValueAt(pf.getTipo(), i, 2);
