@@ -65,6 +65,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jButtonNovo = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
+        jButtonAtualizar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -107,24 +108,49 @@ public class JFCadPaciente extends javax.swing.JFrame {
             jTablePacientes.getColumnModel().getColumn(1).setPreferredWidth(250);
         }
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Nome:");
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Data de Nascimento:");
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Sexo:");
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("CPF:");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Endereço:");
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Telefone:");
 
+        jTextFieldNome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextFieldNome.setEnabled(false);
 
         jRadioButtonM.setText("M");
+        jRadioButtonM.setEnabled(false);
+        jRadioButtonM.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButtonMMouseClicked(evt);
+            }
+        });
+        jRadioButtonM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMActionPerformed(evt);
+            }
+        });
 
         jRadioButtonF.setText("F");
+        jRadioButtonF.setEnabled(false);
+        jRadioButtonF.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButtonFMouseClicked(evt);
+            }
+        });
 
+        jTextFieldEndereco.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextFieldEndereco.setEnabled(false);
 
         try {
@@ -133,6 +159,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jTextFieldDataDeNascimento.setEnabled(false);
+        jTextFieldDataDeNascimento.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         try {
             jTextFieldCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -140,6 +167,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jTextFieldCPF.setEnabled(false);
+        jTextFieldCPF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         try {
             jTextFieldTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#-####-####")));
@@ -147,6 +175,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         jTextFieldTelefone.setEnabled(false);
+        jTextFieldTelefone.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -236,6 +265,15 @@ public class JFCadPaciente extends javax.swing.JFrame {
         });
         jPanel4.add(jButtonAlterar);
 
+        jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonAtualizar);
+
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.setEnabled(false);
         jButtonSalvar.setPreferredSize(new java.awt.Dimension(75, 30));
@@ -255,16 +293,14 @@ public class JFCadPaciente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -281,6 +317,8 @@ public class JFCadPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+         HabilitarCampos();
+         
         
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
@@ -293,7 +331,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-        novoPaciente();
+        HabilitarCampos();
         limparCampos();
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
@@ -302,8 +340,28 @@ public class JFCadPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void jTablePacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePacientesMouseClicked
-       selecionarPaciente();
+        selecionarPaciente();
     }//GEN-LAST:event_jTablePacientesMouseClicked
+
+    private void jRadioButtonMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMActionPerformed
+
+
+    }//GEN-LAST:event_jRadioButtonMActionPerformed
+
+    private void jRadioButtonMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonMMouseClicked
+        //Essa ação deve desabilitar o jRadioButton do sexo feminino
+        jRadioButtonF.getModel().setSelected(false);
+        
+    }//GEN-LAST:event_jRadioButtonMMouseClicked
+
+    private void jRadioButtonFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonFMouseClicked
+        //Essa ação deve desabilitar o jRadioButton do sexo masculino
+        jRadioButtonM.getModel().setSelected(false);
+    }//GEN-LAST:event_jRadioButtonFMouseClicked
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+         atualizarCadPacientes();
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,6 +404,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;
+    private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSalvar;
@@ -376,7 +435,6 @@ public class JFCadPaciente extends javax.swing.JFrame {
         p.setCpf(jTextFieldCPF.getText().trim());
         p.setEndereco(jTextFieldEndereco.getText().trim());
         p.setTelefone(jTextFieldTelefone.getText());
-
 
         //Deve gravar assim: dd/MM/yyyy
         // está salvando assim: 1960-09-22/ 22-09-1960
@@ -413,7 +471,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jRadioButtonF.setEnabled(false);
     }
 
-    private void novoPaciente() {
+    private void HabilitarCampos() {
         //Habilitanto campos de texto
         jTextFieldCPF.setEnabled(true);
         jTextFieldDataDeNascimento.setEnabled(true);
@@ -430,7 +488,6 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jButtonSalvar.setEnabled(true);
 
     }
-
 
     private void limparCampos() {
 
@@ -455,11 +512,11 @@ public class JFCadPaciente extends javax.swing.JFrame {
         for (Paciente p : Lpacientes) {
             //Conversão necessária para salvar a data no formato correto
             String dataN_do_paciente = String.valueOf(p.getDataDeNascimento());
-            String ano =dataN_do_paciente.substring(0, 4);
+            String ano = dataN_do_paciente.substring(0, 4);
             String mes = dataN_do_paciente.substring(5, 7);
             String dia = dataN_do_paciente.substring(8);
-            String DataParaTabela = dia+"/"+mes+"/"+ano;
-            
+            String DataParaTabela = dia + "/" + mes + "/" + ano;
+
             jTablePacientes.getModel().setValueAt(p.getId(), i, 0);
             jTablePacientes.getModel().setValueAt(p.getNome(), i, 1);
             jTablePacientes.getModel().setValueAt(DataParaTabela, i, 2);
@@ -480,23 +537,71 @@ public class JFCadPaciente extends javax.swing.JFrame {
     }
 
     private void selecionarPaciente() {
-       int linhaSelecionada = jTablePacientes.getSelectedRow();
-       jTextFieldNome.setText(jTablePacientes.getValueAt(linhaSelecionada,1).toString());
-       jTextFieldDataDeNascimento.setText(jTablePacientes.getValueAt(linhaSelecionada,2).toString());
-       //pegando o sexo
-       String sexo = jTablePacientes.getValueAt(linhaSelecionada, 3).toString();
-       String sexoM = "masculino";
-       String sexoF = "feminino";
-       
-       if(sexo.equals(sexoM))
+        int linhaSelecionada = jTablePacientes.getSelectedRow();
+        jTextFieldNome.setText(jTablePacientes.getValueAt(linhaSelecionada, 1).toString());
+        jTextFieldDataDeNascimento.setText(jTablePacientes.getValueAt(linhaSelecionada, 2).toString());
+        //pegando o sexo
+        String sexo = jTablePacientes.getValueAt(linhaSelecionada, 3).toString();
+        String sexoM = "masculino";
+        String sexoF = "feminino";
+
+        if (sexo.equalsIgnoreCase(sexoM)) {
             jRadioButtonM.getModel().setSelected(true);
-        else
-            if(sexo.equals(sexoF))
-                jRadioButtonF.getModel().setSelected(true);
-       
-       jTextFieldCPF.setText(jTablePacientes.getValueAt(linhaSelecionada,4).toString());
-       jTextFieldEndereco.setText(jTablePacientes.getValueAt(linhaSelecionada,5).toString());
-       jTextFieldTelefone.setText(jTablePacientes.getValueAt(linhaSelecionada,6).toString());
+            jRadioButtonF.getModel().setSelected(false);
+        } else if (sexo.equalsIgnoreCase(sexoF)) {
+            jRadioButtonF.getModel().setSelected(true);
+            jRadioButtonM.getModel().setSelected(false);
+        }
+
+        jTextFieldCPF.setText(jTablePacientes.getValueAt(linhaSelecionada, 4).toString());
+        jTextFieldEndereco.setText(jTablePacientes.getValueAt(linhaSelecionada, 5).toString());
+        jTextFieldTelefone.setText(jTablePacientes.getValueAt(linhaSelecionada, 6).toString());
     }
+
+    private void atualizarCadPacientes() {       
+        Paciente p = new Paciente();
+        p.setNome(jTextFieldNome.getText());
+        p.setCpf(jTextFieldCPF.getText());
+        p.setEndereco(jTextFieldEndereco.getText());
+        p.setTelefone(jTextFieldTelefone.getText());
+
+        //Deve gravar assim: dd/MM/yyyy
+        // está salvando assim: 1960-09-22/ 22-09-1960
+        String dia = jTextFieldDataDeNascimento.getText().substring(0, 2);
+        String mes = jTextFieldDataDeNascimento.getText().substring(3, 5);
+        String ano = jTextFieldDataDeNascimento.getText().substring(6);
+        String dataASerGravada = ano + "-" + mes + "-" + dia;
+
+        LocalDate DN = LocalDate.parse(dataASerGravada);
+        p.setDataDeNascimento(java.sql.Date.valueOf(DN));
+        //Salvar Sexo
+        if (jRadioButtonM.getModel().isSelected() == true) {
+            p.setSexo("Masculino");
+        } else if (jRadioButtonF.getModel().isSelected() == true) {
+            p.setSexo("Feminino");
+        }
+
+        Dao<Paciente> dao = new Dao<>();
+        dao.atualizar(p);
+        JOptionPane.showMessageDialog(null, "Dados atualizados com sucesso!");
+
+        jButtonAtualizar.setEnabled(false);
+        jButtonSalvar.setEnabled(false);
+        jButtonNovo.setEnabled(true);
+        jButtonExcluir.setEnabled(true);
+        jButtonAlterar.setEnabled(true);
+        
+
+        // Desabilitando campos
+        jTextFieldCPF.setEnabled(false);
+        jTextFieldDataDeNascimento.setEnabled(false);
+        jTextFieldEndereco.setEnabled(false);
+        jTextFieldNome.setEnabled(false);
+        jTextFieldTelefone.setEnabled(false);
+        jRadioButtonM.setEnabled(false);
+        jRadioButtonF.setEnabled(false);
+    }
+
+  
 
 }

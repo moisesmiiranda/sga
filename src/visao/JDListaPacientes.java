@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Paciente;
 import org.hibernate.Session;
 import util.Utilitaria;
+import visao.JFCadConsulta;
 
 /**
  *
@@ -72,6 +73,11 @@ public class JDListaPacientes extends javax.swing.JDialog {
 
         jButton1.setText("Adicionar Consulta");
         jButton1.setPreferredSize(new java.awt.Dimension(200, 35));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButton1);
 
         jButton2.setText("Pesquisar");
@@ -135,6 +141,10 @@ public class JDListaPacientes extends javax.swing.JDialog {
     private void jTableListaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaPacientesMouseClicked
        
     }//GEN-LAST:event_jTableListaPacientesMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       AdicionarConsulta();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,6 +239,18 @@ public class JDListaPacientes extends javax.swing.JDialog {
             tabelaListaPaciente.addRow(new Object[linha]);
         }
 
+    }
+
+    private void AdicionarConsulta() {
+       /*Esse método deve pegar o objeto selecionado da tabela jTableListaPacientes
+        e adicioná-lo na tabela jTablePacienteCadConsulta.*/
+        Object ObjtSelecionado = jTableListaPacientes.getSelectedRow();
+        
+        
+        
+        
+        
+        
     }
 
    

@@ -51,6 +51,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
         jButtonNovo = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
+        jButtonAtualizar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -81,6 +82,11 @@ public class JFCadProfissional extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableProfissionais.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableProfissionaisMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableProfissionais);
@@ -165,6 +171,16 @@ public class JFCadProfissional extends javax.swing.JFrame {
         });
         jPanel4.add(jButtonAlterar);
 
+        jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.setEnabled(false);
+        jButtonAtualizar.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonAtualizar);
+
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.setEnabled(false);
         jButtonSalvar.setPreferredSize(new java.awt.Dimension(75, 30));
@@ -211,7 +227,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        // TODO add your handling code here:
+       habilitarCampos();
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
@@ -229,6 +245,14 @@ public class JFCadProfissional extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         mostrarDoBancoNaTabela();
     }//GEN-LAST:event_formWindowOpened
+
+    private void jTableProfissionaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableProfissionaisMouseClicked
+        daTabelaParaOsTextFields();
+    }//GEN-LAST:event_jTableProfissionaisMouseClicked
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,6 +291,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;
+    private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSalvar;
@@ -368,4 +393,22 @@ public class JFCadProfissional extends javax.swing.JFrame {
         }
     }// Final do método
 
+    private void daTabelaParaOsTextFields() {
+        int linha = jTableProfissionais.getSelectedRow();
+        
+       jTextFieldNome.setText(jTableProfissionais.getModel().getValueAt(linha,1).toString());
+       jTextFieldTipo.setText(jTableProfissionais.getModel().getValueAt(linha,2).toString());
+       jTextFieldIdentificacao.setText(jTableProfissionais.getModel().getValueAt(linha,3).toString());
+       
+        
+        
+    }
+
+    private void habilitarCampos() {
+       jTextFieldNome.setEnabled(true);
+       jTextFieldTipo.setEnabled(true);
+       jTextFieldIdentificacao.setEnabled(true);
+       jButtonAtualizar.setEnabled(true);
+       jButtonExcluir.setEnabled(false);
+    }
 }//Final da classe
