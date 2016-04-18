@@ -5,6 +5,8 @@
  */
 package visao;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Consulta;
@@ -46,7 +48,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTFDataConsulta = new com.toedter.calendar.JDateChooser();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jTFHora = new javax.swing.JFormattedTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableProfissionalDaConsulta = new javax.swing.JTable();
         jScrollPane6 = new javax.swing.JScrollPane();
@@ -110,7 +112,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
         jLabel6.setText("Hora da Consulta:");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            jTFHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -171,7 +173,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
                         .addGap(94, 94, 94)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTFHora, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(314, 314, 314))
                     .addComponent(jScrollPane4)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -189,7 +191,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFDataConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addGap(7, 7, 7)
@@ -571,7 +573,6 @@ public class JFCadConsulta extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonPesquisaPorNome;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -597,6 +598,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private com.toedter.calendar.JDateChooser jTFDataConsulta;
+    private javax.swing.JFormattedTextField jTFHora;
     private javax.swing.JTextField jTFPesquisaPNome;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableConsultasCadastradas;
@@ -620,6 +622,19 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
     private void SalvarConsulta() {
         Consulta c = new Consulta();
+        c.setData((Date) jTFDataConsulta.getDate());
+        //pegar a hora da tela
+        Time hora = Time.valueOf(jTFHora.getText());
+        //salvar hora
+        c.setHora(hora);
+        //precisa receber um objeto paciente
+        c.setPaciente(null);
+        //precisa receber um objeto profissional
+        c.setProfissional(null);
+        
+        
+        Paciente p = new Paciente();
+        
         
 
         

@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -27,7 +28,7 @@ public class Profissional {
     private String tipo;
     @Column (unique = true)
     private String identificacao;
-    @OneToOne (mappedBy = "profissional")
+    @ManyToMany (mappedBy = "profissional")
     private Consulta consulta;
     
     

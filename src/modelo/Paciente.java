@@ -13,7 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import org.hibernate.mapping.ManyToOne;
 
 /**
  *
@@ -33,7 +36,7 @@ public class Paciente {
     private String cpf;
     private String endereco;
     private String telefone;
-    @OneToOne(mappedBy = "paciente")
+    @OneToMany(mappedBy = "paciente")
     private Consulta consulta;
 
     public int getId() {

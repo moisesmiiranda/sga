@@ -13,6 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -26,10 +29,10 @@ public class Consulta {
     private int id;
     private Date data;
     private Time hora;
-    @OneToOne
+    @ManyToMany
     @JoinColumn(name ="profissionalFK")
     private Profissional profissional;
-    @OneToOne
+    @OneToMany
     @JoinColumn(name = "pacienteFK")  
     private Paciente paciente;
 
