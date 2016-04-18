@@ -5,6 +5,9 @@
  */
 package visao;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import modelo.Paciente;
@@ -16,7 +19,7 @@ import visao.JFCadConsulta;
  *
  * @author ADMIN
  */
-public class JDListaPacientes extends javax.swing.JDialog {
+public class JDListaPacientes extends javax.swing.JDialog{
 
     /**
      * Creates new form JDListaPacientes
@@ -25,6 +28,8 @@ public class JDListaPacientes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -143,7 +148,7 @@ public class JDListaPacientes extends javax.swing.JDialog {
     }//GEN-LAST:event_jTableListaPacientesMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       AdicionarConsulta();
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -241,17 +246,7 @@ public class JDListaPacientes extends javax.swing.JDialog {
 
     }
 
-    private void AdicionarConsulta() {
-       /*Esse método deve pegar o objeto selecionado da tabela jTableListaPacientes
-        e adicioná-lo na tabela jTablePacienteCadConsulta.*/
-        Object ObjtSelecionado = jTableListaPacientes.getSelectedRow();
-        
-        
-        
-        
-        
-        
-    }
+
 
    
 }
