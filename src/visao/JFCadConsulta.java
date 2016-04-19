@@ -628,6 +628,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
         //salvar hora
         c.setHora(hora);
         //precisa receber um objeto paciente
+        
         c.setPaciente(null);
         //precisa receber um objeto profissional
         c.setProfissional(null);
