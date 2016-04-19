@@ -5,9 +5,16 @@
  */
 package visao;
 
+import DAO_Generico.Dao;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javafx.util.converter.LocalTimeStringConverter;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Consulta;
 import modelo.Paciente;
@@ -26,10 +33,8 @@ public class JFCadConsulta extends javax.swing.JFrame {
      */
     public JFCadConsulta() {
         initComponents();
-        
-       
+
     }
-     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,8 +62,8 @@ public class JFCadConsulta extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
-        jButtonAlterar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableConsultasCadastradas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -220,17 +225,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
         });
         jPanel4.add(jButtonExcluir);
 
-        jButtonAlterar.setText("Alterar");
-        jButtonAlterar.setPreferredSize(new java.awt.Dimension(75, 30));
-        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAlterarActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButtonAlterar);
-
         jButtonSalvar.setText("Salvar");
-        jButtonSalvar.setEnabled(false);
         jButtonSalvar.setPreferredSize(new java.awt.Dimension(75, 30));
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,6 +233,14 @@ public class JFCadConsulta extends javax.swing.JFrame {
             }
         });
         jPanel4.add(jButtonSalvar);
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButton1);
 
         jTableConsultasCadastradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -500,11 +503,9 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         SalvarConsulta();
-    }//GEN-LAST:event_jButtonSalvarActionPerformed
+        MostrarDadosNaTabela();
 
-    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAlterarActionPerformed
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
         // TODO add your handling code here:
@@ -515,17 +516,23 @@ public class JFCadConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-           mostrarPacientesCadastrados();
-           mostrarProfissionaisCadastrados();
+        mostrarPacientesCadastrados();
+        mostrarProfissionaisCadastrados();
     }//GEN-LAST:event_formWindowOpened
 
     private void jTableListaPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaPacienteMouseClicked
-       adicionarPacienteNaConsulta();
+        adicionarPacienteNaConsulta();
     }//GEN-LAST:event_jTableListaPacienteMouseClicked
 
     private void jTableListaProfissionaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaProfissionaisMouseClicked
         adicionarProfissionalNaConsulta();
     }//GEN-LAST:event_jTableListaProfissionaisMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        LocalTime horaTF = LocalTime.parse(jTFHora.getText());
+   
+            JOptionPane.showMessageDialog(null, horaTF);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -563,12 +570,12 @@ public class JFCadConsulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonPesquisaPorNome;
@@ -615,34 +622,49 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
     //Variavel da tela
     JDListaPacientes listaPaciente;
+
     private void mostrarTelaDePacientes() {
-    listaPaciente = new JDListaPacientes(this, true);
-    listaPaciente.setVisible(true);
+        listaPaciente = new JDListaPacientes(this, true);
+        listaPaciente.setVisible(true);
     }
 
     private void SalvarConsulta() {
         Consulta c = new Consulta();
-        c.setData((Date) jTFDataConsulta.getDate());
+        //Salvar a Data
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = sf.format(jTFDataConsulta.getDate());
+        
+        String dia = dataFormatada.toString().substring(0, 2);
+        String mes = dataFormatada.toString().substring(3, 5);
+        String ano = dataFormatada.toString().substring(6);
+        String Data_Cons_Banco = ano + "-" + mes + "-" + dia;
+        //Variável local date para converter para date a string;
+        LocalDate DtCons = LocalDate.parse(Data_Cons_Banco);
+        // salvando no objeto
+        c.setData(java.sql.Date.valueOf(DtCons));
+
         //pegar a hora da tela
-        Time hora = Time.valueOf(jTFHora.getText());
+        int HH = Integer.parseInt(jTFHora.getText().substring(0,2));
+        int mm = Integer.parseInt(jTFHora.getText().substring(3,5));
+        
+        LocalTime hora = LocalTime.of(HH, mm);
+        Time horaMinuto = Time.valueOf(hora);
         //salvar hora
-        c.setHora(hora);
+        c.setHora(horaMinuto);
         //precisa receber um objeto paciente
         c.setPaciente(null);
         //precisa receber um objeto profissional
         c.setProfissional(null);
-        
-        
-        Paciente p = new Paciente();
-        
-        
-
-        
        
+
+        Dao<Consulta> dao = new Dao<>();
+        dao.gravar(c);
+        JOptionPane.showMessageDialog(null, "Dados gravados com sucesso!");
+
     }
 
     private void mostrarPacientesCadastrados() {
-       Session sessao = Utilitaria.getSession();//Peguei a sessao
+        Session sessao = Utilitaria.getSession();//Peguei a sessao
         List<Paciente> Lpacientes = sessao.createQuery("from Paciente").list();//selecionei a tabela pacientes
         int i = 0;
         int linha = 1;
@@ -669,16 +691,15 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
             tabelaPaciente.addRow(new Object[linha]);
         }
-        
 
     }
 
     private void mostrarProfissionaisCadastrados() {
-         Session sessao = Utilitaria.getSession();//Peguei a sessao
+        Session sessao = Utilitaria.getSession();//Peguei a sessao
         List<Profissional> Lprofissionais = sessao.createQuery("from Profissional").list();//selecionei a tabela profissionais
         int i = 0;
         for (Profissional pf : Lprofissionais) {
-            
+
             jTableListaProfissionais.getModel().setValueAt(pf.getId(), i, 0);
             jTableListaProfissionais.getModel().setValueAt(pf.getNome(), i, 1);
             jTableListaProfissionais.getModel().setValueAt(pf.getTipo(), i, 2);
@@ -687,25 +708,22 @@ public class JFCadConsulta extends javax.swing.JFrame {
             DefaultTableModel tabelaProfissionais = (DefaultTableModel) jTableListaProfissionais.getModel(); // pegando o modelo padrão da tabela
             //int linha = 1;          
             tabelaProfissionais.addRow(new Object[1]);
-    }
-}//final método
+        }
+    }//final método
 
     private void adicionarPacienteNaConsulta() {
-        
+
         //"Nome =1", "Data de Nascimento = 2", "Sexo = 3", "CPF = 4"
-        
-       
         int linha = jTableListaPaciente.getSelectedRow();
         //pegando os dados da tabela 
-        
+
         String nome = jTableListaPaciente.getModel().getValueAt(linha, 1).toString();
-        String DataNasc =jTableListaPaciente.getModel().getValueAt(linha,2).toString();
-        String sexo =jTableListaPaciente.getModel().getValueAt(linha,3).toString();
-        String cpf =jTableListaPaciente.getModel().getValueAt(linha,4).toString();
-        
-        
+        String DataNasc = jTableListaPaciente.getModel().getValueAt(linha, 2).toString();
+        String sexo = jTableListaPaciente.getModel().getValueAt(linha, 3).toString();
+        String cpf = jTableListaPaciente.getModel().getValueAt(linha, 4).toString();
+
         //setando na outra tabela
-         //"Nome =0", "Data de Nascimento = 1", "Sexo = 2", "CPF = 3"
+        //"Nome =0", "Data de Nascimento = 1", "Sexo = 2", "CPF = 3"
         jTablePacienteDaConsulta.setValueAt(nome, 0, 0);
         jTablePacienteDaConsulta.setValueAt(DataNasc, 0, 1);
         jTablePacienteDaConsulta.setValueAt(sexo, 0, 2);
@@ -714,17 +732,41 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
     private void adicionarProfissionalNaConsulta() {
         //"Nome =1", "tipo = 2"
-        
-       
+
         int linha = jTableListaProfissionais.getSelectedRow();
         //pegando os dados da tabela 
-        
+
         String nome = jTableListaProfissionais.getModel().getValueAt(linha, 1).toString();
-        String Tipo =jTableListaProfissionais.getModel().getValueAt(linha,2).toString();
-          //setando na outra tabela
-          //"Nome =0", "tipo = 1"
-       jTableProfissionalDaConsulta.getModel().setValueAt(nome, 0, 0);
-       jTableProfissionalDaConsulta.getModel().setValueAt(Tipo, 0, 1);
+        String Tipo = jTableListaProfissionais.getModel().getValueAt(linha, 2).toString();
+        //setando na outra tabela
+        //"Nome =0", "tipo = 1"
+        jTableProfissionalDaConsulta.getModel().setValueAt(nome, 0, 0);
+        jTableProfissionalDaConsulta.getModel().setValueAt(Tipo, 0, 1);
     }
-    
+
+    private void MostrarDadosNaTabela() {
+        Session sessao = Utilitaria.getSession();//Peguei a sessao
+        List<Consulta> Lconsultas = sessao.createQuery("from Consulta").list();//selecionei a tabela pacientes
+        int i = 0;
+        int linha = 1;
+        //Data está aparecendo assim 1982-04-22
+        //Deve aparecer assim: 22/04/1982
+
+        for (Consulta c : Lconsultas) {
+            //Conversão necessária para salvar a data no formato correto
+            String data_Consulta = String.valueOf(c.getData());
+            String hora_consulta = String.valueOf(c.getHora());
+
+            jTableConsultasCadastradas.getModel().setValueAt(c.getId(), i, 0);
+            jTableConsultasCadastradas.getModel().setValueAt(data_Consulta, i, 1);
+            jTableConsultasCadastradas.getModel().setValueAt(hora_consulta, i, 2);
+            jTableConsultasCadastradas.getModel().setValueAt(c.getPaciente(), i, 3);
+            jTableConsultasCadastradas.getModel().setValueAt(c.getProfissional(), i, 4);
+            i++;
+            DefaultTableModel tabelaPaciente = (DefaultTableModel) jTableConsultasCadastradas.getModel(); // pegando o modelo padrão da tabela
+
+            tabelaPaciente.addRow(new Object[linha]);
+        }
+    }
+
 }//chave final
