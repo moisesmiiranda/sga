@@ -29,11 +29,11 @@ public class Consulta {
     private int id;
     private Date data;
     private Time hora;
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name ="profissionalFK")
     private Profissional profissional;
-    @OneToMany
-    @JoinColumn(name = "pacienteFK")  
+    @ManyToOne 
+    @JoinColumn (name = "pacienteFK")
     private Paciente paciente;
 
     public int getId() {
