@@ -62,7 +62,11 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuAcompanhamento">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Acompanhamento"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icones/AgendaMenu.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Agenda"/>
+            <Property name="horizontalAlignment" type="int" value="11"/>
           </Properties>
           <SubComponents>
             <Menu class="javax.swing.JMenu" name="jMenu4">
@@ -133,30 +137,4 @@
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
-  <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-        <Property name="columns" type="int" value="0"/>
-        <Property name="rows" type="int" value="1"/>
-      </Layout>
-      <SubComponents>
-        <Container class="javax.swing.JDesktopPane" name="jDesktopPane1">
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="846" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="528" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-        </Container>
-      </SubComponents>
-    </Container>
-  </SubComponents>
 </Form>

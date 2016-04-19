@@ -63,7 +63,6 @@ public class JFCadConsulta extends javax.swing.JFrame {
         jButtonNovo = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableConsultasCadastradas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -103,6 +102,9 @@ public class JFCadConsulta extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
+        jTabbedPane1.setBackground(new java.awt.Color(51, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(51, 204, 255));
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -207,8 +209,11 @@ public class JFCadConsulta extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
         );
 
+        jButtonNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/addNew.png"))); // NOI18N
+        jButtonNovo.setMnemonic('n');
         jButtonNovo.setText("Novo");
-        jButtonNovo.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButtonNovo.setToolTipText("Inicia um novo cadastro");
+        jButtonNovo.setPreferredSize(new java.awt.Dimension(100, 35));
         jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNovoActionPerformed(evt);
@@ -216,8 +221,11 @@ public class JFCadConsulta extends javax.swing.JFrame {
         });
         jPanel4.add(jButtonNovo);
 
+        jButtonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/excluir.png"))); // NOI18N
+        jButtonExcluir.setMnemonic('e');
         jButtonExcluir.setText("Excluir");
-        jButtonExcluir.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButtonExcluir.setToolTipText("Exclui o cadastro selecionado");
+        jButtonExcluir.setPreferredSize(new java.awt.Dimension(100, 35));
         jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExcluirActionPerformed(evt);
@@ -225,22 +233,17 @@ public class JFCadConsulta extends javax.swing.JFrame {
         });
         jPanel4.add(jButtonExcluir);
 
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
+        jButtonSalvar.setMnemonic('s');
         jButtonSalvar.setText("Salvar");
-        jButtonSalvar.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButtonSalvar.setToolTipText("Salva o cadastro atual");
+        jButtonSalvar.setPreferredSize(new java.awt.Dimension(100, 35));
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalvarActionPerformed(evt);
             }
         });
         jPanel4.add(jButtonSalvar);
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton1);
 
         jTableConsultasCadastradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -528,12 +531,6 @@ public class JFCadConsulta extends javax.swing.JFrame {
         adicionarProfissionalNaConsulta();
     }//GEN-LAST:event_jTableListaProfissionaisMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        LocalTime horaTF = LocalTime.parse(jTFHora.getText());
-   
-            JOptionPane.showMessageDialog(null, horaTF);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -570,7 +567,6 @@ public class JFCadConsulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

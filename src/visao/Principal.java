@@ -29,8 +29,6 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -51,23 +49,6 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agenda de Saúde ");
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
-
-        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
-
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 846, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 528, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jDesktopPane1);
-
-        getContentPane().add(jPanel1);
 
         jMenuCadastro.setText("Cadastros");
 
@@ -115,7 +96,9 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuEquipe);
 
-        jMenuAcompanhamento.setText("Acompanhamento");
+        jMenuAcompanhamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/AgendaMenu.png"))); // NOI18N
+        jMenuAcompanhamento.setText("Agenda");
+        jMenuAcompanhamento.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 
         jMenu4.setText("Atendimentos");
 
@@ -210,7 +193,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenuAcompanhamento;
     private javax.swing.JMenuBar jMenuBar1;
@@ -227,7 +209,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenu jMenuRelatorio;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
     //Variável da tela
