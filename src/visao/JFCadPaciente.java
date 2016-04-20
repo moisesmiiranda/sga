@@ -243,8 +243,11 @@ public class JFCadPaciente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButtonNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/addNew.png"))); // NOI18N
+        jButtonNovo.setMnemonic('n');
         jButtonNovo.setText("Novo");
-        jButtonNovo.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButtonNovo.setToolTipText("Inicia um novo cadastro");
+        jButtonNovo.setPreferredSize(new java.awt.Dimension(110, 40));
         jButtonNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNovoActionPerformed(evt);
@@ -252,12 +255,18 @@ public class JFCadPaciente extends javax.swing.JFrame {
         });
         jPanel4.add(jButtonNovo);
 
+        jButtonExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/excluir.png"))); // NOI18N
+        jButtonExcluir.setMnemonic('e');
         jButtonExcluir.setText("Excluir");
-        jButtonExcluir.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButtonExcluir.setToolTipText("Exclui o cadastro selecionado");
+        jButtonExcluir.setPreferredSize(new java.awt.Dimension(110, 40));
         jPanel4.add(jButtonExcluir);
 
+        jButtonAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/editar.png"))); // NOI18N
+        jButtonAlterar.setMnemonic('a');
         jButtonAlterar.setText("Alterar");
-        jButtonAlterar.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButtonAlterar.setToolTipText("Permite modificar o cadastro selecionado");
+        jButtonAlterar.setPreferredSize(new java.awt.Dimension(110, 40));
         jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAlterarActionPerformed(evt);
@@ -265,8 +274,11 @@ public class JFCadPaciente extends javax.swing.JFrame {
         });
         jPanel4.add(jButtonAlterar);
 
+        jButtonAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/atualizar.png"))); // NOI18N
+        jButtonAtualizar.setMnemonic('r');
         jButtonAtualizar.setText("Atualizar");
-        jButtonAtualizar.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButtonAtualizar.setToolTipText("Salva as alterações feitas neste cadastro");
+        jButtonAtualizar.setPreferredSize(new java.awt.Dimension(110, 40));
         jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAtualizarActionPerformed(evt);
@@ -274,9 +286,12 @@ public class JFCadPaciente extends javax.swing.JFrame {
         });
         jPanel4.add(jButtonAtualizar);
 
+        jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
+        jButtonSalvar.setMnemonic('s');
         jButtonSalvar.setText("Salvar");
+        jButtonSalvar.setToolTipText("Salva o cadastro");
         jButtonSalvar.setEnabled(false);
-        jButtonSalvar.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButtonSalvar.setPreferredSize(new java.awt.Dimension(110, 40));
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalvarActionPerformed(evt);

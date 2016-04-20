@@ -206,9 +206,14 @@
               <SubComponents>
                 <Component class="javax.swing.JButton" name="jButtonNovo">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icones/addNew.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="110"/>
                     <Property name="text" type="java.lang.String" value="Novo"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Inicia um novo cadastro"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[75, 30]"/>
+                      <Dimension value="[110, 40]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -217,9 +222,14 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonExcluir">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icones/excluir.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="101"/>
                     <Property name="text" type="java.lang.String" value="Excluir"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Apaga o cadastro selecionado"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[75, 30]"/>
+                      <Dimension value="[110, 40]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -228,9 +238,14 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonAlterar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icones/editar.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="114"/>
                     <Property name="text" type="java.lang.String" value="Alterar"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Edita o cadastro selecionado"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[75, 30]"/>
+                      <Dimension value="[110, 40]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -239,10 +254,15 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonAtualizar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icones/atualizar.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="97"/>
                     <Property name="text" type="java.lang.String" value="Atualizar"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Salva as altera&#xe7;&#xf5;es feitas neste cadastro"/>
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[75, 30]"/>
+                      <Dimension value="[110, 40]"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -251,10 +271,15 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonSalvar">
                   <Properties>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/icones/salvar.png"/>
+                    </Property>
+                    <Property name="mnemonic" type="int" value="115"/>
                     <Property name="text" type="java.lang.String" value="Salvar"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Salva o cadastro"/>
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[75, 30]"/>
+                      <Dimension value="[110, 40]"/>
                     </Property>
                   </Properties>
                   <Events>

@@ -52,6 +52,7 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButtonAtualizar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -175,16 +176,25 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/addNew.png"))); // NOI18N
+        jButton1.setMnemonic('n');
         jButton1.setText("Novo");
-        jButton1.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButton1.setToolTipText("Inicia um novo cadastro");
+        jButton1.setPreferredSize(new java.awt.Dimension(110, 40));
         jPanel4.add(jButton1);
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/excluir.png"))); // NOI18N
+        jButton2.setMnemonic('e');
         jButton2.setText("Excluir");
-        jButton2.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButton2.setToolTipText("Apaga o cadastro selecionado");
+        jButton2.setPreferredSize(new java.awt.Dimension(110, 40));
         jPanel4.add(jButton2);
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/editar.png"))); // NOI18N
+        jButton3.setMnemonic('r');
         jButton3.setText("Alterar");
-        jButton3.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButton3.setToolTipText("Permite editar o cadastro selecionado");
+        jButton3.setPreferredSize(new java.awt.Dimension(110, 40));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -192,8 +202,22 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
         });
         jPanel4.add(jButton3);
 
+        jButtonAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/atualizar.png"))); // NOI18N
+        jButtonAtualizar.setMnemonic('a');
+        jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.setToolTipText("Salva as alterações feitas neste cadastro");
+        jButtonAtualizar.setPreferredSize(new java.awt.Dimension(110, 40));
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonAtualizar);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
         jButton4.setText("Salvar");
-        jButton4.setPreferredSize(new java.awt.Dimension(75, 30));
+        jButton4.setToolTipText("Grava o cadastro");
+        jButton4.setPreferredSize(new java.awt.Dimension(110, 40));
         jPanel4.add(jButton4);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -231,6 +255,10 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,6 +307,7 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
