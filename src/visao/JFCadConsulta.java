@@ -10,9 +10,11 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import javax.swing.JOptionPane;
 import modelo.Consulta;
 import modelo.Paciente;
+import util.Utilitaria;
 
 /**
  *
@@ -23,6 +25,8 @@ public class JFCadConsulta extends javax.swing.JFrame {
     /**
      * Creates new form JFCadConsulta
      */
+    private Paciente paciente;
+    
     public JFCadConsulta() {
         initComponents();
 
@@ -46,9 +50,9 @@ public class JFCadConsulta extends javax.swing.JFrame {
         jTFDataConsulta = new com.toedter.calendar.JDateChooser();
         jTFHora = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldNomePaciente = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonPesquisaPaciente = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
@@ -60,6 +64,13 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Consulta");
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -90,10 +101,10 @@ public class JFCadConsulta extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Paciente:");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPesquisaPaciente.setText("Buscar");
+        jButtonPesquisaPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonPesquisaPacienteActionPerformed(evt);
             }
         });
 
@@ -120,7 +131,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextField7)
-                            .addComponent(jTextField4)
+                            .addComponent(jTextFieldNomePaciente)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -131,7 +142,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
                                     .addComponent(jTFHora, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
+                            .addComponent(jButtonPesquisaPaciente)
                             .addComponent(jButton2))
                         .addGap(240, 240, 240))))
         );
@@ -150,8 +161,8 @@ public class JFCadConsulta extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jTextFieldNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonPesquisaPaciente))
                 .addGap(41, 41, 41)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -279,13 +290,22 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      mostrarListaPacientes();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonPesquisaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisaPacienteActionPerformed
+        pesquisarOTextFiel();
+        mostrarListaPacientes();
+    }//GEN-LAST:event_jButtonPesquisaPacienteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     mostrarListaProfissional();
+        mostrarListaProfissional();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+      if (paciente != null){
+          if (paciente.getId() != 0){
+              jTextFieldNomePaciente.setText(paciente.getNome());
+          }
+      }
+    }//GEN-LAST:event_formWindowGainedFocus
 
     /**
      * @param args the command line arguments
@@ -323,10 +343,10 @@ public class JFCadConsulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
+    private javax.swing.JButton jButtonPesquisaPaciente;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -341,8 +361,8 @@ public class JFCadConsulta extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jTFDataConsulta;
     private javax.swing.JFormattedTextField jTFHora;
     private javax.swing.JTable jTableConsultasCadastradas;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextFieldNomePaciente;
     // End of variables declaration//GEN-END:variables
 
     //Variavel da tela
@@ -392,16 +412,33 @@ public class JFCadConsulta extends javax.swing.JFrame {
     }
 
     //variavel da tela
-    
     private void mostrarListaPacientes() {
-      JDListaPacientes listaPaciente = new JDListaPacientes(this, true);
+        JDListaPacientes listaPaciente = new JDListaPacientes(this, true);
         listaPaciente.setVisible(true);
-        
+
     }
 
     private void mostrarListaProfissional() {
-     JDListaProfissional listaProfissional = new JDListaProfissional(this, true);
-     listaProfissional.setVisible(true);
+        JDListaProfissional listaProfissional = new JDListaProfissional(this, true);
+        listaProfissional.setVisible(true);
+    }
+
+    private void pesquisarOTextFiel() {
+        List<Paciente> pacientes = Utilitaria.getSession().
+                getNamedQuery("pacientePorNome").setString("nome",
+                        jTextFieldNomePaciente.getText() + "%").list();
+        StringBuffer armazenarNomes = new StringBuffer();
+        for (Paciente p : pacientes)
+            armazenarNomes.append(p.getNome());
+        if (armazenarNomes.length() == 0)
+            JOptionPane.showMessageDialog(null, "Paciente não encontrado!");
+            paciente = new Paciente();
+            /*JDListaPacientes listagemPacientes = new JDListaPacientes(paciente);
+            listagemPacientes.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            listagemPacientes.setVisible(true);*/
+            
+            
+
     }
 
 }//chave final

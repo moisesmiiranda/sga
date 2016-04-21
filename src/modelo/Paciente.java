@@ -8,23 +8,28 @@ package modelo;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import org.hibernate.mapping.ManyToOne;
+
+
 
 /**
  *
  * @author Moises
  */
 @Entity
+@NamedQueries({
+    @NamedQuery (name = "listarPacientes", query = "from Paciente"),
+    @NamedQuery (name = "pacientePorID", query ="from Paciente where id = ?"),
+    @NamedQuery (name = "pacientePorCPF", query = "from Paciente where cpf = ?"),
+    @NamedQuery (name = "pacientePorNome", query = "from Paciente where nome like :nome")
+})
 public class Paciente {
 
     @Id

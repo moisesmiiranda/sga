@@ -28,6 +28,12 @@ public class JDListaPacientes extends javax.swing.JDialog{
         super(parent, modal);
         initComponents();
     }
+
+    private Paciente paciente;
+    
+    JDListaPacientes(Paciente p) {
+      paciente = p;
+    }
     
    
 
@@ -148,7 +154,7 @@ public class JDListaPacientes extends javax.swing.JDialog{
     }//GEN-LAST:event_jTableListaPacientesMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+        adicionarPacienteNaConsulta();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -244,6 +250,25 @@ public class JDListaPacientes extends javax.swing.JDialog{
             tabelaListaPaciente.addRow(new Object[linha]);
         }
 
+    }
+
+    private void adicionarPacienteNaConsulta() {
+        Paciente pac = (Paciente) Utilitaria.getSession().getNamedQuery("pacientePorID")
+                .setInteger(0,Integer.parseInt(jTableListaPacientes.getModel()
+                        .getValueAt(jTableListaPacientes.getSelectedRow(), 0)
+                        .toString())).uniqueResult();
+        paciente.setId(pac.getId());
+        paciente.setNome(pac.getNome());
+        paciente.setCpf(pac.getCpf());
+        paciente.setDataDeNascimento(pac.getDataDeNascimento());
+        paciente.setSexo(pac.getSexo());
+        paciente.setTelefone(pac.getTelefone());
+        paciente.setEndereco(pac.getEndereco());
+        
+        dispose();
+        
+        
+       
     }
 
 
