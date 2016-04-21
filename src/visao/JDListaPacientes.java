@@ -19,23 +19,23 @@ import visao.JFCadConsulta;
  *
  * @author ADMIN
  */
-public class JDListaPacientes extends javax.swing.JDialog{
+public class JDListaPacientes extends javax.swing.JDialog {
 
     /**
      * Creates new form JDListaPacientes
      */
-    public JDListaPacientes(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
-        initComponents();
-    }
-
     private Paciente paciente;
     
-    JDListaPacientes(Paciente p) {
-      paciente = p;
+    public JDListaPacientes(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+         initComponents();
+    } 
+
+    public JDListaPacientes(Paciente p) {
+        this.paciente = p;
     }
+
     
-   
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -81,6 +81,15 @@ public class JDListaPacientes extends javax.swing.JDialog{
             }
         });
         jScrollPane1.setViewportView(jTableListaPacientes);
+        if (jTableListaPacientes.getColumnModel().getColumnCount() > 0) {
+            jTableListaPacientes.getColumnModel().getColumn(0).setHeaderValue("ID");
+            jTableListaPacientes.getColumnModel().getColumn(1).setHeaderValue("Nome");
+            jTableListaPacientes.getColumnModel().getColumn(2).setHeaderValue("Data de nascimento");
+            jTableListaPacientes.getColumnModel().getColumn(3).setHeaderValue("Sexo");
+            jTableListaPacientes.getColumnModel().getColumn(4).setHeaderValue("CPF");
+            jTableListaPacientes.getColumnModel().getColumn(5).setHeaderValue("Endereço");
+            jTableListaPacientes.getColumnModel().getColumn(6).setHeaderValue("Telefone");
+        }
 
         jButton1.setText("Adicionar Consulta");
         jButton1.setPreferredSize(new java.awt.Dimension(200, 35));
@@ -150,7 +159,7 @@ public class JDListaPacientes extends javax.swing.JDialog{
     }//GEN-LAST:event_formWindowOpened
 
     private void jTableListaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaPacientesMouseClicked
-       
+
     }//GEN-LAST:event_jTableListaPacientesMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -254,9 +263,9 @@ public class JDListaPacientes extends javax.swing.JDialog{
 
     private void adicionarPacienteNaConsulta() {
         Paciente pac = (Paciente) Utilitaria.getSession().getNamedQuery("pacientePorID")
-                .setInteger(0,Integer.parseInt(jTableListaPacientes.getModel()
-                        .getValueAt(jTableListaPacientes.getSelectedRow(), 0)
-                        .toString())).uniqueResult();
+                .setInteger(0, Integer.parseInt(jTableListaPacientes.getModel()
+                                .getValueAt(jTableListaPacientes.getSelectedRow(), 0)
+                                .toString())).uniqueResult();
         paciente.setId(pac.getId());
         paciente.setNome(pac.getNome());
         paciente.setCpf(pac.getCpf());
@@ -264,14 +273,9 @@ public class JDListaPacientes extends javax.swing.JDialog{
         paciente.setSexo(pac.getSexo());
         paciente.setTelefone(pac.getTelefone());
         paciente.setEndereco(pac.getEndereco());
-        
+
         dispose();
-        
-        
-       
+
     }
 
-
-
-   
 }
