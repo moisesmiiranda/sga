@@ -110,6 +110,11 @@ public class Paciente {
         this.consultas = consultas;
     }
 
+    @Override
+    public String toString() {
+        return "Paciente{" + "id=" + id + ", nome=" + nome + ", dataDeNascimento=" + dataDeNascimento + ", sexo=" + sexo + ", cpf=" + cpf + ", endereco=" + endereco + ", telefone=" + telefone + ", consultas=" + consultas + '}';
+    }
+
 
     
 

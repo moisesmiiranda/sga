@@ -14,16 +14,20 @@ import util.Utilitaria;
 
 /**
  *
- * @author ADMIN
+ * @author Moisés
  */
-public class JDListaProfissional extends javax.swing.JDialog {
+public class ListaProfissional extends javax.swing.JFrame {
 
     /**
-     * Creates new form JDListaProfissional
+     * Creates new form ListaProfissional
      */
-    public JDListaProfissional(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    
+    private Profissional profissional;
+    
+    public ListaProfissional(Profissional p) {
         initComponents();
+        preencherTabela();
+        profissional = p;
     }
 
     /**
@@ -37,7 +41,7 @@ public class JDListaProfissional extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableListaProfissionais = new javax.swing.JTable();
+        TableListaProfissionais = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -52,16 +56,10 @@ public class JDListaProfissional extends javax.swing.JDialog {
         jTextField3 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Profissionais Cadastrados");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        jTableListaProfissionais.setModel(new javax.swing.table.DefaultTableModel(
+        TableListaProfissionais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -77,12 +75,12 @@ public class JDListaProfissional extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTableListaProfissionais.addMouseListener(new java.awt.event.MouseAdapter() {
+        TableListaProfissionais.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableListaProfissionaisMouseClicked(evt);
+                TableListaProfissionaisMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTableListaProfissionais);
+        jScrollPane1.setViewportView(TableListaProfissionais);
 
         jButton1.setText("Adicionar Consulta");
         jButton1.setPreferredSize(new java.awt.Dimension(200, 35));
@@ -106,7 +104,7 @@ public class JDListaProfissional extends javax.swing.JDialog {
 
         jButton3.setText("Pesquisar");
 
-        jLabel2.setText("Pesquisar por CPF:");
+        jLabel2.setText("Pesquisar por Identificação:");
 
         jButton4.setText("Pesquisar");
 
@@ -132,7 +130,7 @@ public class JDListaProfissional extends javax.swing.JDialog {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 221, Short.MAX_VALUE)))
                 .addGap(100, 100, 100))
         );
         jPanel3Layout.setVerticalGroup(
@@ -156,14 +154,14 @@ public class JDListaProfissional extends javax.swing.JDialog {
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -181,68 +179,27 @@ public class JDListaProfissional extends javax.swing.JDialog {
         getContentPane().add(jPanel1);
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTableListaProfissionaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableListaProfissionaisMouseClicked
+    private void TableListaProfissionaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableListaProfissionaisMouseClicked
 
-    }//GEN-LAST:event_jTableListaProfissionaisMouseClicked
+    }//GEN-LAST:event_TableListaProfissionaisMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        adicionarProfissionalNaConsulta();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
-    }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        mostrarProfissionaisCadastrados();
-    }//GEN-LAST:event_formWindowOpened
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDListaProfissional.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDListaProfissional.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDListaProfissional.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDListaProfissional.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JDListaProfissional dialog = new JDListaProfissional(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TableListaProfissionais;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -255,33 +212,44 @@ public class JDListaProfissional extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableListaProfissionais;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 
-    private void mostrarProfissionaisCadastrados() {
-        
+    private void preencherTabela() {
         Session sessao = Utilitaria.getSession();//Peguei a sessao
-        List<Profissional> profissionais = sessao.createQuery("from Profissional").list();//selecionei a tabela profissional
+        List<Profissional> profissionais = sessao.createQuery("from Profissional").list();//selecionei a tabela pacientes
         int i = 0;
         int linha = 1;
-        //Data está aparecendo assim 1982-04-22
-        //Deve aparecer assim: 22/04/1982
 
         for (Profissional p : profissionais) {
-            //Conversão necessária para salvar a data no formato correto
-           jTableListaProfissionais.getModel().setValueAt(p.getId(), i, 0);
-           jTableListaProfissionais.getModel().setValueAt(p.getNome(), i, 1);
-           jTableListaProfissionais.getModel().setValueAt(p.getTipo(), i, 2);
-           jTableListaProfissionais.getModel().setValueAt(p.getIdentificacao(), i, 3);
-                     i++;
-            DefaultTableModel tabelaListaPaciente = (DefaultTableModel) jTableListaProfissionais.getModel(); // pegando o modelo padrão da tabela
 
-            tabelaListaPaciente.addRow(new Object[linha]);
+            TableListaProfissionais.getModel().setValueAt(p.getId(), i, 0);
+            TableListaProfissionais.getModel().setValueAt(p.getNome(), i, 1);
+            TableListaProfissionais.getModel().setValueAt(p.getTipo(), i, 2);
+            TableListaProfissionais.getModel().setValueAt(p.getIdentificacao(), i, 3);
+            i++;
+            
+            DefaultTableModel tabela = (DefaultTableModel) TableListaProfissionais.getModel(); // pegando o modelo padrão da tabela
+
+            tabela.addRow(new Object[linha]);
         }
+    }
 
-     
+    private void adicionarProfissionalNaConsulta() {
+   
+        Profissional prof = (Profissional) Utilitaria.getSession()
+                .getNamedQuery("profissionalPorID").setInteger(0, 
+                        Integer.parseInt(TableListaProfissionais.getModel()
+                                .getValueAt(TableListaProfissionais.getSelectedRow(),0)
+                                .toString())).uniqueResult();
+        
+        profissional.setId(prof.getId());
+        profissional.setNome(prof.getNome());
+        profissional.setTipo(prof.getTipo());
+        profissional.setIdentificacao(prof.getIdentificacao());
+        
+     this.dispose();
     }
 }

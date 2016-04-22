@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -21,6 +23,12 @@ import javax.persistence.OneToOne;
  * @author moises
  */
 @Entity
+@NamedQueries({
+    @NamedQuery (name = "listarProfissionais", query = "from Profissional"),
+    @NamedQuery (name = "profissionalPorID", query ="from Profissional where id = ?"),
+    @NamedQuery (name = "profissionalPorIdentificacao", query = "from Profissional where identificacao = ?"),
+    @NamedQuery (name = "profissionalPorNome", query = "from Profissional where nome like :nome")
+})
 public class Profissional {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,10 +49,6 @@ public class Profissional {
         this.consulta = consulta;
     }
     
-    
-
-  
-
     public int getId() {
         return id;
     }
@@ -75,6 +79,11 @@ public class Profissional {
 
     public void setIdentificacao(String identificacao) {
         this.identificacao = identificacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Profissional{" + "id=" + id + ", nome=" + nome + ", tipo=" + tipo + ", identificacao=" + identificacao + ", consulta=" + consulta + '}';
     }
 
   

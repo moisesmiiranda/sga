@@ -17,12 +17,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 /**
  *
  * @author moises
  */
 @Entity
+//@NamedQuery (name = "ConsultaPorID", query "select from Consulta where id :?")
 public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
