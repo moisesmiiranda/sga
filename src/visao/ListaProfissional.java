@@ -6,6 +6,7 @@
 package visao;
 
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import modelo.Paciente;
 import modelo.Profissional;
@@ -21,10 +22,13 @@ public class ListaProfissional extends javax.swing.JFrame {
     /**
      * Creates new form ListaProfissional
      */
-    
     private Profissional profissional;
-    
+
     public ListaProfissional(Profissional p) {
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
+        
         initComponents();
         preencherTabela();
         profissional = p;
@@ -179,6 +183,7 @@ public class ListaProfissional extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void TableListaProfissionaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableListaProfissionaisMouseClicked
@@ -196,7 +201,6 @@ public class ListaProfissional extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableListaProfissionais;
@@ -230,7 +234,7 @@ public class ListaProfissional extends javax.swing.JFrame {
             TableListaProfissionais.getModel().setValueAt(p.getTipo(), i, 2);
             TableListaProfissionais.getModel().setValueAt(p.getIdentificacao(), i, 3);
             i++;
-            
+
             DefaultTableModel tabela = (DefaultTableModel) TableListaProfissionais.getModel(); // pegando o modelo padrão da tabela
 
             tabela.addRow(new Object[linha]);
@@ -238,18 +242,18 @@ public class ListaProfissional extends javax.swing.JFrame {
     }
 
     private void adicionarProfissionalNaConsulta() {
-   
+
         Profissional prof = (Profissional) Utilitaria.getSession()
-                .getNamedQuery("profissionalPorID").setInteger(0, 
+                .getNamedQuery("profissionalPorID").setInteger(0,
                         Integer.parseInt(TableListaProfissionais.getModel()
-                                .getValueAt(TableListaProfissionais.getSelectedRow(),0)
+                                .getValueAt(TableListaProfissionais.getSelectedRow(), 0)
                                 .toString())).uniqueResult();
-        
+
         profissional.setId(prof.getId());
         profissional.setNome(prof.getNome());
         profissional.setTipo(prof.getTipo());
         profissional.setIdentificacao(prof.getIdentificacao());
-        
-     this.dispose();
+
+        this.dispose();
     }
 }

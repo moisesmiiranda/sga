@@ -6,6 +6,7 @@
 package visao;
 
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import modelo.Paciente;
 import org.hibernate.Session;
@@ -20,10 +21,13 @@ public class ListaPaciente extends javax.swing.JFrame {
     /**
      * Creates new form ListaPAciente
      */
-    
     private Paciente paciente;
-    
+
     public ListaPaciente(Paciente p) {
+        
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
+
         initComponents();
         preencherTabela();
         paciente = p;
@@ -150,6 +154,7 @@ public class ListaPaciente extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void TableListaPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableListaPacientesMouseClicked
@@ -166,13 +171,12 @@ public class ListaPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableListaPacientes;
@@ -220,9 +224,9 @@ public class ListaPaciente extends javax.swing.JFrame {
                 .getNamedQuery("pacientePorID")
                 .setInteger(0,
                         Integer.parseInt(TableListaPacientes.getModel().getValueAt(
-                                TableListaPacientes.getSelectedRow(), 0).toString()
-                            ))
-                    .uniqueResult();
+                                        TableListaPacientes.getSelectedRow(), 0).toString()
+                        ))
+                .uniqueResult();
         paciente.setId(pac.getId());
         paciente.setNome(pac.getNome());
         paciente.setCpf(pac.getCpf());
@@ -230,7 +234,7 @@ public class ListaPaciente extends javax.swing.JFrame {
         paciente.setSexo(pac.getSexo());
         paciente.setTelefone(pac.getTelefone());
         paciente.setEndereco(pac.getEndereco());
-        
+
         this.dispose();
     }
 }

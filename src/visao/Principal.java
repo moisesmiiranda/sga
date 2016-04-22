@@ -5,6 +5,7 @@
  */
 package visao;
 
+import javax.swing.JFrame;
 import util.Utilitaria;
 
 /**
@@ -17,6 +18,8 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public Principal() {
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -135,7 +138,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       mostrarTelaCadastroProfissional();
+        mostrarTelaCadastroProfissional();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -143,7 +146,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-       mostrarTelaCadastroPaciente();
+        mostrarTelaCadastroPaciente();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -151,15 +154,14 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-     mostrarTelaCadastroConsulta();
+        mostrarTelaCadastroConsulta();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -212,25 +214,28 @@ public class Principal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     //Variável da tela
-   // JDCadastroPaciente cadastroPaciente;
+    // JDCadastroPaciente cadastroPaciente;
     JFCadPaciente cadPaciente;
+
     private void mostrarTelaCadastroPaciente() {
         cadPaciente = new JFCadPaciente();
         cadPaciente.setVisible(true);
         //cadastroPaciente = new JDCadastroPaciente(this, true);
         //cadastroPaciente.setVisible(true);
-        
+
     }
     //Variável da tela
     JFCadProfissional cadProfissinal;
+
     private void mostrarTelaCadastroProfissional() {
         cadProfissinal = new JFCadProfissional();
         cadProfissinal.setVisible(true);
     }
     //Variável da Tela
     JFCadConsulta cadConsulta;
+
     private void mostrarTelaCadastroConsulta() {
-       cadConsulta = new JFCadConsulta();
-       cadConsulta.setVisible(true);
+        cadConsulta = new JFCadConsulta();
+        cadConsulta.setVisible(true);
     }
 }

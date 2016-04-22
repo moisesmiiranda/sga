@@ -7,6 +7,7 @@ package visao;
 
 import DAO_Generico.Dao;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Paciente;
@@ -20,11 +21,15 @@ import util.Utilitaria;
  */
 public class JFCadProfissional extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form JFCadProfissional
      */
     public JFCadProfissional() {
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
         initComponents();
+        
     }
 
     /**
@@ -84,6 +89,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableProfissionais.getTableHeader().setReorderingAllowed(false);
         jTableProfissionais.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableProfissionaisMouseClicked(evt);
@@ -91,7 +97,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableProfissionais);
         if (jTableProfissionais.getColumnModel().getColumnCount() > 0) {
-            jTableProfissionais.getColumnModel().getColumn(0).setPreferredWidth(15);
+            jTableProfissionais.getColumnModel().getColumn(0).setPreferredWidth(5);
         }
 
         jLabel2.setText("Nome:");
@@ -220,13 +226,11 @@ public class JFCadProfissional extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.add(jPanel2);
@@ -242,7 +246,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-       habilitarCampos();
+        habilitarCampos();
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
@@ -396,7 +400,7 @@ public class JFCadProfissional extends javax.swing.JFrame {
         List<Profissional> Lprofissionais = sessao.createQuery("from Profissional").list();//selecionei a tabela profissionais
         int i = 0;
         for (Profissional pf : Lprofissionais) {
-            
+
             jTableProfissionais.getModel().setValueAt(pf.getId(), i, 0);
             jTableProfissionais.getModel().setValueAt(pf.getNome(), i, 1);
             jTableProfissionais.getModel().setValueAt(pf.getTipo(), i, 2);
@@ -410,20 +414,18 @@ public class JFCadProfissional extends javax.swing.JFrame {
 
     private void daTabelaParaOsTextFields() {
         int linha = jTableProfissionais.getSelectedRow();
-        
-       jTextFieldNome.setText(jTableProfissionais.getModel().getValueAt(linha,1).toString());
-       jTextFieldTipo.setText(jTableProfissionais.getModel().getValueAt(linha,2).toString());
-       jTextFieldIdentificacao.setText(jTableProfissionais.getModel().getValueAt(linha,3).toString());
-       
-        
-        
+
+        jTextFieldNome.setText(jTableProfissionais.getModel().getValueAt(linha, 1).toString());
+        jTextFieldTipo.setText(jTableProfissionais.getModel().getValueAt(linha, 2).toString());
+        jTextFieldIdentificacao.setText(jTableProfissionais.getModel().getValueAt(linha, 3).toString());
+
     }
 
     private void habilitarCampos() {
-       jTextFieldNome.setEnabled(true);
-       jTextFieldTipo.setEnabled(true);
-       jTextFieldIdentificacao.setEnabled(true);
-       jButtonAtualizar.setEnabled(true);
-       jButtonExcluir.setEnabled(false);
+        jTextFieldNome.setEnabled(true);
+        jTextFieldTipo.setEnabled(true);
+        jTextFieldIdentificacao.setEnabled(true);
+        jButtonAtualizar.setEnabled(true);
+        jButtonExcluir.setEnabled(false);
     }
 }//Final da classe

@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Consulta;
@@ -35,6 +36,8 @@ public class JFCadConsulta extends javax.swing.JFrame {
     private Consulta consulta;
 
     public JFCadConsulta() {
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
         initComponents();
         mostrarNaTabela();
 
@@ -66,7 +69,6 @@ public class JFCadConsulta extends javax.swing.JFrame {
         jButtonNovo = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableConsultasCadastradas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -217,14 +219,6 @@ public class JFCadConsulta extends javax.swing.JFrame {
         });
         jPanel4.add(jButtonSalvar);
 
-        jButton1.setText("teste");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton1);
-
         jTableConsultasCadastradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
@@ -234,13 +228,14 @@ public class JFCadConsulta extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTableConsultasCadastradas.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableConsultasCadastradas);
         if (jTableConsultasCadastradas.getColumnModel().getColumnCount() > 0) {
             jTableConsultasCadastradas.getColumnModel().getColumn(0).setPreferredWidth(5);
@@ -309,28 +304,26 @@ public class JFCadConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonPesquisaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisaPacienteActionPerformed
-        if(jTextFieldNomePaciente == null)
-        pesquisarOTextFiel();
-        else{
-            
+        if (jTextFieldNomePaciente == null) {
+            pesquisarOTextFiel();
+        } else {
+            pesquisarOTextFiel();
         }
 
     }//GEN-LAST:event_jButtonPesquisaPacienteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        pesquisarNoTextField();
+        if (tfNomeProfissional == null) {
+            pesquisarNoTextField();
+        } else {
+            pesquisarNoTextField();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         SetOTextFielPaciente();
         SetOTextFieldProfissional();
     }//GEN-LAST:event_formWindowGainedFocus
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        JOptionPane.showMessageDialog(null, paciente.getId());
-
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -368,7 +361,6 @@ public class JFCadConsulta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
@@ -436,19 +428,18 @@ public class JFCadConsulta extends javax.swing.JFrame {
             armazenarNomes.append(p.getNome());
         }
 
-        if (armazenarNomes.length() > 0) {
-            JOptionPane.showMessageDialog(null, "Paciente encontrado: " + armazenarNomes.toString());
-        } else {
+        if (armazenarNomes.length() == 0) {
             JOptionPane.showMessageDialog(null, "Paciente não encontrado");
             paciente = new Paciente();
             ListaPaciente lp;
             lp = new ListaPaciente(paciente);
             lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             lp.setVisible(true);
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Paciente encontrado: " + armazenarNomes.toString());
+            jTextFieldNomePaciente.setText(armazenarNomes.toString());
         }
-        /*JDListaPacientes listagemPacientes = new JDListaPacientes(paciente);
-         listagemPacientes.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-         listagemPacientes.setVisible(true);*/
 
     }
 
@@ -461,15 +452,16 @@ public class JFCadConsulta extends javax.swing.JFrame {
         for (Profissional p : profissionais) {
             armazenarNomes.append(p.getNome());
         }
-        if (armazenarNomes.length() > 0) {
-            JOptionPane.showMessageDialog(null, "Profissional encontrado: " + armazenarNomes.toString());
-        } else {
+        if (armazenarNomes.length() == 0) {
             JOptionPane.showMessageDialog(null, "Profissional não encontrado!");
             profissional = new Profissional();
             ListaProfissional Telalp = new ListaProfissional(profissional);
             Telalp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             Telalp.setVisible(true);
 
+        } else {
+            JOptionPane.showMessageDialog(null, "Profissional encontrado: " + armazenarNomes.toString());
+            tfNomeProfissional.setText(armazenarNomes.toString());
         }
 
     }
@@ -502,8 +494,8 @@ public class JFCadConsulta extends javax.swing.JFrame {
             jTableConsultasCadastradas.getModel().setValueAt(c.getId(), i, 0);
             jTableConsultasCadastradas.getModel().setValueAt(c.getData(), i, 1);
             jTableConsultasCadastradas.getModel().setValueAt(c.getHora(), i, 2);
-            jTableConsultasCadastradas.getModel().setValueAt(null,i,3);
-            jTableConsultasCadastradas.getModel().setValueAt(null,i,4);
+           // jTableConsultasCadastradas.getModel().setValueAt(null, i, 3);
+            //  jTableConsultasCadastradas.getModel().setValueAt(null, i, 4);
             i++;
             DefaultTableModel tabelaConsulta = (DefaultTableModel) jTableConsultasCadastradas.getModel();
             tabelaConsulta.addRow(new Object[linha]);

@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.time.LocalDate;
 import static java.util.Collections.list;
+import javax.swing.JFrame;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +31,8 @@ public class JFCadPaciente extends javax.swing.JFrame {
      * Creates new form JFCadPaciente
      */
     public JFCadPaciente() {
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
 
         initComponents();
     }
@@ -332,9 +335,9 @@ public class JFCadPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-         HabilitarCampos();
-         
-        
+        HabilitarCampos();
+
+
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
@@ -366,7 +369,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
     private void jRadioButtonMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonMMouseClicked
         //Essa ação deve desabilitar o jRadioButton do sexo feminino
         jRadioButtonF.getModel().setSelected(false);
-        
+
     }//GEN-LAST:event_jRadioButtonMMouseClicked
 
     private void jRadioButtonFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonFMouseClicked
@@ -375,7 +378,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_jRadioButtonFMouseClicked
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-         atualizarCadPacientes();
+        atualizarCadPacientes();
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     /**
@@ -573,7 +576,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jTextFieldTelefone.setText(jTablePacientes.getValueAt(linhaSelecionada, 6).toString());
     }
 
-    private void atualizarCadPacientes() {       
+    private void atualizarCadPacientes() {
         Paciente p = new Paciente();
         p.setNome(jTextFieldNome.getText());
         p.setCpf(jTextFieldCPF.getText());
@@ -605,7 +608,6 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jButtonNovo.setEnabled(true);
         jButtonExcluir.setEnabled(true);
         jButtonAlterar.setEnabled(true);
-        
 
         // Desabilitando campos
         jTextFieldCPF.setEnabled(false);
@@ -616,7 +618,5 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jRadioButtonM.setEnabled(false);
         jRadioButtonF.setEnabled(false);
     }
-
-  
 
 }
