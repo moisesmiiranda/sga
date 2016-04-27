@@ -235,6 +235,7 @@ public class ListaPaciente extends javax.swing.JFrame {
         paciente.setTelefone(pac.getTelefone());
         paciente.setEndereco(pac.getEndereco());
 
-        this.dispose();
+        dispose();
+// this.dispose();
     }
 }

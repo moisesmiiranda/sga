@@ -62,7 +62,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
         jTFHora = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
         jTextFieldNomePaciente = new javax.swing.JTextField();
-        tfNomeProfissional = new javax.swing.JTextField();
+        jTextFieldNomeProfissional = new javax.swing.JTextField();
         jButtonPesquisaPaciente = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -141,7 +141,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfNomeProfissional)
+                            .addComponent(jTextFieldNomeProfissional)
                             .addComponent(jTextFieldNomePaciente)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +178,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNomeProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNomeProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -304,20 +304,13 @@ public class JFCadConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonPesquisaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisaPacienteActionPerformed
-        if (jTextFieldNomePaciente == null) {
-            pesquisarOTextFiel();
-        } else {
-            pesquisarOTextFiel();
-        }
+        buscarPaciente();
+
 
     }//GEN-LAST:event_jButtonPesquisaPacienteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (tfNomeProfissional == null) {
-            pesquisarNoTextField();
-        } else {
-            pesquisarNoTextField();
-        }
+        buscarProfissional();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
@@ -380,7 +373,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField jTFHora;
     private javax.swing.JTable jTableConsultasCadastradas;
     private javax.swing.JTextField jTextFieldNomePaciente;
-    private javax.swing.JTextField tfNomeProfissional;
+    private javax.swing.JTextField jTextFieldNomeProfissional;
     // End of variables declaration//GEN-END:variables
 
     //Variavel da tela
@@ -421,9 +414,9 @@ public class JFCadConsulta extends javax.swing.JFrame {
     private void pesquisarOTextFiel() {
         List<Paciente> pacientes = Utilitaria.getSession().
                 getNamedQuery("pacientePorNome").setString("nome",
-                        jTextFieldNomePaciente.getText() + "%").list();
+                jTextFieldNomePaciente.getText() + "%").list();
 
-        StringBuffer armazenarNomes = new StringBuffer();
+        /*  StringBuffer armazenarNomes = new StringBuffer();
         for (Paciente p : pacientes) {
             armazenarNomes.append(p.getNome());
         }
@@ -439,14 +432,14 @@ public class JFCadConsulta extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Paciente encontrado: " + armazenarNomes.toString());
             jTextFieldNomePaciente.setText(armazenarNomes.toString());
-        }
-
+            
+        }*/
     }
 
     private void pesquisarNoTextField() {
         List<Profissional> profissionais = Utilitaria.getSession().
                 getNamedQuery("profissionalPorNome").setString("nome",
-                        tfNomeProfissional.getText() + "%").list();
+                jTextFieldNomeProfissional.getText() + "%").list();
 
         StringBuffer armazenarNomes = new StringBuffer();
         for (Profissional p : profissionais) {
@@ -461,7 +454,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
         } else {
             JOptionPane.showMessageDialog(null, "Profissional encontrado: " + armazenarNomes.toString());
-            tfNomeProfissional.setText(armazenarNomes.toString());
+            jTextFieldNomeProfissional.setText(armazenarNomes.toString());
         }
 
     }
@@ -478,7 +471,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
     private void SetOTextFieldProfissional() {
         if (profissional != null) {
             if (profissional.getId() != 0) {
-                tfNomeProfissional.setText(profissional.getNome());
+                jTextFieldNomeProfissional.setText(profissional.getNome());
 
             }
         }
@@ -494,11 +487,47 @@ public class JFCadConsulta extends javax.swing.JFrame {
             jTableConsultasCadastradas.getModel().setValueAt(c.getId(), i, 0);
             jTableConsultasCadastradas.getModel().setValueAt(c.getData(), i, 1);
             jTableConsultasCadastradas.getModel().setValueAt(c.getHora(), i, 2);
-           // jTableConsultasCadastradas.getModel().setValueAt(null, i, 3);
-            //  jTableConsultasCadastradas.getModel().setValueAt(null, i, 4);
+            if (c.getPaciente() != null) {
+                jTableConsultasCadastradas.getModel().setValueAt(c.getPaciente().getNome(), i, 3);
+            }
+            if (c.getProfissional() != null) {
+                jTableConsultasCadastradas.getModel().setValueAt(c.getProfissional().getNome(), i, 4);
+            }
             i++;
             DefaultTableModel tabelaConsulta = (DefaultTableModel) jTableConsultasCadastradas.getModel();
             tabelaConsulta.addRow(new Object[linha]);
+
+        }
+    }
+
+    private void buscarPaciente() {
+        List<Paciente> pacientes = Utilitaria.getSession().
+                getNamedQuery("pacientePorNome").setString("nome",
+                jTextFieldNomePaciente.getText() + "%").list();
+
+        for (Paciente p : pacientes) {
+
+            paciente = new Paciente();
+            ListaPaciente lp;
+            lp = new ListaPaciente(paciente);
+            lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            lp.setVisible(true);
+
+        }
+    }
+
+    private void buscarProfissional() {
+        List<Profissional> profissionais = Utilitaria.getSession().
+                getNamedQuery("profissionalPorNome").setString("nome",
+                jTextFieldNomeProfissional.getText() + "%").list();
+
+        for (Profissional p : profissionais) {
+
+            paciente = new Paciente();
+            ListaProfissional lp;
+            lp = new ListaProfissional(p);
+            lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            lp.setVisible(true);
 
         }
     }
