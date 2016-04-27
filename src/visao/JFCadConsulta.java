@@ -75,6 +75,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Consulta");
+        setType(java.awt.Window.Type.UTILITY);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -304,18 +305,18 @@ public class JFCadConsulta extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonPesquisaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisaPacienteActionPerformed
-        buscarPaciente();
+        buscarPorPacientes();
 
 
     }//GEN-LAST:event_jButtonPesquisaPacienteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        buscarProfissional();
+        buscarPorProfissionais();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        SetOTextFielPaciente();
-        SetOTextFieldProfissional();
+        SetOTextFielDoPaciente();
+        SetOTextFieldDoProfissional();
     }//GEN-LAST:event_formWindowGainedFocus
 
     /**
@@ -414,32 +415,32 @@ public class JFCadConsulta extends javax.swing.JFrame {
     private void pesquisarOTextFiel() {
         List<Paciente> pacientes = Utilitaria.getSession().
                 getNamedQuery("pacientePorNome").setString("nome",
-                jTextFieldNomePaciente.getText() + "%").list();
+                        jTextFieldNomePaciente.getText() + "%").list();
 
         /*  StringBuffer armazenarNomes = new StringBuffer();
-        for (Paciente p : pacientes) {
-            armazenarNomes.append(p.getNome());
-        }
+         for (Paciente p : pacientes) {
+         armazenarNomes.append(p.getNome());
+         }
 
-        if (armazenarNomes.length() == 0) {
-            JOptionPane.showMessageDialog(null, "Paciente não encontrado");
-            paciente = new Paciente();
-            ListaPaciente lp;
-            lp = new ListaPaciente(paciente);
-            lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            lp.setVisible(true);
+         if (armazenarNomes.length() == 0) {
+         JOptionPane.showMessageDialog(null, "Paciente não encontrado");
+         paciente = new Paciente();
+         ListaPaciente lp;
+         lp = new ListaPaciente(paciente);
+         lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+         lp.setVisible(true);
 
-        } else {
-            JOptionPane.showMessageDialog(null, "Paciente encontrado: " + armazenarNomes.toString());
-            jTextFieldNomePaciente.setText(armazenarNomes.toString());
+         } else {
+         JOptionPane.showMessageDialog(null, "Paciente encontrado: " + armazenarNomes.toString());
+         jTextFieldNomePaciente.setText(armazenarNomes.toString());
             
-        }*/
+         }*/
     }
 
     private void pesquisarNoTextField() {
         List<Profissional> profissionais = Utilitaria.getSession().
                 getNamedQuery("profissionalPorNome").setString("nome",
-                jTextFieldNomeProfissional.getText() + "%").list();
+                        jTextFieldNomeProfissional.getText() + "%").list();
 
         StringBuffer armazenarNomes = new StringBuffer();
         for (Profissional p : profissionais) {
@@ -459,7 +460,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
 
     }
 
-    private void SetOTextFielPaciente() {
+    private void SetOTextFielDoPaciente() {
         if (paciente != null) {
             if (paciente.getId() != 0) {
                 jTextFieldNomePaciente.setText(paciente.getNome());
@@ -468,7 +469,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
         }
     }
 
-    private void SetOTextFieldProfissional() {
+    private void SetOTextFieldDoProfissional() {
         if (profissional != null) {
             if (profissional.getId() != 0) {
                 jTextFieldNomeProfissional.setText(profissional.getNome());
@@ -500,26 +501,44 @@ public class JFCadConsulta extends javax.swing.JFrame {
         }
     }
 
-    private void buscarPaciente() {
-        List<Paciente> pacientes = Utilitaria.getSession().
-                getNamedQuery("pacientePorNome").setString("nome",
-                jTextFieldNomePaciente.getText() + "%").list();
+    private void buscarPorPacientes() {
+        /*Esse método deve Instanciar um Paciente,
+        criar uma instância da tela a ser chamada
+        e setar na mesma uma lista de Pacientes com o parâmetro "paciente"*/
+        
+        paciente = new Paciente();
+        ListaPaciente lp;
+        lp = new ListaPaciente(paciente);
+        lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        lp.setVisible(true);
+        
 
-        for (Paciente p : pacientes) {
+        //Antigo
+        /*List<Paciente> pacientes = Utilitaria.getSession().
+         getNamedQuery("pacientePorNome").setString("nome",
+         jTextFieldNomePaciente.getText() + "%").list();
 
-            paciente = new Paciente();
-            ListaPaciente lp;
-            lp = new ListaPaciente(paciente);
-            lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            lp.setVisible(true);
+         for (Paciente p : pacientes) {
 
-        }
+           
+
+         }*/
     }
 
-    private void buscarProfissional() {
-        List<Profissional> profissionais = Utilitaria.getSession().
+    private void buscarPorProfissionais() {
+          /*Esse método deve Instanciar um Profissional,
+        criar uma instância da tela a ser chamada
+        e setar na mesma uma lista de Profissional com o parâmetro "Profissional"*/
+        profissional = new Profissional();
+        ListaProfissional lp;
+        lp = new ListaProfissional(profissional);
+        lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        lp.setVisible(true);
+        
+        //ANTIGO
+        /*List<Profissional> profissionais = Utilitaria.getSession().
                 getNamedQuery("profissionalPorNome").setString("nome",
-                jTextFieldNomeProfissional.getText() + "%").list();
+                        jTextFieldNomeProfissional.getText() + "%").list();
 
         for (Profissional p : profissionais) {
 
@@ -529,7 +548,7 @@ public class JFCadConsulta extends javax.swing.JFrame {
             lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             lp.setVisible(true);
 
-        }
+        }*/
     }
 
 }//chaveFinal
