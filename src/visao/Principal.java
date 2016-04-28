@@ -45,6 +45,7 @@ public class Principal extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JToolBar.Separator();
         jButton6 = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -115,6 +116,11 @@ public class Principal extends javax.swing.JFrame {
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton4);
         jToolBar1.add(jSeparator4);
 
@@ -132,6 +138,27 @@ public class Principal extends javax.swing.JFrame {
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton6);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/Logo sitema AG4.png"))); // NOI18N
+        jLabel2.setPreferredSize(new java.awt.Dimension(600, 552));
+
+        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(122, 122, 122))
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 583, Short.MAX_VALUE))
+        );
 
         jMenuCadastro.setMnemonic('c');
         jMenuCadastro.setText("Cadastros");
@@ -156,6 +183,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem9.setText("Campanhas");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenuCadastro.add(jMenuItem9);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
@@ -227,11 +259,13 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
             .addGroup(layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
-                .addGap(154, 154, 154))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 916, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,11 +273,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
-                .addGap(44, 44, 44))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(862, 587));
+        setSize(new java.awt.Dimension(940, 721));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -268,7 +302,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         mostrarTelaCadastroConsulta();
+        mostrarTelaCadastroConsulta();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -276,8 +310,16 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         mostrarTelaCadastroProfissional();
+       mostrarTelaCadastroProfissional();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        mostrarTelaCadastroCampanhas();
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        mostrarTelaCadastroCampanhas();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,6 +366,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenuAcompanhamento;
     private javax.swing.JMenuBar jMenuBar1;
@@ -360,11 +403,12 @@ public class Principal extends javax.swing.JFrame {
 
     }
     //Variável da tela
-    JFCadProfissional cadProfissinal;
 
     private void mostrarTelaCadastroProfissional() {
-        cadProfissinal = new JFCadProfissional();
-        cadProfissinal.setVisible(true);
+        JDCadProfissional cadProfissional = new JDCadProfissional(this, true);
+        cadProfissional.setVisible(true);
+//JFCadProfissional cadProfissinal = new JFCadProfissional();
+        
     }
     //Variável da Tela
     JFCadConsulta cadConsulta;
@@ -372,5 +416,11 @@ public class Principal extends javax.swing.JFrame {
     private void mostrarTelaCadastroConsulta() {
         cadConsulta = new JFCadConsulta();
         cadConsulta.setVisible(true);
+    }
+
+    private void mostrarTelaCadastroCampanhas() {
+        JDCadCampanhas cadCampanha = new JDCadCampanhas(this, true);
+        cadCampanha.setVisible(true);
+
     }
 }

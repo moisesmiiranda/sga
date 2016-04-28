@@ -5,6 +5,9 @@
  */
 package visao;
 
+import java.awt.Frame;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Moisés
@@ -16,9 +19,14 @@ public class JDCadCampanhas extends javax.swing.JDialog {
      */
     public JDCadCampanhas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null);
         initComponents();
+        
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -237,6 +245,7 @@ public class JDCadCampanhas extends javax.swing.JDialog {
         getContentPane().add(jPanel1);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
@@ -323,4 +332,8 @@ public class JDCadCampanhas extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldNomePaciente;
     private javax.swing.JTextField jTextFieldNomeProfissional;
     // End of variables declaration//GEN-END:variables
+
+    private void setExtendedState(int state) {
+        
+    }
 }
