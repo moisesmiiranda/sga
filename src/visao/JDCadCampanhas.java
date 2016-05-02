@@ -5,8 +5,20 @@
  */
 package visao;
 
+import DAO_Generico.Dao;
 import java.awt.Frame;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.List;
+import javax.net.ssl.SSLException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.scripts.JO;
+import modelo.Campanhas;
+import modelo.Consulta;
+import org.hibernate.Session;
+import util.Utilitaria;
 
 /**
  *
@@ -19,14 +31,10 @@ public class JDCadCampanhas extends javax.swing.JDialog {
      */
     public JDCadCampanhas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setLocationRelativeTo(null);
         initComponents();
-        
+        PreencherTabela();
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,20 +49,20 @@ public class JDCadCampanhas extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTFDataConsulta = new com.toedter.calendar.JDateChooser();
+        jTFDataInicial = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
-        jTextFieldNomePaciente = new javax.swing.JTextField();
-        jTextFieldNomeProfissional = new javax.swing.JTextField();
+        jTextFieldTitulo = new javax.swing.JTextField();
+        jTextFieldDescricao = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTFDataConsulta1 = new com.toedter.calendar.JDateChooser();
+        jTFDataFinal = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButtonAlterar = new javax.swing.JButton();
-        jButtonExcluir2 = new javax.swing.JButton();
+        jButtonAtualizar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableConsultasCadastradas = new javax.swing.JTable();
+        jTableCampanhas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -86,20 +94,20 @@ public class JDCadCampanhas extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldNomePaciente)
+                            .addComponent(jTextFieldTitulo)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jTFDataConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                                    .addComponent(jTFDataConsulta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jTFDataInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                    .addComponent(jTFDataFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(271, 271, 271)))
                         .addGap(311, 311, 311))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(91, 91, 91))
-                    .addComponent(jTextFieldNomeProfissional)
+                    .addComponent(jTextFieldDescricao)
                     .addComponent(jLabel9)
                     .addComponent(jLabel5)))
         );
@@ -109,19 +117,19 @@ public class JDCadCampanhas extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFDataConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFDataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTFDataConsulta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTFDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldNomeProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -161,17 +169,17 @@ public class JDCadCampanhas extends javax.swing.JDialog {
         });
         jPanel4.add(jButtonAlterar);
 
-        jButtonExcluir2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/atualizar.png"))); // NOI18N
-        jButtonExcluir2.setMnemonic('r');
-        jButtonExcluir2.setText("Atualizar");
-        jButtonExcluir2.setToolTipText("Salva as alterações feitas neste cadastro");
-        jButtonExcluir2.setPreferredSize(new java.awt.Dimension(110, 40));
-        jButtonExcluir2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/atualizar.png"))); // NOI18N
+        jButtonAtualizar.setMnemonic('r');
+        jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.setToolTipText("Salva as alterações feitas neste cadastro");
+        jButtonAtualizar.setPreferredSize(new java.awt.Dimension(110, 40));
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluir2ActionPerformed(evt);
+                jButtonAtualizarActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonExcluir2);
+        jPanel4.add(jButtonAtualizar);
 
         jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
         jButtonSalvar.setMnemonic('s');
@@ -185,7 +193,7 @@ public class JDCadCampanhas extends javax.swing.JDialog {
         });
         jPanel4.add(jButtonSalvar);
 
-        jTableConsultasCadastradas.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCampanhas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
             },
@@ -201,8 +209,8 @@ public class JDCadCampanhas extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTableConsultasCadastradas.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTableConsultasCadastradas);
+        jTableCampanhas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTableCampanhas);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -257,16 +265,21 @@ public class JDCadCampanhas extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-       
+        salvarCampanha();
+        LimparCampos();
+        ControleBotoes();
+        PreencherTabela();
+
+
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
-    private void jButtonExcluir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluir2ActionPerformed
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonExcluir2ActionPerformed
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,8 +325,8 @@ public class JDCadCampanhas extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;
+    private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonExcluir;
-    private javax.swing.JButton jButtonExcluir2;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel1;
@@ -326,14 +339,105 @@ public class JDCadCampanhas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private com.toedter.calendar.JDateChooser jTFDataConsulta;
-    private com.toedter.calendar.JDateChooser jTFDataConsulta1;
-    private javax.swing.JTable jTableConsultasCadastradas;
-    private javax.swing.JTextField jTextFieldNomePaciente;
-    private javax.swing.JTextField jTextFieldNomeProfissional;
+    private com.toedter.calendar.JDateChooser jTFDataFinal;
+    private com.toedter.calendar.JDateChooser jTFDataInicial;
+    private javax.swing.JTable jTableCampanhas;
+    private javax.swing.JTextField jTextFieldDescricao;
+    private javax.swing.JTextField jTextFieldTitulo;
     // End of variables declaration//GEN-END:variables
 
     private void setExtendedState(int state) {
-        
+
+    }
+
+    private void salvarCampanha() {
+        Campanhas c = new Campanhas();
+        //
+        //Salvar a Data FInal
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = sf.format(jTFDataFinal.getDate());
+
+        String dia = dataFormatada.toString().substring(0, 2);
+        String mes = dataFormatada.toString().substring(3, 5);
+        String ano = dataFormatada.toString().substring(6);
+        String Data_Final_Banco = ano + "-" + mes + "-" + dia;
+        //Variável local date para converter para date a string;
+        LocalDate DtFinal = LocalDate.parse(Data_Final_Banco);
+        // salvando no objeto
+        c.setDataFinal(java.sql.Date.valueOf(DtFinal));
+
+        //Salvar Data Inicial
+        SimpleDateFormat sf2 = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada2 = sf2.format(jTFDataInicial.getDate());
+
+        String dia2 = dataFormatada2.toString().substring(0, 2);
+        String mes2 = dataFormatada2.toString().substring(3, 5);
+        String ano2 = dataFormatada2.toString().substring(6);
+        String Data_Final_Banco2 = ano2 + "-" + mes2 + "-" + dia2;
+        //Variável local date para converter para date a string;
+        LocalDate DtInicical = LocalDate.parse(Data_Final_Banco2);
+        c.setDataInicial(java.sql.Date.valueOf(DtInicical));
+
+        c.setTitulo(jTextFieldTitulo.getText());
+        c.setDescricao(jTextFieldDescricao.getText());
+
+        Dao<Campanhas> dao = new Dao<>();
+        dao.gravar(c);
+
+    }
+
+    private void LimparCampos() {
+        jTFDataFinal.cleanup();
+        jTFDataInicial.cleanup();
+        jTextFieldDescricao.setText(null);
+        jTextFieldTitulo.setText(null);
+    }
+
+    private void ControleBotoes() {
+        jButtonAlterar.setEnabled(true);
+        jButtonExcluir.setEnabled(true);
+        jButtonNovo.setEnabled(true);
+        jButtonAtualizar.setEnabled(false);
+        jButtonSalvar.setEnabled(false);
+
+    }
+
+    private void PreencherTabela() {
+        Session sessao = Utilitaria.getSession();
+        List<Campanhas> LCampanhas = sessao.createQuery("from Campanhas").list();
+        int i = 0;
+        int linha = 1;
+        //  "ID", "Data", "Hora", "Nome do Paciente", "Profissional"
+
+        for (Campanhas c : LCampanhas) {
+
+            jTableCampanhas.getModel().setValueAt(c.getId(), i, 0);
+
+            //para exibir a data no formato correto
+            String dataInicialNobanco = String.valueOf(c.getDataInicial());
+            //1997
+            String anoI = dataInicialNobanco.substring(0, 4);
+            String mesI = dataInicialNobanco.substring(5, 7);
+            String diaI = dataInicialNobanco.substring(8);
+            String dataInicialTabela = diaI + "/" + mesI + "/" + anoI;
+
+            jTableCampanhas.getModel().setValueAt(dataInicialTabela, i, 1);
+
+            //para exibir a data no formato correto
+            String dataFinalNobanco = String.valueOf(c.getDataFinal());
+            //1997
+            String ano = dataFinalNobanco.substring(0, 4);
+            String mes = dataFinalNobanco.substring(5, 7);
+            String dia = dataFinalNobanco.substring(8);
+            String dataFinalTabela = dia + "/" + mes + "/" + ano;
+
+            jTableCampanhas.getModel().setValueAt(dataFinalTabela, i, 2);
+            jTableCampanhas.getModel().setValueAt(c.getTitulo(), i,3);
+            jTableCampanhas.getModel().setValueAt(c.getDescricao(), i,4);
+            i++;
+            DefaultTableModel tabelaCampanhas = (DefaultTableModel) jTableCampanhas.getModel();
+            tabelaCampanhas.addRow(new Object[linha]);
+
+        }
     }
 }

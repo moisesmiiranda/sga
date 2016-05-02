@@ -5,8 +5,16 @@
  */
 package visao;
 
+import DAO_Generico.Dao;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Paciente;
+import org.hibernate.Session;
+import util.Utilitaria;
 
 /**
  *
@@ -19,9 +27,10 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
      */
     public JDCadastroPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-      
+
         initComponents();
-        
+        mostrarDoBancoNaTabela();
+
     }
 
     /**
@@ -69,7 +78,7 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
 
         jTablePacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nome", "Data de Nascimento", "Sexo", "CPF", "Endereço", "Telefone"
@@ -290,7 +299,7 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -314,7 +323,7 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTablePacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePacientesMouseClicked
-       // selecionarPaciente();
+        // selecionarPaciente();
     }//GEN-LAST:event_jTablePacientesMouseClicked
 
     private void jRadioButtonMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonMMouseClicked
@@ -332,24 +341,24 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonFMouseClicked
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-      //  HabilitarCampos();
-        //limparCampos();
+        HabilitarCampos();
+        limparCampos();
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-       // HabilitarCampos();
+        HabilitarCampos();
 
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-      //  atualizarCadPacientes();
+        //  atualizarCadPacientes();
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
-       // salvarPaciente();
-       // mostrarDoBancoNaTabela();
-       // limparCampos();
-        //controleCamposEBotoes();
+        salvarPaciente();
+        mostrarDoBancoNaTabela();
+        limparCampos();
+        controleCamposEBotoes();
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     /**
@@ -420,4 +429,145 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JFormattedTextField jTextFieldTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void salvarPaciente() {
+        Paciente p = new Paciente();
+        p.setNome(jTextFieldNome.getText().trim());
+        p.setCpf(jTextFieldCPF.getText().trim());
+        p.setEndereco(jTextFieldEndereco.getText().trim());
+        p.setTelefone(jTextFieldTelefone.getText());
+
+        //Deve gravar assim: dd/MM/yyyy
+        // está salvando assim: 1960-09-22/ 22-09-1960
+        String dia = jTextFieldDataDeNascimento.getText().substring(0, 2);
+        String mes = jTextFieldDataDeNascimento.getText().substring(3, 5);
+        String ano = jTextFieldDataDeNascimento.getText().substring(6);
+        String dataASerGravada = ano + "-" + mes + "-" + dia;
+
+        LocalDate DN = LocalDate.parse(dataASerGravada);
+        p.setDataDeNascimento(java.sql.Date.valueOf(DN));
+        //Salvar Sexo
+        if (jRadioButtonM.getModel().isSelected() == true) {
+            p.setSexo("Masculino");
+        } else if (jRadioButtonF.getModel().isSelected() == true) {
+            p.setSexo("Feminino");
+        }
+
+        Dao<Paciente> dao = new Dao<>();
+        dao.gravar(p);
+        JOptionPane.showMessageDialog(null, "Dados gravados com sucesso!");
+
+        jButtonSalvar.setEnabled(false);
+        jButtonNovo.setEnabled(true);
+        jButtonExcluir.setEnabled(true);
+        jButtonAlterar.setEnabled(true);
+
+        // Desabilitando campos
+        jTextFieldCPF.setEnabled(false);
+        jTextFieldDataDeNascimento.setEnabled(false);
+        jTextFieldEndereco.setEnabled(false);
+        jTextFieldNome.setEnabled(false);
+        jTextFieldTelefone.setEnabled(false);
+        jRadioButtonM.setEnabled(false);
+        jRadioButtonF.setEnabled(false);
+    }
+
+    private void HabilitarCampos() {
+        //Habilitanto campos de texto
+        jTextFieldCPF.setEnabled(true);
+        jTextFieldDataDeNascimento.setEnabled(true);
+        jTextFieldEndereco.setEnabled(true);
+        jTextFieldNome.setEnabled(true);
+        jTextFieldTelefone.setEnabled(true);
+        jRadioButtonM.setEnabled(true);
+        jRadioButtonF.setEnabled(true);
+        //desabilitando botões novo e alterar, excluir
+        jButtonExcluir.setEnabled(false);
+        jButtonNovo.setEnabled(false);
+        jButtonAlterar.setEnabled(false);
+        //Habilitar o botão Salvar
+        jButtonSalvar.setEnabled(true);
+    }
+
+    private void limparCampos() {
+        jTextFieldNome.setText(null);
+        jTextFieldDataDeNascimento.setText(null);
+        jRadioButtonF.getModel().setSelected(false);
+        jRadioButtonM.getModel().setSelected(false);
+        jTextFieldCPF.setText(null);
+        jTextFieldEndereco.setText(null);
+        jTextFieldTelefone.setText(null);
+
+    }
+
+    private void mostrarDoBancoNaTabela() {
+        Session sessao = Utilitaria.getSession();//Peguei a sessao
+        List<Paciente> Lpacientes = sessao.createQuery("from Paciente").list();//selecionei a tabela pacientes
+        int i = 0;
+        
+         
+        
+        //Teste pra adicionar uma linha a tabela vazia
+        if (jTablePacientes.getRowCount()==0) {
+            DefaultTableModel table = (DefaultTableModel) jTablePacientes.getModel();
+            table.addRow(new Object[jTablePacientes.getRowCount() + 1]);
+
+        }
+
+        for (Paciente p : Lpacientes) {
+         Lpacientes.lastIndexOf(p); 
+            //Conversão necessária para salvar a data no formato correto
+            //Data está aparecendo assim 1982-04-22
+            //Deve aparecer assim: 22/04/1982
+            String dataN_do_paciente = String.valueOf(p.getDataDeNascimento());
+            String ano = dataN_do_paciente.substring(0, 4);
+            String mes = dataN_do_paciente.substring(5, 7);
+            String dia = dataN_do_paciente.substring(8);
+            String DataParaTabela = dia + "/" + mes + "/" + ano;
+        
+            
+            
+            jTablePacientes.getModel().setValueAt(p.getId(), i, 0);
+            jTablePacientes.getModel().setValueAt(p.getNome(), i, 1);
+            jTablePacientes.getModel().setValueAt(DataParaTabela, i, 2);
+            jTablePacientes.getModel().setValueAt(p.getSexo(), i, 3);
+            jTablePacientes.getModel().setValueAt(p.getCpf(), i, 4);
+            jTablePacientes.getModel().setValueAt(p.getEndereco(), i, 5);
+            jTablePacientes.getModel().setValueAt(p.getTelefone(), i, 6);
+            i++;
+
+            DefaultTableModel tabelaPaciente = (DefaultTableModel) jTablePacientes.getModel(); // pegando o modelo padrão da tabela
+            int nLinhas = jTablePacientes.getRowCount()-1;
+            tabelaPaciente.addRow(new Object[jTablePacientes.getRowCount()- nLinhas]);
+
+        }
+
+    }
+
+    private void controleCamposEBotoes() {
+
+    }
+
+    private void selecionarPaciente() {
+        int linhaSelecionada = jTablePacientes.getSelectedRow();
+        jTextFieldNome.setText(jTablePacientes.getValueAt(linhaSelecionada, 1).toString());
+        jTextFieldDataDeNascimento.setText(jTablePacientes.getValueAt(linhaSelecionada, 2).toString());
+        //pegando o sexo
+        String sexo = jTablePacientes.getValueAt(linhaSelecionada, 3).toString();
+        String sexoM = "masculino";
+        String sexoF = "feminino";
+
+        if (sexo.equalsIgnoreCase(sexoM)) {
+            jRadioButtonM.getModel().setSelected(true);
+            jRadioButtonF.getModel().setSelected(false);
+        } else if (sexo.equalsIgnoreCase(sexoF)) {
+            jRadioButtonF.getModel().setSelected(true);
+            jRadioButtonM.getModel().setSelected(false);
+        }
+
+        jTextFieldCPF.setText(jTablePacientes.getValueAt(linhaSelecionada, 4).toString());
+        jTextFieldEndereco.setText(jTablePacientes.getValueAt(linhaSelecionada, 5).toString());
+        jTextFieldTelefone.setText(jTablePacientes.getValueAt(linhaSelecionada, 6).toString());
+
+    }
 }

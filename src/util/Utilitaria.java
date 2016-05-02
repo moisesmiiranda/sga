@@ -25,6 +25,7 @@ public static void configurar(){
     configuracao.addAnnotatedClass(modelo.Paciente.class);
     configuracao.addAnnotatedClass(modelo.Consulta.class);
     configuracao.addAnnotatedClass(modelo.Profissional.class);
+    configuracao.addAnnotatedClass(modelo.Campanhas.class);
     
     SchemaUpdate update = new SchemaUpdate(configuracao);
     update.execute(true, true);

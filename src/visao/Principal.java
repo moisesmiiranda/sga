@@ -45,7 +45,6 @@ public class Principal extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JToolBar.Separator();
         jButton6 = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
-        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -139,25 +138,15 @@ public class Principal extends javax.swing.JFrame {
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton6);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/Logo sitema AG4.png"))); // NOI18N
-        jLabel2.setPreferredSize(new java.awt.Dimension(600, 552));
-
-        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(122, 122, 122))
+            .addGap(0, 928, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 583, Short.MAX_VALUE))
+            .addGap(0, 583, Short.MAX_VALUE)
         );
 
         jMenuCadastro.setMnemonic('c');
@@ -366,7 +355,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenuAcompanhamento;
     private javax.swing.JMenuBar jMenuBar1;
@@ -391,15 +379,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 
-    //Variável da tela
-    // JDCadastroPaciente cadastroPaciente;
-    JFCadPaciente cadPaciente;
+  
 
     private void mostrarTelaCadastroPaciente() {
-        cadPaciente = new JFCadPaciente();
+      JDCadastroPaciente  cadPaciente = new JDCadastroPaciente(this,true);
+       
+        cadPaciente = new JDCadastroPaciente(this, true);
         cadPaciente.setVisible(true);
-        //cadastroPaciente = new JDCadastroPaciente(this, true);
-        //cadastroPaciente.setVisible(true);
 
     }
     //Variável da tela
@@ -411,10 +397,10 @@ public class Principal extends javax.swing.JFrame {
         
     }
     //Variável da Tela
-    JFCadConsulta cadConsulta;
+    JDCadConsulta cadConsulta;
 
     private void mostrarTelaCadastroConsulta() {
-        cadConsulta = new JFCadConsulta();
+        cadConsulta = new JDCadConsulta(this, true);
         cadConsulta.setVisible(true);
     }
 

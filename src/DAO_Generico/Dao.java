@@ -2,6 +2,7 @@
 package DAO_Generico;
 
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 import org.hibernate.Session;
 import util.Utilitaria;
 
@@ -24,6 +25,7 @@ public class Dao<T> {
         sessao.getTransaction().commit();
         if(sessao.isOpen())
             sessao.close();
+        JOptionPane.showMessageDialog(null,"Dados salvos com sucesso!");
     }
     
     public void atualizar(T t){

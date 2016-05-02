@@ -7,33 +7,29 @@ package visao;
 
 import DAO_Generico.Dao;
 import java.util.List;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
 import java.time.LocalDate;
-import static java.util.Collections.list;
-import javax.swing.JFrame;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Paciente;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import util.Utilitaria;
+import java.awt.Frame;
+import javax.swing.JFrame;
+        
 
 /**
  *
  * @author Moisés
  */
-public class JFCadPaciente extends javax.swing.JFrame {
+public class JFCadPaciente extends javax.swing.JDialog {
 
     /**
      * Creates new form JFCadPaciente
      */
-    public JFCadPaciente() {
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setLocationRelativeTo(null);
-
+    public JFCadPaciente(java.awt.Frame parent, boolean moda) {
+        //super(parent, modal);
+                
         initComponents();
     }
 
@@ -131,6 +127,7 @@ public class JFCadPaciente extends javax.swing.JFrame {
         jLabel7.setText("Telefone:");
 
         jTextFieldNome.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextFieldNome.setToolTipText("Informe o nome do paciente");
         jTextFieldNome.setEnabled(false);
 
         jRadioButtonM.setText("M");
@@ -385,13 +382,12 @@ public class JFCadPaciente extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+      public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -400,24 +396,28 @@ public class JFCadPaciente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFCadPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDCadCampanhas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFCadPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDCadCampanhas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFCadPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDCadCampanhas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFCadPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDCadCampanhas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                new JFCadPaciente().setVisible(true);
-
+                JFCadPaciente dialog = new JFCadPaciente(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
-
         });
     }
 
@@ -544,9 +544,10 @@ public class JFCadPaciente extends javax.swing.JFrame {
             jTablePacientes.getModel().setValueAt(p.getEndereco(), i, 5);
             jTablePacientes.getModel().setValueAt(p.getTelefone(), i, 6);
             i++;
-            DefaultTableModel tabelaPaciente = (DefaultTableModel) jTablePacientes.getModel(); // pegando o modelo padrão da tabela
 
+            DefaultTableModel tabelaPaciente = (DefaultTableModel) jTablePacientes.getModel(); // pegando o modelo padrão da tabela
             tabelaPaciente.addRow(new Object[linha]);
+
         }
 
     }
