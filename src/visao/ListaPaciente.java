@@ -129,17 +129,17 @@ public class ListaPaciente extends javax.swing.JDialog {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        TableListaPacientes.setBorder(javax.swing.BorderFactory.createTitledBorder("Todos os Pacientes Cadastrados"));
+        TableListaPacientes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         TableListaPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nome", "Data de nascimento", "Sexo", "CPF", "Endereço", "Telefone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -232,7 +232,13 @@ public class ListaPaciente extends javax.swing.JDialog {
             String mes = dataN_do_paciente.substring(5, 7);
             String dia = dataN_do_paciente.substring(8);
             String DataParaTabela = dia + "/" + mes + "/" + ano;
-
+            
+            if(TableListaPacientes.getRowCount() == 0){
+                DefaultTableModel table = (DefaultTableModel) TableListaPacientes.getModel();
+                table.addRow(new Object[TableListaPacientes.getRowCount() +1]);
+            }
+                
+            
             TableListaPacientes.getModel().setValueAt(p.getId(), i, 0);
             TableListaPacientes.getModel().setValueAt(p.getNome(), i, 1);
             TableListaPacientes.getModel().setValueAt(DataParaTabela, i, 2);
@@ -243,7 +249,7 @@ public class ListaPaciente extends javax.swing.JDialog {
             i++;
             DefaultTableModel tabelaListaPaciente = (DefaultTableModel) TableListaPacientes.getModel(); // pegando o modelo padrão da tabela
 
-            tabelaListaPaciente.addRow(new Object[linha]);
+            tabelaListaPaciente.addRow(new Object[TableListaPacientes.getRowCount()]);
         }
     }
 

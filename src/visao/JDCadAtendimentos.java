@@ -426,28 +426,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
 
     }
 
-    private void pesquisarNoTextField() {
-        List<Profissional> profissionais = Utilitaria.getSession().
-                getNamedQuery("profissionalPorNome").setString("nome",
-                jTextFieldNomeProfissional.getText() + "%").list();
-
-        StringBuffer armazenarNomes = new StringBuffer();
-        for (Profissional p : profissionais) {
-            armazenarNomes.append(p.getNome());
-        }
-        if (armazenarNomes.length() == 0) {
-            JOptionPane.showMessageDialog(null, "Profissional não encontrado!");
-            profissional = new Profissional();
-            ListaProfissional Telalp = new ListaProfissional(profissional);
-            Telalp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            Telalp.setVisible(true);
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Profissional encontrado: " + armazenarNomes.toString());
-            jTextFieldNomeProfissional.setText(armazenarNomes.toString());
-        }
-
-    }
+    
 
     private void SetOTextFielDoPaciente() {
         if (paciente != null) {
@@ -518,7 +497,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         e setar na mesma uma lista de Profissional com o parâmetro "Profissional"*/
         profissional = new Profissional();
         ListaProfissional lp;
-        lp = new ListaProfissional(profissional);
+        lp = new ListaProfissional(null,true,profissional);
         lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         lp.setVisible(true);
 

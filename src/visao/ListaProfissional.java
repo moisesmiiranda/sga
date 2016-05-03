@@ -17,21 +17,23 @@ import util.Utilitaria;
  *
  * @author Moisés
  */
-public class ListaProfissional extends javax.swing.JFrame {
+public class ListaProfissional extends javax.swing.JDialog {
 
     /**
      * Creates new form ListaProfissional
      */
     private Profissional profissional;
 
-    public ListaProfissional(Profissional p) {
-
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setLocationRelativeTo(null);
-        
+    public ListaProfissional(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        preencherTabela();
+    }
+
+    public ListaProfissional(java.awt.Frame parent, boolean modal, Profissional p) {
+        super(parent, modal);
+        initComponents();
         profissional = p;
+        preencherTabela();
     }
 
     /**
@@ -57,7 +59,8 @@ public class ListaProfissional extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Todos os Profissionais");
         setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
@@ -228,9 +231,9 @@ public class ListaProfissional extends javax.swing.JFrame {
 
         Profissional prof = (Profissional) Utilitaria.getSession()
                 .getNamedQuery("profissionalPorID").setInteger(0,
-                        Integer.parseInt(TableListaProfissionais.getModel()
-                                .getValueAt(TableListaProfissionais.getSelectedRow(), 0)
-                                .toString())).uniqueResult();
+                Integer.parseInt(TableListaProfissionais.getModel()
+                        .getValueAt(TableListaProfissionais.getSelectedRow(), 0)
+                        .toString())).uniqueResult();
 
         profissional.setId(prof.getId());
         profissional.setNome(prof.getNome());
