@@ -47,16 +47,19 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuEquipe = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuAcompanhamento = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
         jMenuCampanha = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuRelatorio = new javax.swing.JMenu();
@@ -97,8 +100,8 @@ public class Principal extends javax.swing.JFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/consulta.png"))); // NOI18N
         jButton3.setMnemonic('s');
-        jButton3.setText("Cadastro de Consultas");
-        jButton3.setToolTipText("");
+        jButton3.setText("Cadastro de Atendimentos");
+        jButton3.setToolTipText("Ctrl + A");
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -142,7 +145,7 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 928, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,14 +155,9 @@ public class Principal extends javax.swing.JFrame {
         jMenuCadastro.setMnemonic('c');
         jMenuCadastro.setText("Cadastros");
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setText("Consultas");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenuCadastro.add(jMenuItem2);
+        jMenuItem16.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem16.setText("Atendimentos");
+        jMenuCadastro.add(jMenuItem16);
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setText("Pacientes");
@@ -170,7 +168,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenuCadastro.add(jMenuItem5);
 
-        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem9.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem9.setText("Campanhas");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +177,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenuCadastro.add(jMenuItem9);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Profissionais");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,6 +204,12 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem6.setText("Profissionais");
         jMenuEquipe.add(jMenuItem6);
 
+        jMenuItem13.setText("Endereço");
+        jMenuEquipe.add(jMenuItem13);
+
+        jMenuItem14.setText("Contatos");
+        jMenuEquipe.add(jMenuItem14);
+
         jMenuBar1.add(jMenuEquipe);
 
         jMenuAcompanhamento.setMnemonic('a');
@@ -214,13 +218,16 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu4.setText("Atendimentos");
 
-        jMenuItem3.setText("Consultas");
+        jMenuItem3.setText("De hoje");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu4.add(jMenuItem3);
+
+        jMenuItem15.setText("Outra data");
+        jMenu4.add(jMenuItem15);
 
         jMenuAcompanhamento.add(jMenu4);
 
@@ -253,7 +260,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 916, Short.MAX_VALUE)
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -266,7 +273,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(940, 721));
+        setSize(new java.awt.Dimension(1012, 721));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -286,12 +293,8 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        mostrarTelaCadastroConsulta();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        mostrarTelaCadastroConsulta();
+        mostrarTelaCadastroAtendimento();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -362,7 +365,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuCampanha;
     private javax.swing.JMenu jMenuEquipe;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -397,11 +403,11 @@ public class Principal extends javax.swing.JFrame {
         
     }
     //Variável da Tela
-    JDCadConsulta cadConsulta;
+    JDCadAtendimentos cadAtendimento;
 
-    private void mostrarTelaCadastroConsulta() {
-        cadConsulta = new JDCadConsulta(this, true);
-        cadConsulta.setVisible(true);
+    private void mostrarTelaCadastroAtendimento() {
+        cadAtendimento = new JDCadAtendimentos(this, true);
+        cadAtendimento.setVisible(true);
     }
 
     private void mostrarTelaCadastroCampanhas() {

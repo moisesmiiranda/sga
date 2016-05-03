@@ -323,7 +323,7 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTablePacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePacientesMouseClicked
-        // selecionarPaciente();
+         selecionarPaciente();
     }//GEN-LAST:event_jTablePacientesMouseClicked
 
     private void jRadioButtonMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonMMouseClicked
@@ -351,7 +351,8 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-        //  atualizarCadPacientes();
+        atualizarCadPacientes();
+        mostrarDoBancoNaTabela();
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
@@ -569,5 +570,48 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
         jTextFieldEndereco.setText(jTablePacientes.getValueAt(linhaSelecionada, 5).toString());
         jTextFieldTelefone.setText(jTablePacientes.getValueAt(linhaSelecionada, 6).toString());
 
+    }
+
+    private void atualizarCadPacientes() {
+        Paciente p = new Paciente();
+        p.setNome(jTextFieldNome.getText().trim());
+        p.setCpf(jTextFieldCPF.getText().trim());
+        p.setEndereco(jTextFieldEndereco.getText().trim());
+        p.setTelefone(jTextFieldTelefone.getText());
+        p.setId(Integer.parseInt(jTablePacientes.getModel().getValueAt(jTablePacientes.getSelectedRow(), 0).toString()));
+
+        //Deve gravar assim: dd/MM/yyyy
+        // está salvando assim: 1960-09-22/ 22-09-1960
+        String dia = jTextFieldDataDeNascimento.getText().substring(0, 2);
+        String mes = jTextFieldDataDeNascimento.getText().substring(3, 5);
+        String ano = jTextFieldDataDeNascimento.getText().substring(6);
+        String dataASerGravada = ano + "-" + mes + "-" + dia;
+
+        LocalDate DN = LocalDate.parse(dataASerGravada);
+        p.setDataDeNascimento(java.sql.Date.valueOf(DN));
+        //Salvar Sexo
+        if (jRadioButtonM.getModel().isSelected() == true) {
+            p.setSexo("Masculino");
+        } else if (jRadioButtonF.getModel().isSelected() == true) {
+            p.setSexo("Feminino");
+        }
+
+        Dao<Paciente> dao = new Dao<>();
+        dao.atualizar(p);
+        JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso!");
+
+        jButtonSalvar.setEnabled(false);
+        jButtonNovo.setEnabled(true);
+        jButtonExcluir.setEnabled(true);
+        jButtonAlterar.setEnabled(true);
+
+        // Desabilitando campos
+        jTextFieldCPF.setEnabled(false);
+        jTextFieldDataDeNascimento.setEnabled(false);
+        jTextFieldEndereco.setEnabled(false);
+        jTextFieldNome.setEnabled(false);
+        jTextFieldTelefone.setEnabled(false);
+        jRadioButtonM.setEnabled(false);
+        jRadioButtonF.setEnabled(false);
     }
 }

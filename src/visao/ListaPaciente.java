@@ -16,21 +16,24 @@ import util.Utilitaria;
  *
  * @author Moisés
  */
-public class ListaPaciente extends javax.swing.JFrame {
+public class ListaPaciente extends javax.swing.JDialog {
 
     /**
      * Creates new form ListaPAciente
      */
     private Paciente paciente;
 
-    public ListaPaciente(Paciente p) {
-        
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setLocationRelativeTo(null);
-
+    public ListaPaciente(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        preencherTabela();
+
+    }
+
+    public ListaPaciente(java.awt.Frame parent, boolean modal,Paciente p) {
+        super(parent, modal);
+        initComponents();
         paciente = p;
+        preencherTabela();
     }
 
     /**
@@ -56,7 +59,7 @@ public class ListaPaciente extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableListaPacientes = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setType(java.awt.Window.Type.UTILITY);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -249,7 +252,7 @@ public class ListaPaciente extends javax.swing.JFrame {
                 .getNamedQuery("pacientePorID")
                 .setInteger(0,
                         Integer.parseInt(TableListaPacientes.getModel().getValueAt(
-                                        TableListaPacientes.getSelectedRow(), 0).toString()
+                                TableListaPacientes.getSelectedRow(), 0).toString()
                         ))
                 .uniqueResult();
         paciente.setId(pac.getId());

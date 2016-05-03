@@ -14,7 +14,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import modelo.Consulta;
+import modelo.Atendimento;
 import modelo.Paciente;
 import modelo.Profissional;
 import org.hibernate.Session;
@@ -24,7 +24,7 @@ import util.Utilitaria;
  *
  * @author ADMIN
  */
-public class JDCadConsulta extends javax.swing.JDialog {
+public class JDCadAtendimentos extends javax.swing.JDialog {
 
     /**
      * Creates new form JDCadConsultaJDCadConsulta
@@ -33,9 +33,9 @@ public class JDCadConsulta extends javax.swing.JDialog {
 
     private Profissional profissional;
 
-    private Consulta consulta;
+    private Atendimento consulta;
 
-    public JDCadConsulta(java.awt.Frame parent, boolean modal) {
+    public JDCadAtendimentos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
 
         initComponents();
@@ -58,8 +58,8 @@ public class JDCadConsulta extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTFDataConsulta = new com.toedter.calendar.JDateChooser();
-        jTFHora = new javax.swing.JFormattedTextField();
+        jTFDataAtendimento = new com.toedter.calendar.JDateChooser();
+        jTFHoraAtendimento = new javax.swing.JFormattedTextField();
         jLabel9 = new javax.swing.JLabel();
         jTextFieldNomePaciente = new javax.swing.JTextField();
         jTextFieldNomeProfissional = new javax.swing.JTextField();
@@ -70,7 +70,7 @@ public class JDCadConsulta extends javax.swing.JDialog {
         jButtonExcluir = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTableConsultasCadastradas = new javax.swing.JTable();
+        jTableAtendimentos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -99,13 +99,13 @@ public class JDCadConsulta extends javax.swing.JDialog {
         jLabel3.setText("Profissional Responsável:");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Data da Consulta:");
+        jLabel4.setText("Data:");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("Hora da Consulta:");
+        jLabel6.setText("Hora:");
 
         try {
-            jTFHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
+            jTFHoraAtendimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -147,11 +147,11 @@ public class JDCadConsulta extends javax.swing.JDialog {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addComponent(jTFDataConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+                                    .addComponent(jTFDataAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
                                 .addGap(94, 94, 94)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jTFHora, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))))
+                                    .addComponent(jTFHoraAtendimento, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonPesquisaPaciente)
@@ -167,8 +167,8 @@ public class JDCadConsulta extends javax.swing.JDialog {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFDataConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTFHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFHoraAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -220,7 +220,7 @@ public class JDCadConsulta extends javax.swing.JDialog {
         });
         jPanel4.add(jButtonSalvar);
 
-        jTableConsultasCadastradas.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAtendimentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
             },
@@ -236,15 +236,15 @@ public class JDCadConsulta extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTableConsultasCadastradas.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(jTableConsultasCadastradas);
-        if (jTableConsultasCadastradas.getColumnModel().getColumnCount() > 0) {
-            jTableConsultasCadastradas.getColumnModel().getColumn(0).setPreferredWidth(5);
+        jTableAtendimentos.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(jTableAtendimentos);
+        if (jTableAtendimentos.getColumnModel().getColumnCount() > 0) {
+            jTableAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(5);
         }
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Consultas Cadastradas");
+        jLabel1.setText("Atendimentos Cadastrados");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -349,7 +349,7 @@ public class JDCadConsulta extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDCadConsulta dialog = new JDCadConsulta(new javax.swing.JFrame(), true);
+                JDCadAtendimentos dialog = new JDCadAtendimentos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -377,19 +377,19 @@ public class JDCadConsulta extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private com.toedter.calendar.JDateChooser jTFDataConsulta;
-    private javax.swing.JFormattedTextField jTFHora;
-    private javax.swing.JTable jTableConsultasCadastradas;
+    private com.toedter.calendar.JDateChooser jTFDataAtendimento;
+    private javax.swing.JFormattedTextField jTFHoraAtendimento;
+    private javax.swing.JTable jTableAtendimentos;
     private javax.swing.JTextField jTextFieldNomePaciente;
     private javax.swing.JTextField jTextFieldNomeProfissional;
     // End of variables declaration//GEN-END:variables
 
     //Variavel da tela
     private void SalvarConsulta() {
-        Consulta c = new Consulta();
+        Atendimento c = new Atendimento();
         //Salvar a Data
         SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
-        String dataFormatada = sf.format(jTFDataConsulta.getDate());
+        String dataFormatada = sf.format(jTFDataAtendimento.getDate());
 
         String dia = dataFormatada.toString().substring(0, 2);
         String mes = dataFormatada.toString().substring(3, 5);
@@ -401,8 +401,8 @@ public class JDCadConsulta extends javax.swing.JDialog {
         c.setData(java.sql.Date.valueOf(DtCons));
 
         //pegar a hora da tela
-        int HH = Integer.parseInt(jTFHora.getText().substring(0, 2));
-        int mm = Integer.parseInt(jTFHora.getText().substring(3, 5));
+        int HH = Integer.parseInt(jTFHoraAtendimento.getText().substring(0, 2));
+        int mm = Integer.parseInt(jTFHoraAtendimento.getText().substring(3, 5));
 
         LocalTime hora = LocalTime.of(HH, mm);
         Time horaMinuto = Time.valueOf(hora);
@@ -413,7 +413,7 @@ public class JDCadConsulta extends javax.swing.JDialog {
         //precisa receber um objeto profissional
         c.setProfissional(profissional);
 
-        Dao<Consulta> dao = new Dao<>();
+        Dao<Atendimento> dao = new Dao<>();
         dao.gravar(c);
         JOptionPane.showMessageDialog(null, "Dados gravados com sucesso!");
 
@@ -469,12 +469,12 @@ public class JDCadConsulta extends javax.swing.JDialog {
 
     private void mostrarNaTabela() {
         Session sessao = Utilitaria.getSession();
-        List<Consulta> LConsultas = sessao.createQuery("from Consulta").list();
+        List<Atendimento> LAtendimentos = sessao.createQuery("from Atendimento").list();
         int i = 0;
         int linha = 1;
         //  "ID", "Data", "Hora", "Nome do Paciente", "Profissional"
 
-        for (Consulta c : LConsultas) {
+        for (Atendimento c : LAtendimentos) {
             //para exibir a data no formato correto
             String dataNobanco = String.valueOf(c.getData());
             //1997
@@ -482,17 +482,17 @@ public class JDCadConsulta extends javax.swing.JDialog {
             String mes = dataNobanco.substring(5, 7);
             String dia = dataNobanco.substring(8);
             String dataNatabela = dia + "/" + mes + "/" + ano;
-            jTableConsultasCadastradas.getModel().setValueAt(c.getId(), i, 0);
-            jTableConsultasCadastradas.getModel().setValueAt(dataNatabela, i, 1);
-            jTableConsultasCadastradas.getModel().setValueAt(c.getHora(), i, 2);
+            jTableAtendimentos.getModel().setValueAt(c.getId(), i, 0);
+            jTableAtendimentos.getModel().setValueAt(dataNatabela, i, 1);
+            jTableAtendimentos.getModel().setValueAt(c.getHora(), i, 2);
             if (c.getPaciente() != null) {
-                jTableConsultasCadastradas.getModel().setValueAt(c.getPaciente().getNome(), i, 3);
+                jTableAtendimentos.getModel().setValueAt(c.getPaciente().getNome(), i, 3);
             }
             if (c.getProfissional() != null) {
-                jTableConsultasCadastradas.getModel().setValueAt(c.getProfissional().getNome(), i, 4);
+                jTableAtendimentos.getModel().setValueAt(c.getProfissional().getNome(), i, 4);
             }
             i++;
-            DefaultTableModel tabelaConsulta = (DefaultTableModel) jTableConsultasCadastradas.getModel();
+            DefaultTableModel tabelaConsulta = (DefaultTableModel) jTableAtendimentos.getModel();
             tabelaConsulta.addRow(new Object[linha]);
 
         }
@@ -505,7 +505,7 @@ public class JDCadConsulta extends javax.swing.JDialog {
 
         paciente = new Paciente();
         ListaPaciente lp;
-        lp = new ListaPaciente(paciente);
+        lp = new ListaPaciente(null,true,paciente);
         lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         lp.setVisible(true);
 

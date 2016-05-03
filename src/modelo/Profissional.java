@@ -39,13 +39,13 @@ public class Profissional {
     @Column (unique = true)
     private String identificacao;
     @OneToMany (mappedBy = "profissional")
-    private List <Consulta> consulta;
+    private List <Atendimento> consulta;
 
-    public List<Consulta> getConsulta() {
+    public List<Atendimento> getConsulta() {
         return consulta;
     }
 
-    public void setConsulta(List<Consulta> consulta) {
+    public void setConsulta(List<Atendimento> consulta) {
         this.consulta = consulta;
     }
     

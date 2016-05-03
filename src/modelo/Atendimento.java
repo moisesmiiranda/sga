@@ -25,8 +25,8 @@ import org.hibernate.annotations.NamedQuery;
  * @author moises
  */
 @Entity
-//@NamedQuery (name = "ConsultaPorID", query "select from Consulta where id :?")
-public class Consulta {
+//@NamedQuery (name = "ConsultaPorID", query "select from Atendimento where id :?")
+public class Atendimento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -98,7 +98,7 @@ public class Consulta {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Consulta other = (Consulta) obj;
+        final Atendimento other = (Atendimento) obj;
         if (this.id != other.id) {
             return false;
         }

@@ -44,7 +44,7 @@ public class Paciente {
     private String endereco;
     private String telefone;
     @OneToMany (mappedBy = "paciente")
-    private List<Consulta> consultas;
+    private List<Atendimento> consultas;
 
     public int getId() {
         return id;
@@ -102,11 +102,11 @@ public class Paciente {
         this.telefone = telefone;
     }
 
-    public List<Consulta> getConsultas() {
+    public List<Atendimento> getConsultas() {
         return consultas;
     }
 
-    public void setConsultas(List<Consulta> consultas) {
+    public void setConsultas(List<Atendimento> consultas) {
         this.consultas = consultas;
     }
 

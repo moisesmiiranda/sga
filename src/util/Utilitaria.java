@@ -23,7 +23,7 @@ public class Utilitaria {
 public static void configurar(){
     configuracao = new Configuration();
     configuracao.addAnnotatedClass(modelo.Paciente.class);
-    configuracao.addAnnotatedClass(modelo.Consulta.class);
+    configuracao.addAnnotatedClass(modelo.Atendimento.class);
     configuracao.addAnnotatedClass(modelo.Profissional.class);
     configuracao.addAnnotatedClass(modelo.Campanhas.class);
     

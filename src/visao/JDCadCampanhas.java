@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import jdk.nashorn.internal.scripts.JO;
 import modelo.Campanhas;
-import modelo.Consulta;
+import modelo.Atendimento;
 import org.hibernate.Session;
 import util.Utilitaria;
 
