@@ -33,6 +33,7 @@ public class JDCadCampanhas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         PreencherTabela();
+        
     }
 
     /**
@@ -79,11 +80,19 @@ public class JDCadCampanhas extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Data Inicial");
 
+        jTFDataInicial.setEnabled(false);
+
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Título da Campanha:");
 
+        jTextFieldTitulo.setEnabled(false);
+
+        jTextFieldDescricao.setEnabled(false);
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Data Final");
+
+        jTFDataFinal.setEnabled(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -173,6 +182,7 @@ public class JDCadCampanhas extends javax.swing.JDialog {
         jButtonAtualizar.setMnemonic('r');
         jButtonAtualizar.setText("Atualizar");
         jButtonAtualizar.setToolTipText("Salva as alterações feitas neste cadastro");
+        jButtonAtualizar.setEnabled(false);
         jButtonAtualizar.setPreferredSize(new java.awt.Dimension(110, 40));
         jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +195,7 @@ public class JDCadCampanhas extends javax.swing.JDialog {
         jButtonSalvar.setMnemonic('s');
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.setToolTipText("Salva o cadastro atual");
+        jButtonSalvar.setEnabled(false);
         jButtonSalvar.setPreferredSize(new java.awt.Dimension(110, 40));
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,7 +268,9 @@ public class JDCadCampanhas extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
-
+      habilitarCampos();
+      desabilitarBotoes();
+      jButtonSalvar.setEnabled(true);
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
@@ -274,7 +287,7 @@ public class JDCadCampanhas extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        // TODO add your handling code here:
+        alterarCampanha();
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
@@ -439,5 +452,26 @@ public class JDCadCampanhas extends javax.swing.JDialog {
             tabelaCampanhas.addRow(new Object[linha]);
 
         }
+    }
+
+    private void habilitarCampos() {
+      jTFDataFinal.setEnabled(true);
+      jTFDataInicial.setEnabled(true);
+      jTextFieldDescricao.setEnabled(true);
+      jTextFieldTitulo.setEnabled(true);
+      jButtonSalvar.setEnabled(true);
+      
+    }
+
+    private void desabilitarBotoes() {
+        jButtonAlterar.setEnabled(false);
+        jButtonAtualizar.setEnabled(false);
+        jButtonExcluir.setEnabled(false);
+        jButtonNovo.setEnabled(false);
+                
+    }
+
+    private void alterarCampanha() {
+    
     }
 }

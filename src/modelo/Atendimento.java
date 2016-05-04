@@ -32,6 +32,7 @@ public class Atendimento {
     private int id;
     private Date data;
     private Time hora;
+    private String descricao;
     @ManyToOne
     @JoinColumn(name ="profissionalFK")
     private Profissional profissional;
@@ -39,6 +40,18 @@ public class Atendimento {
     @JoinColumn (name = "pacienteFK")
     private Paciente paciente;
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+  
+
+    
+    
     public int getId() {
         return id;
     }
@@ -80,48 +93,15 @@ public class Atendimento {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + this.id;
-        hash = 17 * hash + Objects.hashCode(this.data);
-        hash = 17 * hash + Objects.hashCode(this.hora);
-        hash = 17 * hash + Objects.hashCode(this.profissional);
-        hash = 17 * hash + Objects.hashCode(this.paciente);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Atendimento other = (Atendimento) obj;
-        if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.data, other.data)) {
-            return false;
-        }
-        if (!Objects.equals(this.hora, other.hora)) {
-            return false;
-        }
-        if (!Objects.equals(this.profissional, other.profissional)) {
-            return false;
-        }
-        if (!Objects.equals(this.paciente, other.paciente)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "Consulta{" + "id=" + id + ", data=" + data + ", hora=" + hora + ", profissional=" + profissional + ", paciente=" + paciente + '}';
+        return "Atendimento{" + "id=" + id + ", data=" + data + ", hora=" + hora + ", descricao=" + descricao + ", profissional=" + profissional + ", paciente=" + paciente + '}';
     }
 
+   
+
+   
+
+   
    
     
     

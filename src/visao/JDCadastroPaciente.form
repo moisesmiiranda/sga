@@ -369,6 +369,9 @@
                       <Dimension value="[110, 40]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcluirActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonAlterar">
                   <Properties>
@@ -394,6 +397,7 @@
                     <Property name="mnemonic" type="int" value="114"/>
                     <Property name="text" type="java.lang.String" value="Atualizar"/>
                     <Property name="toolTipText" type="java.lang.String" value="Salva as altera&#xe7;&#xf5;es feitas neste cadastro"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[110, 40]"/>
                     </Property>

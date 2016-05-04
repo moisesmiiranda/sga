@@ -65,16 +65,20 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         jTextFieldNomeProfissional = new javax.swing.JTextField();
         jButtonPesquisaPaciente = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jTextFieldDescricao = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
+        jButtonAlterar = new javax.swing.JButton();
+        jButtonAtualizar = new javax.swing.JButton();
         jButtonSalvar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableAtendimentos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Consulta");
+        setTitle("Cadastro de Atendimentos");
         setType(java.awt.Window.Type.UTILITY);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
@@ -127,6 +131,15 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
             }
         });
 
+        jTextFieldDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDescricaoActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("Tipo do Antendimento:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -137,9 +150,6 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(402, 402, 402))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldNomeProfissional)
@@ -156,7 +166,15 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonPesquisaPaciente)
                             .addComponent(jButton2))
-                        .addGap(240, 240, 240))))
+                        .addGap(240, 240, 240))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jTextFieldDescricao))
+                        .addGap(306, 306, 306))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +187,11 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTFDataAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTFHoraAtendimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -181,7 +203,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNomeProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jButtonNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/addNew.png"))); // NOI18N
@@ -208,10 +230,36 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         });
         jPanel4.add(jButtonExcluir);
 
+        jButtonAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/editar.png"))); // NOI18N
+        jButtonAlterar.setMnemonic('r');
+        jButtonAlterar.setText("Alterar");
+        jButtonAlterar.setToolTipText("Salva o cadastro atual");
+        jButtonAlterar.setPreferredSize(new java.awt.Dimension(100, 35));
+        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonAlterar);
+
+        jButtonAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/atualizar.png"))); // NOI18N
+        jButtonAtualizar.setMnemonic('a');
+        jButtonAtualizar.setText("Atualizar");
+        jButtonAtualizar.setToolTipText("Salva o cadastro atual");
+        jButtonAtualizar.setEnabled(false);
+        jButtonAtualizar.setPreferredSize(new java.awt.Dimension(100, 35));
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonAtualizar);
+
         jButtonSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
         jButtonSalvar.setMnemonic('s');
         jButtonSalvar.setText("Salvar");
         jButtonSalvar.setToolTipText("Salva o cadastro atual");
+        jButtonSalvar.setEnabled(false);
         jButtonSalvar.setPreferredSize(new java.awt.Dimension(100, 35));
         jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,14 +270,14 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
 
         jTableAtendimentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Data", "Hora", "Nome do Paciente", "Profissional"
+                "ID", "Descrição", "Data", "Hora", "Nome do Paciente", "Profissional"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -260,7 +308,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
                         .addComponent(jScrollPane2)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(214, 214, 214)
+                .addGap(215, 215, 215)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -268,11 +316,11 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -293,6 +341,8 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         SalvarConsulta();
         mostrarNaTabela();
+        controleBotoes();
+
 
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
@@ -301,6 +351,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
+        controleCamposEBotões();
 
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
@@ -318,6 +369,18 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         SetOTextFielDoPaciente();
         SetOTextFieldDoProfissional();
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void jTextFieldDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDescricaoActionPerformed
+
+    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAlterarActionPerformed
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,11 +426,14 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAlterar;
+    private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonPesquisaPaciente;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -380,13 +446,14 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
     private com.toedter.calendar.JDateChooser jTFDataAtendimento;
     private javax.swing.JFormattedTextField jTFHoraAtendimento;
     private javax.swing.JTable jTableAtendimentos;
+    private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldNomePaciente;
     private javax.swing.JTextField jTextFieldNomeProfissional;
     // End of variables declaration//GEN-END:variables
 
     //Variavel da tela
     private void SalvarConsulta() {
-        Atendimento c = new Atendimento();
+        Atendimento a = new Atendimento();
         //Salvar a Data
         SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatada = sf.format(jTFDataAtendimento.getDate());
@@ -398,7 +465,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         //Variável local date para converter para date a string;
         LocalDate DtCons = LocalDate.parse(Data_Cons_Banco);
         // salvando no objeto
-        c.setData(java.sql.Date.valueOf(DtCons));
+        a.setData(java.sql.Date.valueOf(DtCons));
 
         //pegar a hora da tela
         int HH = Integer.parseInt(jTFHoraAtendimento.getText().substring(0, 2));
@@ -407,14 +474,16 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         LocalTime hora = LocalTime.of(HH, mm);
         Time horaMinuto = Time.valueOf(hora);
         //salvar hora
-        c.setHora(horaMinuto);
+        a.setHora(horaMinuto);
         //precisa receber um objeto paciente 
-        c.setPaciente(paciente);
+        a.setPaciente(paciente);
         //precisa receber um objeto profissional
-        c.setProfissional(profissional);
+        a.setProfissional(profissional);
+
+        a.setDescricao(jTextFieldDescricao.getText());
 
         Dao<Atendimento> dao = new Dao<>();
-        dao.gravar(c);
+        dao.gravar(a);
         JOptionPane.showMessageDialog(null, "Dados gravados com sucesso!");
 
     }
@@ -425,8 +494,6 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
                 jTextFieldNomePaciente.getText() + "%").list();
 
     }
-
-    
 
     private void SetOTextFielDoPaciente() {
         if (paciente != null) {
@@ -453,22 +520,23 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         int linha = 1;
         //  "ID", "Data", "Hora", "Nome do Paciente", "Profissional"
 
-        for (Atendimento c : LAtendimentos) {
+        for (Atendimento a : LAtendimentos) {
             //para exibir a data no formato correto
-            String dataNobanco = String.valueOf(c.getData());
+            String dataNobanco = String.valueOf(a.getData());
             //1997
             String ano = dataNobanco.substring(0, 4);
             String mes = dataNobanco.substring(5, 7);
             String dia = dataNobanco.substring(8);
             String dataNatabela = dia + "/" + mes + "/" + ano;
-            jTableAtendimentos.getModel().setValueAt(c.getId(), i, 0);
-            jTableAtendimentos.getModel().setValueAt(dataNatabela, i, 1);
-            jTableAtendimentos.getModel().setValueAt(c.getHora(), i, 2);
-            if (c.getPaciente() != null) {
-                jTableAtendimentos.getModel().setValueAt(c.getPaciente().getNome(), i, 3);
+            jTableAtendimentos.getModel().setValueAt(a.getId(), i, 0);
+            jTableAtendimentos.getModel().setValueAt(a.getDescricao(), i, 1);
+            jTableAtendimentos.getModel().setValueAt(dataNatabela, i, 2);
+            jTableAtendimentos.getModel().setValueAt(a.getHora(), i, 3);
+            if (a.getPaciente() != null) {
+                jTableAtendimentos.getModel().setValueAt(a.getPaciente().getNome(), i, 4);
             }
-            if (c.getProfissional() != null) {
-                jTableAtendimentos.getModel().setValueAt(c.getProfissional().getNome(), i, 4);
+            if (a.getProfissional() != null) {
+                jTableAtendimentos.getModel().setValueAt(a.getProfissional().getNome(), i, 5);
             }
             i++;
             DefaultTableModel tabelaConsulta = (DefaultTableModel) jTableAtendimentos.getModel();
@@ -484,11 +552,10 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
 
         paciente = new Paciente();
         ListaPaciente lp;
-        lp = new ListaPaciente(null,true,paciente);
+        lp = new ListaPaciente(null, true, paciente);
         lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         lp.setVisible(true);
 
-     
     }
 
     private void buscarPorProfissionais() {
@@ -497,11 +564,37 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         e setar na mesma uma lista de Profissional com o parâmetro "Profissional"*/
         profissional = new Profissional();
         ListaProfissional lp;
-        lp = new ListaProfissional(null,true,profissional);
+        lp = new ListaProfissional(null, true, profissional);
         lp.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         lp.setVisible(true);
 
-       
+    }
+
+    private void controleCamposEBotões() {
+        //Desabilitar botões
+        jButtonNovo.setEnabled(false);
+        jButtonExcluir.setEnabled(false);
+        jButtonAtualizar.setEnabled(false);
+        jButtonAlterar.setEnabled(false);
+        //Habilitar Botões
+        jButtonSalvar.setEnabled(true);
+        //Habilitar campos
+        jTFDataAtendimento.setEnabled(true);
+        jTFHoraAtendimento.setEnabled(true);
+        jTextFieldDescricao.setEnabled(true);
+        jTextFieldNomePaciente.setEnabled(true);
+        jTextFieldNomeProfissional.setEnabled(true);
+
+    }
+
+    private void controleBotoes() {
+        //habilitar botões
+        jButtonNovo.setEnabled(true);
+        jButtonAlterar.setEnabled(true);
+        jButtonExcluir.setEnabled(true);
+        jButtonAtualizar.setEnabled(false);
+        jButtonSalvar.setEnabled(false);
+        
     }
 
 }//chaveFinal

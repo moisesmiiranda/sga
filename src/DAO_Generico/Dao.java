@@ -35,7 +35,9 @@ public class Dao<T> {
         sessao.getTransaction().commit();
         if(sessao.isOpen())
             sessao.close();
+    JOptionPane.showMessageDialog(null, "Cadastro atualizado.");
     }
+    
     public void excluir(T t){
         sessao = Utilitaria.getSession();
         sessao.beginTransaction();

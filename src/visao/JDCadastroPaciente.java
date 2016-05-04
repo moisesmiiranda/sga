@@ -16,10 +16,6 @@ import modelo.Paciente;
 import org.hibernate.Session;
 import util.Utilitaria;
 
-/**
- *
- * @author pI5
- */
 public class JDCadastroPaciente extends javax.swing.JDialog {
 
     /**
@@ -251,6 +247,11 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
         jButtonExcluir.setText("Excluir");
         jButtonExcluir.setToolTipText("Exclui o cadastro selecionado");
         jButtonExcluir.setPreferredSize(new java.awt.Dimension(110, 40));
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButtonExcluir);
 
         jButtonAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/editar.png"))); // NOI18N
@@ -269,6 +270,7 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
         jButtonAtualizar.setMnemonic('r');
         jButtonAtualizar.setText("Atualizar");
         jButtonAtualizar.setToolTipText("Salva as alterações feitas neste cadastro");
+        jButtonAtualizar.setEnabled(false);
         jButtonAtualizar.setPreferredSize(new java.awt.Dimension(110, 40));
         jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,7 +325,7 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTablePacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePacientesMouseClicked
-         selecionarPaciente();
+        selecionarPaciente();
     }//GEN-LAST:event_jTablePacientesMouseClicked
 
     private void jRadioButtonMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonMMouseClicked
@@ -361,6 +363,24 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
         limparCampos();
         controleCamposEBotoes();
     }//GEN-LAST:event_jButtonSalvarActionPerformed
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        //NÃO = 1 SIM = 0
+        int resp = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja exluir o paciente "
+                + jTextFieldNome.getText() + "?", "Atenção!", JOptionPane.YES_NO_OPTION);
+        if (resp == 0) {
+            try {
+                excluirPaciente();
+                limparCampos();
+                mostrarDoBancoNaTabela();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, jTextFieldNome.getText() + " não pode ser excluído,"
+                        + " verifique se não há um atendimento associado a este cadastro.", "ATENÇÃO", JOptionPane.OK_OPTION);
+            }
+
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,8 +476,9 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
 
         Dao<Paciente> dao = new Dao<>();
         dao.gravar(p);
-        JOptionPane.showMessageDialog(null, "Dados gravados com sucesso!");
-
+        
+        //CONTROLE BOTÕES
+        
         jButtonSalvar.setEnabled(false);
         jButtonNovo.setEnabled(true);
         jButtonExcluir.setEnabled(true);
@@ -505,18 +526,16 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
         Session sessao = Utilitaria.getSession();//Peguei a sessao
         List<Paciente> Lpacientes = sessao.createQuery("from Paciente").list();//selecionei a tabela pacientes
         int i = 0;
-        
-         
-        
+
         //Teste pra adicionar uma linha a tabela vazia
-        if (jTablePacientes.getRowCount()==0) {
+        if (jTablePacientes.getRowCount() == 0) {
             DefaultTableModel table = (DefaultTableModel) jTablePacientes.getModel();
             table.addRow(new Object[jTablePacientes.getRowCount() + 1]);
 
         }
 
         for (Paciente p : Lpacientes) {
-         Lpacientes.lastIndexOf(p); 
+            Lpacientes.lastIndexOf(p);
             //Conversão necessária para salvar a data no formato correto
             //Data está aparecendo assim 1982-04-22
             //Deve aparecer assim: 22/04/1982
@@ -525,9 +544,7 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
             String mes = dataN_do_paciente.substring(5, 7);
             String dia = dataN_do_paciente.substring(8);
             String DataParaTabela = dia + "/" + mes + "/" + ano;
-        
-            
-            
+
             jTablePacientes.getModel().setValueAt(p.getId(), i, 0);
             jTablePacientes.getModel().setValueAt(p.getNome(), i, 1);
             jTablePacientes.getModel().setValueAt(DataParaTabela, i, 2);
@@ -538,8 +555,8 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
             i++;
 
             DefaultTableModel tabelaPaciente = (DefaultTableModel) jTablePacientes.getModel(); // pegando o modelo padrão da tabela
-            int nLinhas = jTablePacientes.getRowCount()-1;
-            tabelaPaciente.addRow(new Object[jTablePacientes.getRowCount()- nLinhas]);
+            int nLinhas = jTablePacientes.getRowCount() - 1;
+            tabelaPaciente.addRow(new Object[jTablePacientes.getRowCount() - nLinhas]);
 
         }
 
@@ -588,11 +605,14 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
         String dataASerGravada = ano + "-" + mes + "-" + dia;
 
         LocalDate DN = LocalDate.parse(dataASerGravada);
+        //Setando a dataNascimento
         p.setDataDeNascimento(java.sql.Date.valueOf(DN));
         //Salvar Sexo
         if (jRadioButtonM.getModel().isSelected() == true) {
+            //Setando o Sexo
             p.setSexo("Masculino");
         } else if (jRadioButtonF.getModel().isSelected() == true) {
+            //Setando o Sexo
             p.setSexo("Feminino");
         }
 
@@ -613,5 +633,16 @@ public class JDCadastroPaciente extends javax.swing.JDialog {
         jTextFieldTelefone.setEnabled(false);
         jRadioButtonM.setEnabled(false);
         jRadioButtonF.setEnabled(false);
+    }
+
+    private void excluirPaciente() {
+        Paciente p = new Paciente();
+        p.setId((int) jTablePacientes.getModel().getValueAt(jTablePacientes.getSelectedRow(), 0));
+        p.setNome(jTextFieldNome.getText());
+
+        Dao<Paciente> dao = new Dao<>();
+        dao.excluir(p);
+        JOptionPane.showMessageDialog(null, "Paciente " + p.getNome() + " foi excluido com sucesso.");
+
     }
 }

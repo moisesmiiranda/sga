@@ -237,7 +237,23 @@ public class JDCadProfissional extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonNovoActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        // TODO add your handling code here:
+        
+        //NÃO = 1 SIM = 0
+        int resp = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja exluir o paciente "
+                + jTextFieldNome.getText() + "?", "Atenção!", JOptionPane.YES_NO_OPTION);
+        if (resp == 0) {
+            try {
+                excluirProfissional();
+                limparCampos();
+                mostrarDoBancoNaTabela();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, jTextFieldNome.getText() + " não pode ser excluído,"
+                        + " verifique se não há um atendimento associado a este cadastro.", "ATENÇÃO", JOptionPane.OK_OPTION);
+            }
+
+        }
+        
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
@@ -245,7 +261,7 @@ public class JDCadProfissional extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-        // TODO add your handling code here:
+        atualizarProfissional();
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
 
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
@@ -325,7 +341,7 @@ public class JDCadProfissional extends javax.swing.JDialog {
         // Salvando no banco
         Dao<Profissional> dao = new Dao<>();
         dao.gravar(pf);
-        JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso!");
+
     }
 
     private void mostrarDoBancoNaTabela() {
@@ -393,6 +409,38 @@ public class JDCadProfissional extends javax.swing.JDialog {
         jTextFieldNome.setText(jTableProfissionais.getModel().getValueAt(linha, 1).toString());
         jTextFieldTipo.setText(jTableProfissionais.getModel().getValueAt(linha, 2).toString());
         jTextFieldIdentificacao.setText(jTableProfissionais.getModel().getValueAt(linha, 3).toString());
+    }
+
+    private void atualizarProfissional() {
+
+        Profissional pf = new Profissional();
+        pf.setNome(jTextFieldNome.getText().trim());
+        pf.setTipo(jTextFieldTipo.getText().trim());
+        pf.setIdentificacao(jTextFieldIdentificacao.getText().trim());
+        pf.setId((int) jTableProfissionais.getModel().getValueAt(jTableProfissionais.getSelectedRow(), 0));
+        // Salvando no banco
+        Dao<Profissional> dao = new Dao<>();
+        dao.atualizar(pf);
+
+    }
+
+    private void excluirProfissional() {
+        Profissional pf = new Profissional();
+        pf.setNome(jTextFieldNome.getText().trim());
+        pf.setId((int) jTableProfissionais.getModel().getValueAt(jTableProfissionais.getSelectedRow(), 0));
+        
+        //Excluindo
+        
+        Dao<Profissional> dao = new Dao<>();
+        dao.excluir(pf);
+        
+    }
+
+    private void limparCampos() {
+       jTextFieldIdentificacao.setText(null);
+       jTextFieldNome.setText(null);
+       jTextFieldTipo.setText(null);
+       
     }
 
 }//Final da classe
