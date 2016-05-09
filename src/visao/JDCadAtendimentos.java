@@ -6,13 +6,17 @@
 package visao;
 
 import DAO_Generico.Dao;
+import com.toedter.calendar.JDateChooser;
+import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import modelo.Atendimento;
 import modelo.Paciente;
@@ -64,7 +68,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         jTextFieldNomePaciente = new javax.swing.JTextField();
         jTextFieldNomeProfissional = new javax.swing.JTextField();
         jButtonPesquisaPaciente = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonPesquisarProfissional = new javax.swing.JButton();
         jTextFieldDescricao = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -108,29 +112,39 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Hora:");
 
+        jTFDataAtendimento.setEnabled(false);
+
         try {
             jTFHoraAtendimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jTFHoraAtendimento.setEnabled(false);
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Paciente:");
 
+        jTextFieldNomePaciente.setEnabled(false);
+
+        jTextFieldNomeProfissional.setEnabled(false);
+
         jButtonPesquisaPaciente.setText("Buscar");
+        jButtonPesquisaPaciente.setEnabled(false);
         jButtonPesquisaPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPesquisaPacienteActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Buscar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPesquisarProfissional.setText("Buscar");
+        jButtonPesquisarProfissional.setEnabled(false);
+        jButtonPesquisarProfissional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonPesquisarProfissionalActionPerformed(evt);
             }
         });
 
+        jTextFieldDescricao.setEnabled(false);
         jTextFieldDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDescricaoActionPerformed(evt);
@@ -138,7 +152,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Tipo do Antendimento:");
+        jLabel10.setText("Descrição:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -165,7 +179,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonPesquisaPaciente)
-                            .addComponent(jButton2))
+                            .addComponent(jButtonPesquisarProfissional))
                         .addGap(240, 240, 240))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +216,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNomeProfissional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonPesquisarProfissional))
                 .addContainerGap())
         );
 
@@ -285,6 +299,11 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
             }
         });
         jTableAtendimentos.getTableHeader().setReorderingAllowed(false);
+        jTableAtendimentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAtendimentosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableAtendimentos);
         if (jTableAtendimentos.getColumnModel().getColumnCount() > 0) {
             jTableAtendimentos.getColumnModel().getColumn(0).setPreferredWidth(5);
@@ -342,12 +361,28 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         SalvarConsulta();
         mostrarNaTabela();
         controleBotoes();
+        limparCampos();
 
 
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-        // TODO add your handling code here:
+        //NÃO = 1 SIM = 0
+        int resp = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja exluir o antendimento "
+                + jTextFieldDescricao.getText() + "?", "Atenção!", JOptionPane.YES_NO_OPTION);
+        if (resp == 0) {
+            try {
+                excluirAtendimento();
+                limparCampos();
+                mostrarNaTabela();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, jTextFieldDescricao.getText() + " não pode ser excluído!", "ATENÇÃO", JOptionPane.OK_OPTION);
+            }
+
+        }
+
+
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jButtonNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoActionPerformed
@@ -361,9 +396,9 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButtonPesquisaPacienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonPesquisarProfissionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarProfissionalActionPerformed
         buscarPorProfissionais();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonPesquisarProfissionalActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         SetOTextFielDoPaciente();
@@ -375,12 +410,21 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextFieldDescricaoActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
-        // TODO add your handling code here:
+        botoesECampos();
+        jTableAtendimentos.setEnabled(false);
+
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
-        // TODO add your handling code here:
+        pegarDaTabelaESetarNosTextFields();
+        atualizarAtendimento();
+        jTableAtendimentos.setEnabled(true);
+
     }//GEN-LAST:event_jButtonAtualizarActionPerformed
+
+    private void jTableAtendimentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAtendimentosMouseClicked
+        pegarDadosDaTabela();
+    }//GEN-LAST:event_jTableAtendimentosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -425,12 +469,12 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonAtualizar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonPesquisaPaciente;
+    private javax.swing.JButton jButtonPesquisarProfissional;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -484,14 +528,15 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
 
         Dao<Atendimento> dao = new Dao<>();
         dao.gravar(a);
-        JOptionPane.showMessageDialog(null, "Dados gravados com sucesso!");
+
+        limparCampos();
 
     }
 
     private void pesquisarOTextFiel() {
         List<Paciente> pacientes = Utilitaria.getSession().
                 getNamedQuery("pacientePorNome").setString("nome",
-                jTextFieldNomePaciente.getText() + "%").list();
+                        jTextFieldNomePaciente.getText() + "%").list();
 
     }
 
@@ -547,8 +592,8 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
 
     private void buscarPorPacientes() {
         /*Esse método deve Instanciar um Paciente,
-        criar uma instância da tela a ser chamada
-        e setar na mesma uma lista de Pacientes com o parâmetro "paciente"*/
+         criar uma instância da tela a ser chamada
+         e setar na mesma uma lista de Pacientes com o parâmetro "paciente"*/
 
         paciente = new Paciente();
         ListaPaciente lp;
@@ -560,8 +605,8 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
 
     private void buscarPorProfissionais() {
         /*Esse método deve Instanciar um Profissional,
-        criar uma instância da tela a ser chamada
-        e setar na mesma uma lista de Profissional com o parâmetro "Profissional"*/
+         criar uma instância da tela a ser chamada
+         e setar na mesma uma lista de Profissional com o parâmetro "Profissional"*/
         profissional = new Profissional();
         ListaProfissional lp;
         lp = new ListaProfissional(null, true, profissional);
@@ -576,7 +621,10 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         jButtonExcluir.setEnabled(false);
         jButtonAtualizar.setEnabled(false);
         jButtonAlterar.setEnabled(false);
+
         //Habilitar Botões
+        jButtonPesquisaPaciente.setEnabled(true);
+        jButtonPesquisarProfissional.setEnabled(true);
         jButtonSalvar.setEnabled(true);
         //Habilitar campos
         jTFDataAtendimento.setEnabled(true);
@@ -594,7 +642,143 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
         jButtonExcluir.setEnabled(true);
         jButtonAtualizar.setEnabled(false);
         jButtonSalvar.setEnabled(false);
+
+    }
+
+    private void pegarDaTabelaESetarNosTextFields() {
+        Atendimento a = new Atendimento();
+        //Salvar a Data
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = sf.format(jTFDataAtendimento.getDate());
+
+        String dia = dataFormatada.toString().substring(0, 2);
+        String mes = dataFormatada.toString().substring(3, 5);
+        String ano = dataFormatada.toString().substring(6);
+        String Data_Cons_Banco = ano + "-" + mes + "-" + dia;
+        //Variável local date para converter para date a string;
+        LocalDate DtCons = LocalDate.parse(Data_Cons_Banco);
+        // salvando no objeto
+        a.setData(java.sql.Date.valueOf(DtCons));
+
+        //pegar a hora da tela
+        int HH = Integer.parseInt(jTFHoraAtendimento.getText().substring(0, 2));
+        int mm = Integer.parseInt(jTFHoraAtendimento.getText().substring(3, 5));
+
+        LocalTime hora = LocalTime.of(HH, mm);
+        Time horaMinuto = Time.valueOf(hora);
+        //salvar hora
+        a.setHora(horaMinuto);
+        //precisa receber um objeto paciente 
+        a.setPaciente(paciente);
+        //precisa receber um objeto profissional
+        a.setProfissional(profissional);
+
+        a.setDescricao(jTextFieldDescricao.getText());
+
+        a.setId((int) jTableAtendimentos.getModel().getValueAt(jTableAtendimentos.getSelectedRow(), 0));
+
+        Dao<Atendimento> dao = new Dao<>();
+        dao.gravar(a);
+        JOptionPane.showMessageDialog(null, "Dados gravados com sucesso!");
+
+    }
+
+    private void pegarDadosDaTabela() {
+        int linha = jTableAtendimentos.getSelectedRow();
+        //Setando os textfields
+         
+        // String DataDaTabela = jTableAtendimentos.getModel().getValueAt(linha, 2).toString();
+         //data está assim 08/05/2016
+        // String dia = DataDaTabela.substring(0,2);
+         //String mes = DataDaTabela.substring(3,5);
+         //String ano = DataDaTabela.substring(6);
+        // String dataCompleta = dia+"/"+mes+"/"+ano;
+         
+       // LocalDate dataDoObjeto =  LocalDate.parse(DataDaTabela);
         
+       // Date dtaParaOChoose = Date.valueOf(dataDoObjeto);
+        
+       // jTFDataAtendimento.setDate((dtaParaOChoose));
+        jTFHoraAtendimento.setText(jTableAtendimentos.getModel().getValueAt(linha, 3).toString());
+        jTextFieldDescricao.setText( jTableAtendimentos.getModel().getValueAt(linha, 1).toString());
+        jTextFieldNomePaciente.setText(jTableAtendimentos.getModel().getValueAt(linha, 4).toString());
+        jTextFieldNomeProfissional.setText(jTableAtendimentos.getModel().getValueAt(linha, 5).toString());
+
+    }
+
+    private void atualizarAtendimento() {
+        Atendimento a = new Atendimento();
+        //Salvar a Data
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = sf.format(jTFDataAtendimento.getDate());
+
+        String dia = dataFormatada.toString().substring(0, 2);
+        String mes = dataFormatada.toString().substring(3, 5);
+        String ano = dataFormatada.toString().substring(6);
+        String Data_Cons_Banco = ano + "-" + mes + "-" + dia;
+        //Variável local date para converter para date a string;
+        LocalDate DtCons = LocalDate.parse(Data_Cons_Banco);
+        // salvando no objeto
+        a.setData(java.sql.Date.valueOf(DtCons));
+
+        //pegar a hora da tela
+        int HH = Integer.parseInt(jTFHoraAtendimento.getText().substring(0, 2));
+        int mm = Integer.parseInt(jTFHoraAtendimento.getText().substring(3, 5));
+
+        LocalTime hora = LocalTime.of(HH, mm);
+        Time horaMinuto = Time.valueOf(hora);
+        //salvar hora
+        a.setHora(horaMinuto);
+        //precisa receber um objeto paciente 
+        a.setPaciente(paciente);
+        //precisa receber um objeto profissional
+        a.setProfissional(profissional);
+
+        a.setDescricao(jTextFieldDescricao.getText());
+
+        a.setId((int) jTableAtendimentos.getModel().getValueAt(jTableAtendimentos.getSelectedRow(), 0));
+
+        Dao<Atendimento> dao = new Dao<>();
+        dao.atualizar(a);
+
+    }
+
+    private void botoesECampos() {
+        //Campos 
+        jTFDataAtendimento.setEnabled(true);
+        jTFHoraAtendimento.setEnabled(true);
+        jTextFieldDescricao.setEnabled(true);
+        jTextFieldNomePaciente.setEnabled(true);
+        jTextFieldNomeProfissional.setEnabled(true);
+
+        //botões
+        jButtonAlterar.setEnabled(false);
+        jButtonExcluir.setEnabled(false);
+        jButtonNovo.setEnabled(false);
+        jButtonSalvar.setEnabled(false);
+        jButtonAtualizar.setEnabled(true);
+        jButtonPesquisaPaciente.setEnabled(true);
+        jButtonPesquisarProfissional.setEnabled(true);
+
+    }
+
+    private void limparCampos() {
+        jTextFieldDescricao.setText(null);
+        jTextFieldNomePaciente.setText(null);
+        jTextFieldNomeProfissional.setText(null);
+        jTFDataAtendimento.setDate(null);
+        jTFHoraAtendimento.setText(null);
+
+    }
+
+    private void excluirAtendimento() {
+        Atendimento a = new Atendimento();
+        a.setId((int) jTableAtendimentos.getValueAt(jTableAtendimentos.getSelectedRow(), 0));
+        a.setDescricao((String) jTableAtendimentos.getValueAt(jTableAtendimentos.getSelectedRow(), 1));
+
+        Dao<Atendimento> dao = new Dao<>();
+        dao.excluir(a);
+        JOptionPane.showMessageDialog(null, "O Antendimento: " + a.getDescricao() + " foi excluido com sucesso!");
     }
 
 }//chaveFinal
