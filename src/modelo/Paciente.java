@@ -27,7 +27,7 @@ import javax.persistence.OneToMany;
 @NamedQueries({
     @NamedQuery (name = "listarPacientes", query = "from Paciente"),
     @NamedQuery (name = "pacientePorID", query ="from Paciente where id = ?"),
-    @NamedQuery (name = "pacientePorCPF", query = "from Paciente where cpf = ?"),
+    @NamedQuery (name = "pacientePorCPF", query = "from Paciente where cpf like :cpf"),
     @NamedQuery (name = "pacientePorNome", query = "from Paciente where nome like :nome")
 })
 public class Paciente {

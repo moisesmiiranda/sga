@@ -25,7 +25,7 @@ import org.hibernate.annotations.NamedQuery;
  * @author moises
  */
 @Entity
-//@NamedQuery (name = "ConsultaPorID", query "select from Atendimento where id :?")
+    
 public class Atendimento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

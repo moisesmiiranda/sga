@@ -7,6 +7,7 @@ package visao;
 
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Paciente;
 import org.hibernate.Session;
@@ -29,7 +30,7 @@ public class ListaPaciente extends javax.swing.JDialog {
 
     }
 
-    public ListaPaciente(java.awt.Frame parent, boolean modal,Paciente p) {
+    public ListaPaciente(java.awt.Frame parent, boolean modal, Paciente p) {
         super(parent, modal);
         initComponents();
         paciente = p;
@@ -48,14 +49,16 @@ public class ListaPaciente extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButtonAddConsulta = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTFNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTFCpf = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTFID = new javax.swing.JTextField();
+        jBPesquisarPorNome = new javax.swing.JButton();
+        jBPesquisarPorID = new javax.swing.JButton();
+        jBPesquisarPorCPF = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableListaPacientes = new javax.swing.JTable();
 
@@ -77,22 +80,40 @@ public class ListaPaciente extends javax.swing.JDialog {
         });
         jPanel2.add(jButtonAddConsulta);
 
-        jButton2.setText("Pesquisar");
-        jButton2.setPreferredSize(new java.awt.Dimension(200, 35));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jButton2);
-
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquise por um paciente específico"));
 
         jLabel1.setText("Pesquisar por Nome:");
 
+        jTFNome.setPreferredSize(new java.awt.Dimension(6, 25));
+
         jLabel2.setText("Pesquisar por CPF:");
 
+        jTFCpf.setPreferredSize(new java.awt.Dimension(6, 25));
+
         jLabel3.setText("Pesquisar por ID:");
+
+        jTFID.setPreferredSize(new java.awt.Dimension(6, 25));
+
+        jBPesquisarPorNome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/lupaBotao.png"))); // NOI18N
+        jBPesquisarPorNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPesquisarPorNomeActionPerformed(evt);
+            }
+        });
+
+        jBPesquisarPorID.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/lupaBotao.png"))); // NOI18N
+        jBPesquisarPorID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPesquisarPorIDActionPerformed(evt);
+            }
+        });
+
+        jBPesquisarPorCPF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/lupaBotao.png"))); // NOI18N
+        jBPesquisarPorCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPesquisarPorCPFActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -102,16 +123,24 @@ public class ListaPaciente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                    .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBPesquisarPorNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(125, 125, 125)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jTFCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBPesquisarPorCPF)))
+                .addGap(70, 70, 70)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(154, 154, 154))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jTFID, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBPesquisarPorID)))
+                .addGap(95, 95, 95))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,10 +151,15 @@ public class ListaPaciente extends javax.swing.JDialog {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBPesquisarPorNome)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTFNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTFCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jBPesquisarPorID)
+                        .addComponent(jBPesquisarPorCPF)))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -169,7 +203,7 @@ public class ListaPaciente extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -189,13 +223,21 @@ public class ListaPaciente extends javax.swing.JDialog {
         //fecharATela();
     }//GEN-LAST:event_jButtonAddConsultaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // mostrarTelaPesquisaPaciente();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
     }//GEN-LAST:event_formWindowOpened
+
+    private void jBPesquisarPorNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarPorNomeActionPerformed
+        pesquisarPorNome();
+    }//GEN-LAST:event_jBPesquisarPorNomeActionPerformed
+
+    private void jBPesquisarPorCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarPorCPFActionPerformed
+        pesquisarPorCpf();
+    }//GEN-LAST:event_jBPesquisarPorCPFActionPerformed
+
+    private void jBPesquisarPorIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarPorIDActionPerformed
+        pesquisarPorID();
+    }//GEN-LAST:event_jBPesquisarPorIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,7 +245,9 @@ public class ListaPaciente extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableListaPacientes;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jBPesquisarPorCPF;
+    private javax.swing.JButton jBPesquisarPorID;
+    private javax.swing.JButton jBPesquisarPorNome;
     private javax.swing.JButton jButtonAddConsulta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -212,9 +256,9 @@ public class ListaPaciente extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTFCpf;
+    private javax.swing.JTextField jTFID;
+    private javax.swing.JTextField jTFNome;
     // End of variables declaration//GEN-END:variables
 
     private void preencherTabela() {
@@ -232,13 +276,12 @@ public class ListaPaciente extends javax.swing.JDialog {
             String mes = dataN_do_paciente.substring(5, 7);
             String dia = dataN_do_paciente.substring(8);
             String DataParaTabela = dia + "/" + mes + "/" + ano;
-            
-            if(TableListaPacientes.getRowCount() == 0){
+
+            if (TableListaPacientes.getRowCount() == 0) {
                 DefaultTableModel table = (DefaultTableModel) TableListaPacientes.getModel();
-                table.addRow(new Object[TableListaPacientes.getRowCount() +1]);
+                table.addRow(new Object[TableListaPacientes.getRowCount() + 1]);
             }
-                
-            
+
             TableListaPacientes.getModel().setValueAt(p.getId(), i, 0);
             TableListaPacientes.getModel().setValueAt(p.getNome(), i, 1);
             TableListaPacientes.getModel().setValueAt(DataParaTabela, i, 2);
@@ -258,7 +301,7 @@ public class ListaPaciente extends javax.swing.JDialog {
                 .getNamedQuery("pacientePorID")
                 .setInteger(0,
                         Integer.parseInt(TableListaPacientes.getModel().getValueAt(
-                                TableListaPacientes.getSelectedRow(), 0).toString()
+                                        TableListaPacientes.getSelectedRow(), 0).toString()
                         ))
                 .uniqueResult();
         paciente.setId(pac.getId());
@@ -272,4 +315,74 @@ public class ListaPaciente extends javax.swing.JDialog {
         dispose();
 // this.dispose();
     }
+
+    private void pesquisarPorNome() {
+        try {
+
+            Paciente p = (Paciente) Utilitaria.getSession().getNamedQuery("pacientePorNome").setString("nome", jTFNome.getText()).uniqueResult();
+
+            int perg = JOptionPane.showConfirmDialog(null, "Paciente encontrado = " + p.getNome() + "\n Deseja adicionar a um atendimento?", "Resultado da busca por nome", JOptionPane.YES_NO_OPTION);
+
+            if (perg == 0) {
+
+                paciente.setId(p.getId());
+                paciente.setNome(p.getNome());
+                paciente.setCpf(p.getCpf());
+                paciente.setDataDeNascimento(p.getDataDeNascimento());
+                paciente.setSexo(p.getSexo());
+                paciente.setTelefone(p.getTelefone());
+                paciente.setEndereco(p.getEndereco());
+                dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível adicionar este paciente na consulta \n ERRO: " + e);
+        }
+    }
+
+    private void pesquisarPorCpf() {
+        try {
+
+            Paciente p = (Paciente) Utilitaria.getSession().getNamedQuery("pacientePorCPF").setString("cpf", jTFCpf.getText()).uniqueResult();
+
+            int perg = JOptionPane.showConfirmDialog(null, "Paciente encontrado = " + p.getNome() + "\n Deseja adicionar a um atendimento?", "Resultado da busca por CPF", JOptionPane.YES_NO_OPTION);
+
+            if (perg == 0) {
+
+                paciente.setId(p.getId());
+                paciente.setNome(p.getNome());
+                paciente.setCpf(p.getCpf());
+                paciente.setDataDeNascimento(p.getDataDeNascimento());
+                paciente.setSexo(p.getSexo());
+                paciente.setTelefone(p.getTelefone());
+                paciente.setEndereco(p.getEndereco());
+                dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível adicionar este paciente na consulta \n ERRO: " + e);
+        }
+
+    }
+
+    private void pesquisarPorID() {
+        try {
+            Paciente p = (Paciente) Utilitaria.getSession().getNamedQuery("pacientePorID").setInteger(0, Integer.parseInt(jTFID.getText())).uniqueResult();
+
+            int perg = JOptionPane.showConfirmDialog(null, "Paciente encontrado = " + p.getNome() + "\n Deseja adicionar a um atendimento?", "Resultado da busca por ID", JOptionPane.YES_NO_OPTION);
+
+            if (perg == 0) {
+
+                paciente.setId(p.getId());
+                paciente.setNome(p.getNome());
+                paciente.setCpf(p.getCpf());
+                paciente.setDataDeNascimento(p.getDataDeNascimento());
+                paciente.setSexo(p.getSexo());
+                paciente.setTelefone(p.getTelefone());
+                paciente.setEndereco(p.getEndereco());
+                dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível adicionar este paciente na consulta \n ERRO: " + e);
+        }
+    }
+
 }

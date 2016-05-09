@@ -131,6 +131,11 @@ public class Principal extends javax.swing.JFrame {
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton5);
         jToolBar1.add(jSeparator5);
 
@@ -313,6 +318,10 @@ public class Principal extends javax.swing.JFrame {
         mostrarTelaCadastroCampanhas();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        mostrarTelaAgenda();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -414,5 +423,11 @@ public class Principal extends javax.swing.JFrame {
         JDCadCampanhas cadCampanha = new JDCadCampanhas(this, true);
         cadCampanha.setVisible(true);
 
+    }
+
+    private void mostrarTelaAgenda() {
+      JDAgenda jdAgenda = new JDAgenda(this,true);
+      jdAgenda.setVisible(true);
+    
     }
 }

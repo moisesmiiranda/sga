@@ -557,6 +557,7 @@ public class JDCadAtendimentos extends javax.swing.JDialog {
             }
         }
     }
+    
 
     private void mostrarNaTabela() {
         Session sessao = Utilitaria.getSession();

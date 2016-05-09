@@ -400,8 +400,8 @@ public class JDCadCampanhas extends javax.swing.JDialog {
     }
 
     private void LimparCampos() {
-        jTFDataFinal.cleanup();
-        jTFDataInicial.cleanup();
+        jTFDataFinal.setDate(null);
+        jTFDataInicial.setDate(null);
         jTextFieldDescricao.setText(null);
         jTextFieldTitulo.setText(null);
     }
