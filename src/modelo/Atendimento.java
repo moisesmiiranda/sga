@@ -25,7 +25,8 @@ import org.hibernate.annotations.NamedQuery;
  * @author moises
  */
 @Entity
-    
+@NamedQuery(name = "AtendimentosPorIntervaloDeDatas",query = "from Atendimento a where a.data between ? and ?")
+
 public class Atendimento {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

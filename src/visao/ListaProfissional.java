@@ -27,6 +27,7 @@ public class ListaProfissional extends javax.swing.JDialog {
     public ListaProfissional(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        preencherTabela();
     }
 
     public ListaProfissional(java.awt.Frame parent, boolean modal, Profissional p) {
@@ -231,9 +232,9 @@ public class ListaProfissional extends javax.swing.JDialog {
 
         Profissional prof = (Profissional) Utilitaria.getSession()
                 .getNamedQuery("profissionalPorID").setInteger(0,
-                Integer.parseInt(TableListaProfissionais.getModel()
-                        .getValueAt(TableListaProfissionais.getSelectedRow(), 0)
-                        .toString())).uniqueResult();
+                        Integer.parseInt(TableListaProfissionais.getModel()
+                                .getValueAt(TableListaProfissionais.getSelectedRow(), 0)
+                                .toString())).uniqueResult();
 
         profissional.setId(prof.getId());
         profissional.setNome(prof.getNome());

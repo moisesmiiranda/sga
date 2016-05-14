@@ -6,6 +6,9 @@
 package visao;
 
 import javax.swing.JFrame;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 import util.Utilitaria;
 
 /**
@@ -44,7 +47,9 @@ public class Principal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        LOGOLABEL = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastro = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
@@ -52,18 +57,13 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuEquipe = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
         jMenuAcompanhamento = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenuCampanha = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuRelatorio = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agenda de Saúde ");
@@ -140,22 +140,42 @@ public class Principal extends javax.swing.JFrame {
         jToolBar1.add(jSeparator5);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/relatorios.png"))); // NOI18N
-        jButton6.setText("Gerar Relatórios");
+        jButton6.setText("Relatório de Atendimento");
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton6);
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/relatorios.png"))); // NOI18N
+        jButton7.setText("Relatório de Pacientes");
+        jButton7.setFocusable(false);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton7);
+
+        LOGOLABEL.setBackground(new java.awt.Color(255, 255, 255));
+        LOGOLABEL.setForeground(new java.awt.Color(255, 255, 255));
+        LOGOLABEL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LOGOLABEL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/Logo sitema AG4.png"))); // NOI18N
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(LOGOLABEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 994, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 583, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addComponent(LOGOLABEL, javax.swing.GroupLayout.PREFERRED_SIZE, 580, Short.MAX_VALUE)
+                .addContainerGap())
         );
+        jDesktopPane1.setLayer(LOGOLABEL, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenuCadastro.setMnemonic('c');
         jMenuCadastro.setText("Cadastros");
@@ -202,45 +222,25 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuCadastro);
 
-        jMenuEquipe.setMnemonic('e');
-        jMenuEquipe.setText("Equipe");
-        jMenuEquipe.setToolTipText("");
-
-        jMenuItem6.setText("Profissionais");
-        jMenuEquipe.add(jMenuItem6);
-
-        jMenuItem13.setText("Endereço");
-        jMenuEquipe.add(jMenuItem13);
-
-        jMenuItem14.setText("Contatos");
-        jMenuEquipe.add(jMenuItem14);
-
-        jMenuBar1.add(jMenuEquipe);
-
         jMenuAcompanhamento.setMnemonic('a');
         jMenuAcompanhamento.setText("Agenda");
         jMenuAcompanhamento.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 
-        jMenu4.setText("Atendimentos");
-
-        jMenuItem3.setText("De hoje");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem10.setText("Visualizar atendimentos");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem3);
-
-        jMenuItem15.setText("Outra data");
-        jMenu4.add(jMenuItem15);
-
-        jMenuAcompanhamento.add(jMenu4);
+        jMenuAcompanhamento.add(jMenuItem10);
 
         jMenuBar1.add(jMenuAcompanhamento);
 
         jMenuCampanha.setMnemonic('m');
         jMenuCampanha.setText("Campanhas");
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setText("Visualizar Campanhas");
         jMenuCampanha.add(jMenuItem4);
 
@@ -249,8 +249,23 @@ public class Principal extends javax.swing.JFrame {
         jMenuRelatorio.setMnemonic('r');
         jMenuRelatorio.setText("Relatórios");
 
-        jMenuItem8.setText("População Atendida");
+        jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem8.setText("Pacientes");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenuRelatorio.add(jMenuItem8);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem2.setText("Atendimentos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuRelatorio.add(jMenuItem2);
 
         jMenuBar1.add(jMenuRelatorio);
 
@@ -265,7 +280,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 984, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -274,7 +289,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDesktopPane1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -285,10 +300,6 @@ public class Principal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         mostrarTelaCadastroProfissional();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         mostrarTelaCadastroPaciente();
@@ -307,7 +318,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       mostrarTelaCadastroProfissional();
+        mostrarTelaCadastroProfissional();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
@@ -321,6 +332,37 @@ public class Principal extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         mostrarTelaAgenda();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        try {
+// variaveis de arquivos
+            String jasperFileName = "./relatorio/RelatorioAtendimentos.jasper";
+//String pdfFileName = "Atendimentos.pdf";
+// jasper print
+            JasperPrint jprint = (JasperPrint) JasperFillManager.fillReport(jasperFileName,
+                    null, Utilitaria.getConnection());
+// pdf
+//JasperExportManager.exportReportToPdfFile(jprint, pdfFileName);
+//preview
+            JasperViewer jv = new JasperViewer(jprint, false);
+            jv.setTitle("Relatorio de Atendimentos");
+            jv.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        mostrarRelatorioPacientes();
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        mostrarTelaAgenda();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,28 +402,25 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LOGOLABEL;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenuAcompanhamento;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastro;
     private javax.swing.JMenu jMenuCampanha;
-    private javax.swing.JMenu jMenuEquipe;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
@@ -394,11 +433,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 
-  
-
     private void mostrarTelaCadastroPaciente() {
-      JDCadastroPaciente  cadPaciente = new JDCadastroPaciente(this,true);
-       
+        JDCadastroPaciente cadPaciente = new JDCadastroPaciente(this, true);
+
         cadPaciente = new JDCadastroPaciente(this, true);
         cadPaciente.setVisible(true);
 
@@ -409,7 +446,7 @@ public class Principal extends javax.swing.JFrame {
         JDCadProfissional cadProfissional = new JDCadProfissional(this, true);
         cadProfissional.setVisible(true);
 //JFCadProfissional cadProfissinal = new JFCadProfissional();
-        
+
     }
     //Variável da Tela
     JDCadAtendimentos cadAtendimento;
@@ -426,8 +463,34 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void mostrarTelaAgenda() {
-      JDAgenda jdAgenda = new JDAgenda(this,true);
-      jdAgenda.setVisible(true);
-    
+        JDAgenda jdAgenda = new JDAgenda(this, true);
+        jdAgenda.setVisible(true);
+
+    }
+
+    private void mostrarRelatorioPacientes() {
+        try {
+// variaveis de arquivos
+            String jasperFileName = "./relatorio/RelatorioPacientes.jasper";
+//String pdfFileName = "Atendimentos.pdf";
+// jasper print
+            JasperPrint jprint = (JasperPrint) JasperFillManager.fillReport(jasperFileName,
+                    null, Utilitaria.getConnection());
+// pdf
+//JasperExportManager.exportReportToPdfFile(jprint, pdfFileName);
+//preview
+            JasperViewer jv = new JasperViewer(jprint, false);
+            jv.setTitle("Relatorio de Pacientes");
+            jv.setVisible(true);
+            jv.setExtendedState(MAXIMIZED_BOTH);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void mostrarTelaListaProfissionais() {
+        ListaProfissional lstP = new ListaProfissional(this, true);
+        lstP.setVisible(true);
     }
 }

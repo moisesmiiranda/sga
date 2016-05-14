@@ -5,6 +5,14 @@
  */
 package visao;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import modelo.Atendimento;
+import util.Utilitaria;
+
 /**
  *
  * @author moises
@@ -17,6 +25,7 @@ public class JDAgenda extends javax.swing.JDialog {
     public JDAgenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
     }
 
     /**
@@ -30,21 +39,22 @@ public class JDAgenda extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDateChooserInicial = new com.toedter.calendar.JDateChooser();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jDateChooserFinal = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jBExibirAgendamentos = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableAgendamentos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldTotalAgendamentos = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Agendamento de Serviços");
 
         jLabel2.setText("De:");
@@ -52,6 +62,11 @@ public class JDAgenda extends javax.swing.JDialog {
         jLabel3.setText("Até:");
 
         jBExibirAgendamentos.setText("Exibir Agendamento");
+        jBExibirAgendamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExibirAgendamentosActionPerformed(evt);
+            }
+        });
 
         jTableAgendamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,9 +92,19 @@ public class JDAgenda extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(jTableAgendamentos);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/salvar.png"))); // NOI18N
         jButton1.setText("Ok");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Total de Agendamentos");
+
+        jTextFieldTotalAgendamentos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextFieldTotalAgendamentos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,19 +114,19 @@ public class JDAgenda extends javax.swing.JDialog {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooserInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBExibirAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(264, 264, 264)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                            .addComponent(jDateChooserFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
                         .addGap(45, 45, 45))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldTotalAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,27 +135,25 @@ public class JDAgenda extends javax.swing.JDialog {
                         .addComponent(jScrollPane2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(22, 22, 22)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jDateChooserFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jDateChooserInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -138,7 +161,7 @@ public class JDAgenda extends javax.swing.JDialog {
                     .addComponent(jBExibirAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldTotalAgendamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addGap(32, 32, 32)
@@ -149,11 +172,21 @@ public class JDAgenda extends javax.swing.JDialog {
         getContentPane().add(jPanel1);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableAgendamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAgendamentosMouseClicked
-        
+
     }//GEN-LAST:event_jTableAgendamentosMouseClicked
+
+    private void jBExibirAgendamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExibirAgendamentosActionPerformed
+        ExibirAgendamentos();
+        exibirTotalAgendamentos();
+    }//GEN-LAST:event_jBExibirAgendamentosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,8 +233,8 @@ public class JDAgenda extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBExibirAgendamentos;
     private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooserFinal;
+    private com.toedter.calendar.JDateChooser jDateChooserInicial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -209,6 +242,72 @@ public class JDAgenda extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableAgendamentos;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldTotalAgendamentos;
     // End of variables declaration//GEN-END:variables
+
+    private void ExibirAgendamentos() {
+        //pegar a data inicial no formato correto para poder comparar no banco
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+        String dtInicialFormatada = sf.format(jDateChooserInicial.getDate());
+
+        String dia = dtInicialFormatada.toString().substring(0, 2);
+        String mes = dtInicialFormatada.toString().substring(3, 5);
+        String ano = dtInicialFormatada.toString().substring(6);
+
+        String dtInicialParaBanco = ano + "-" + mes + "-" + dia;
+        //Variável local date para converter para date a string;
+        LocalDate dtInicial = LocalDate.parse(dtInicialParaBanco);
+    //pegar a data final no formato correto para poder comparar no banco
+
+        SimpleDateFormat sf2 = new SimpleDateFormat("dd/MM/yyyy");
+        String dtFinalFormatada = sf2.format(jDateChooserFinal.getDate());
+
+        String diaF = dtFinalFormatada.toString().substring(0, 2);
+        String mesF = dtFinalFormatada.toString().substring(3, 5);
+        String anoF = dtFinalFormatada.toString().substring(6);
+
+        String dtFinalParaBanco = anoF + "-" + mesF + "-" + diaF;
+        //Variável local date para converter para date a string;
+        LocalDate dtFinal = LocalDate.parse(dtFinalParaBanco);
+
+        /* Usa uma namedQuery para fazer a consulta necessária*/
+        List<Atendimento> atendimentos = Utilitaria.getSession()
+                .getNamedQuery("AtendimentosPorIntervaloDeDatas")
+                .setDate(0, Date.valueOf(dtInicial)).setDate(1, Date.valueOf(dtFinal)).list();
+
+        int i = 0;
+        int linha = 1;
+
+        for (Atendimento a : atendimentos) {
+            //Exibir a data no formato correto
+            String dataNoBanco = String.valueOf(a.getData());
+            //1994-03-25
+            String anoT = dataNoBanco.substring(0, 4);
+            String mesT = dataNoBanco.substring(5, 7);
+            String diaT = dataNoBanco.substring(8);
+            String dataPraTable = diaT + "/" + mesT + "/" + ano;
+            jTableAgendamentos.getModel().setValueAt(a.getId(), i, 0);
+            jTableAgendamentos.getModel().setValueAt(a.getDescricao(), i, 1);
+            jTableAgendamentos.getModel().setValueAt(dataPraTable, i, 2);
+            jTableAgendamentos.getModel().setValueAt(a.getHora(), i, 3);
+            if (a.getPaciente() != null) {
+                jTableAgendamentos.getModel().setValueAt(a.getPaciente().getNome(), i, 4);
+            }
+            if (a.getProfissional() != null) {
+                jTableAgendamentos.getModel().setValueAt(a.getProfissional().getNome(), i, 5);
+                
+            }
+            i++;
+           DefaultTableModel tabela = (DefaultTableModel) jTableAgendamentos.getModel();
+           tabela.addRow(new Object[linha]);
+            
+            
+        }
+        
+    }
+
+    private void exibirTotalAgendamentos() {
+        int nAgendamentos = jTableAgendamentos.getRowCount();
+        jTextFieldTotalAgendamentos.setText(String.valueOf(nAgendamentos));
+    }
 }

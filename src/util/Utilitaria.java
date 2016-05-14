@@ -5,9 +5,11 @@
  */
 package util;
 
+import java.sql.Connection;
 import org.hibernate.Session;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.internal.SessionImpl;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.tool.hbm2ddl.SchemaUpdate;
 
@@ -30,6 +32,12 @@ public static void configurar(){
     SchemaUpdate update = new SchemaUpdate(configuracao);
     update.execute(true, true);
 }
+
+ public static Connection getConnection(){
+        Session session = getSession();
+        SessionImpl sessionImp = (SessionImpl) session;
+        return sessionImp.connection(); 
+    }
 
 public static Session getSession(){
     ServiceRegistry service = new StandardServiceRegistryBuilder().build();
