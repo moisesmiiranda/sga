@@ -128,10 +128,12 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jBPesquisarPorNome" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTFNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTFID" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTFCpf" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jTFNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTFID" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <Component id="jBPesquisarPorID" min="-2" max="-2" attributes="0"/>
                               <Component id="jBPesquisarPorCPF" min="-2" max="-2" attributes="0"/>

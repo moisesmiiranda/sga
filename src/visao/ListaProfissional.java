@@ -7,6 +7,7 @@ package visao;
 
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Paciente;
 import modelo.Profissional;
@@ -54,11 +55,14 @@ public class ListaProfissional extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldNome = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldIdentificacao = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldID = new javax.swing.JTextField();
+        jBPesquisarPorNome = new javax.swing.JButton();
+        jBPesquisarIDentificacao = new javax.swing.JButton();
+        jBPesquisarPorID = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Todos os Profissionais");
@@ -108,9 +112,36 @@ public class ListaProfissional extends javax.swing.JDialog {
 
         jLabel1.setText("Pesquisa por Nome:");
 
+        jTextFieldNome.setPreferredSize(new java.awt.Dimension(6, 25));
+
         jLabel2.setText("Pesquisar por Identificação:");
 
+        jTextFieldIdentificacao.setPreferredSize(new java.awt.Dimension(6, 25));
+
         jLabel3.setText("Pesquisar por ID:");
+
+        jTextFieldID.setPreferredSize(new java.awt.Dimension(6, 25));
+
+        jBPesquisarPorNome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/lupaBotao.png"))); // NOI18N
+        jBPesquisarPorNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPesquisarPorNomeActionPerformed(evt);
+            }
+        });
+
+        jBPesquisarIDentificacao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/lupaBotao.png"))); // NOI18N
+        jBPesquisarIDentificacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPesquisarIDentificacaoActionPerformed(evt);
+            }
+        });
+
+        jBPesquisarPorID.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icones/lupaBotao.png"))); // NOI18N
+        jBPesquisarPorID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPesquisarPorIDActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -120,16 +151,25 @@ public class ListaProfissional extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBPesquisarPorNome)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jTextFieldIdentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBPesquisarIDentificacao))
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBPesquisarPorID)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,22 +182,25 @@ public class ListaProfissional extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldIdentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBPesquisarPorNome)
+                    .addComponent(jBPesquisarIDentificacao)
+                    .addComponent(jBPesquisarPorID))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 886, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,12 +231,27 @@ public class ListaProfissional extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jBPesquisarPorNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarPorNomeActionPerformed
+        pesquisarPorNome();
+    }//GEN-LAST:event_jBPesquisarPorNomeActionPerformed
+
+    private void jBPesquisarIDentificacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarIDentificacaoActionPerformed
+    pesquisarPorIdentificacao();
+    }//GEN-LAST:event_jBPesquisarIDentificacaoActionPerformed
+
+    private void jBPesquisarPorIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarPorIDActionPerformed
+        pesquisarPorID();
+    }//GEN-LAST:event_jBPesquisarPorIDActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TableListaProfissionais;
+    private javax.swing.JButton jBPesquisarIDentificacao;
+    private javax.swing.JButton jBPesquisarPorID;
+    private javax.swing.JButton jBPesquisarPorNome;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -203,9 +261,9 @@ public class ListaProfissional extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextFieldID;
+    private javax.swing.JTextField jTextFieldIdentificacao;
+    private javax.swing.JTextField jTextFieldNome;
     // End of variables declaration//GEN-END:variables
 
     private void preencherTabela() {
@@ -243,5 +301,67 @@ public class ListaProfissional extends javax.swing.JDialog {
 
         dispose();
         //this.dispose();
+    }
+
+    private void pesquisarPorNome() {
+     try {
+            Profissional p = (Profissional) Utilitaria.getSession().getNamedQuery("profissionalPorNome").setString("nome",(jTextFieldNome.getText())).uniqueResult();
+
+            int perg = JOptionPane.showConfirmDialog(null, "Profissional encontrado = " + p.getNome() + "\n Deseja adicionar a um atendimento?", "Resultado da busca por NOME", JOptionPane.YES_NO_OPTION);
+
+            if (perg == 0) {
+
+                profissional.setId(p.getId());
+                profissional.setNome(p.getNome());
+                profissional.setIdentificacao(p.getIdentificacao());
+                profissional.setTipo(p.getTipo());
+                
+                dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível adicionar este profissional na consulta \n ERRO: " + e);
+        }
+    }
+
+    private void pesquisarPorIdentificacao() {
+        
+        try {
+            Profissional p = (Profissional) Utilitaria.getSession().getNamedQuery("profissionalPorIdentificacao").setString("identificacao",(jTextFieldIdentificacao.getText())).uniqueResult();
+
+            int perg = JOptionPane.showConfirmDialog(null, "Profissional encontrado = " + p.getNome() + "\n Deseja adicionar a um atendimento?", "Resultado da busca por IDENTIFICAÇÃO", JOptionPane.YES_NO_OPTION);
+
+            if (perg == 0) {
+
+                profissional.setId(p.getId());
+                profissional.setNome(p.getNome());
+                profissional.setIdentificacao(p.getIdentificacao());
+                profissional.setTipo(p.getTipo());
+                
+                dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível adicionar este profissional na consulta \n ERRO: " + e);
+        }
+    
+    }
+
+    private void pesquisarPorID() {
+         try {
+            Profissional p = (Profissional) Utilitaria.getSession().getNamedQuery("profissionalPorID").setInteger(0, Integer.parseInt(jTextFieldID.getText())).uniqueResult();
+
+            int perg = JOptionPane.showConfirmDialog(null, "Profissional encontrado = " + p.getNome() + "\n Deseja adicionar a um atendimento?", "Resultado da busca por ID", JOptionPane.YES_NO_OPTION);
+
+            if (perg == 0) {
+
+                profissional.setId(p.getId());
+                profissional.setNome(p.getNome());
+                profissional.setIdentificacao(p.getIdentificacao());
+                profissional.setTipo(p.getTipo());
+                
+                dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível adicionar este profissional na consulta \n ERRO: " + e);
+        }
     }
 }

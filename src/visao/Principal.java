@@ -62,8 +62,10 @@ public class Principal extends javax.swing.JFrame {
         jMenuCampanha = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuRelatorio = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agenda de Saúde ");
@@ -156,6 +158,11 @@ public class Principal extends javax.swing.JFrame {
         jButton7.setFocusable(false);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton7);
 
         LOGOLABEL.setBackground(new java.awt.Color(255, 255, 255));
@@ -167,7 +174,7 @@ public class Principal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LOGOLABEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 994, Short.MAX_VALUE)
+            .addComponent(LOGOLABEL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,6 +256,15 @@ public class Principal extends javax.swing.JFrame {
         jMenuRelatorio.setMnemonic('r');
         jMenuRelatorio.setText("Relatórios");
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
+        jMenuItem2.setText("Atendimentos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuRelatorio.add(jMenuItem2);
+
         jMenuItem8.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.SHIFT_MASK));
         jMenuItem8.setText("Pacientes");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -258,14 +274,21 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenuRelatorio.add(jMenuItem8);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItem2.setText("Atendimentos");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem6.setText("Profissionais");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItem6ActionPerformed(evt);
             }
         });
-        jMenuRelatorio.add(jMenuItem2);
+        jMenuRelatorio.add(jMenuItem6);
+
+        jMenuItem3.setText("Campanhas");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenuRelatorio.add(jMenuItem3);
 
         jMenuBar1.add(jMenuRelatorio);
 
@@ -364,6 +387,18 @@ public class Principal extends javax.swing.JFrame {
         mostrarTelaAgenda();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        mostrarRelatorioPacientes();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    mostrarRelatorioCampanhas();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        mostrarRelatorioProfissionais();
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -419,8 +454,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
@@ -492,5 +529,47 @@ public class Principal extends javax.swing.JFrame {
     private void mostrarTelaListaProfissionais() {
         ListaProfissional lstP = new ListaProfissional(this, true);
         lstP.setVisible(true);
+    }
+
+    private void mostrarRelatorioCampanhas() {
+        try {
+// variaveis de arquivos
+            String jasperFileName = "./relatorio/RelatorioCampanhas.jasper";
+//String pdfFileName = "Atendimentos.pdf";
+// jasper print
+            JasperPrint jprint = (JasperPrint) JasperFillManager.fillReport(jasperFileName,
+                    null, Utilitaria.getConnection());
+// pdf
+//JasperExportManager.exportReportToPdfFile(jprint, pdfFileName);
+//preview
+            JasperViewer jv = new JasperViewer(jprint, false);
+            jv.setTitle("Relatorio de Campanhas");
+            jv.setVisible(true);
+            jv.setExtendedState(MAXIMIZED_BOTH);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void mostrarRelatorioProfissionais() {
+        try {
+// variaveis de arquivos
+            String jasperFileName = "./relatorio/RelatorioProfissionais.jasper";
+//String pdfFileName = "Atendimentos.pdf";
+// jasper print
+            JasperPrint jprint = (JasperPrint) JasperFillManager.fillReport(jasperFileName,
+                    null, Utilitaria.getConnection());
+// pdf
+//JasperExportManager.exportReportToPdfFile(jprint, pdfFileName);
+//preview
+            JasperViewer jv = new JasperViewer(jprint, false);
+            jv.setTitle("Relatorio de Profissionais");
+            jv.setVisible(true);
+            jv.setExtendedState(MAXIMIZED_BOTH);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
